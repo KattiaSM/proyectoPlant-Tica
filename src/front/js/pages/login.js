@@ -64,6 +64,7 @@ export const Login = () => {
 				<button type="submit" className="btn btn-primary">
 					Aplicar
 				</button>
+				{auth ? <Redirect to="/garden" /> : null}
 			</form>
 		</div>
 	);
