@@ -34,7 +34,7 @@ class User(db.Model):
 
 class Plant(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    commun_name = db.Column(db.String(100), nullable=False)
+    commun_name = db.Column(db.String(100), unique=true, nullable=False)
     api_cientific_name = db.Column(db.String(100), nullable=False)
     local_cientific_name = db.Column(db.String(100), unique=true, nullable=False)
     category = db.Column(db.String(100), unique=False, nullable=False)
@@ -75,7 +75,7 @@ class Plant(db.Model):
 
 class Profile(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50), ForeignKey('User.name'))
+    user_name = db.Column(db.String(50), ForeignKey('User.user_name'))
     personal_description = db.Column(db.String(100), nullable=False)
     profession = db.Column(db.String(100), nullable=False)
     location = db.Column(db.String(50), nullable=False)
@@ -84,12 +84,12 @@ class Profile(db.Model):
 
 
     def __repr__(self):
-        return '<Profile %r>' % self.name
+        return '<Profile %r>' % self.user_name
 
     def serialize(self):
         return {
             "id": self.id,
-            "name": self.name,
+            "user_name": self.user_name,
             "personal_description": self.personal_description,
             "profession": self.profession,
             "location": self.location,
@@ -99,7 +99,7 @@ class Profile(db.Model):
 
 class Garden(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    user_name = db.Column(db.String(100), ForeignKey('User.name'))
+    user_name = db.Column(db.String(50), ForeignKey('User.user_name'))
     status = db.Column(db.String(100), nullable=False)
     photo1 = db.Column(db.String(100))
 
