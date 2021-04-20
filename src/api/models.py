@@ -36,7 +36,7 @@ class Plant(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     commun_name = db.Column(db.String(100), nullable=False)
     api_cientific_name = db.Column(db.String(100), nullable=False)
-    local_cientific_name = db.Column(db.String(100), unique=False, nullable=False)
+    local_cientific_name = db.Column(db.String(100), unique=true, nullable=False)
     category = db.Column(db.String(100), unique=False, nullable=False)
     general = db.Column(db.String(100), unique=False, nullable=False)
     utilization = db.Column(db.String(100), unique=False, nullable=False)
@@ -46,7 +46,7 @@ class Plant(db.Model):
     deep = db.Column(db.String(50), unique=False, nullable=False)
     distancebetween = db.Column(db.String(50), unique=False, nullable=False)
     germination = db.Column(db.String(50), unique=False, nullable=False)
-    height = db.Column(db.String(50), unique=False, nullable=False)
+    height = db.Column(db.String(50), unique=False)
     harving = db.Column(db.String(50), unique=False, nullable=False)
 
 
@@ -75,12 +75,12 @@ class Plant(db.Model):
 
 class Profile(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100), ForeignKey('User.name'))
+    name = db.Column(db.String(50), ForeignKey('User.name'))
     personal_description = db.Column(db.String(100), nullable=False)
-    profession = db.Column(db.String(100))
-    location = db.Column(db.String(50), unique=True)
+    profession = db.Column(db.String(100), nullable=False)
+    location = db.Column(db.String(50), nullable=False)
     user_image = db.Column(db.String(2000))
-    hobbies = db.Column(db.String(250), unique=True)
+    hobbies = db.Column(db.String(250))
 
 
     def __repr__(self):
