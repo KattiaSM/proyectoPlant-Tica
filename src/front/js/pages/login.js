@@ -32,12 +32,12 @@ export const Login = () => {
 
 	return (
 		// <div className="mx-auto pt-5">
-        <div className="m-5">
+		<div className="mx-auto pt-5 m-5">
 			<h1>Login</h1>
 			<form onSubmit={handleSubmit} style={{ width: "500px" }}>
 				<div className="mb-3">
 					<label htmlFor="exampleInputEmail1" className="form-label">
-						Email address
+						Dirección de correo electrónico
 					</label>
 					<input
 						onChange={e => setEmail(e.target.value)}
@@ -46,13 +46,13 @@ export const Login = () => {
 						id="exampleInputEmail1"
 						aria-describedby="emailHelp"
 					/>
-					<div id="emailHelp" className="form-text">
-						Well never share your email with anyone else.
-					</div>
+					{/* <div id="emailHelp" className="form-text">
+						Nos tomamos en serio la privacidad y seguridad de los datos personales!
+					</div> */}
 				</div>
 				<div className="mb-3">
 					<label htmlFor="exampleInputPassword1" className="form-label">
-						Password
+						Contraseña
 					</label>
 					<input
 						onChange={e => setPassword(e.target.value)}
@@ -62,7 +62,7 @@ export const Login = () => {
 					/>
 				</div>
 				<button type="submit" className="btn btn-primary">
-					Submit
+					Aplicar
 				</button>
 			</form>
 		</div>

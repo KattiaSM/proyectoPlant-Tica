@@ -5,8 +5,7 @@ import PropTypes from "prop-types";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 
-
-export const Register = () => {
+export const Registration = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [auth, setAuth] = useState(false);
@@ -36,12 +35,12 @@ export const Register = () => {
 
 	return (
 		// <div className="mx-auto pt-5">
-        <div className="m-5">
-			<h1>Register</h1>
+		<div className="mx-auto pt-5 m-5">
+			<h1>Registro</h1>
 			<form onSubmit={handleSubmit} style={{ width: "500px" }}>
 				<div className="mb-3">
 					<label htmlFor="exampleInputEmail1" className="form-label">
-						Email address
+						Dirección de correo electrónico
 					</label>
 					<input
 						onChange={e => setEmail(e.target.value)}
@@ -50,9 +49,9 @@ export const Register = () => {
 						id="exampleInputEmail1"
 						aria-describedby="emailHelp"
 					/>
-					<div id="emailHelp" className="form-text">
-						Well never share your email with anyone else.
-					</div>
+					{/* <div id="emailHelp" className="form-text">
+						Nos tomamos en serio la privacidad y seguridad de los datos personales!
+					</div> */}
 				</div>
 				<div className="mb-3">
 					<label htmlFor="exampleInputPassword1" className="form-label">
@@ -66,7 +65,7 @@ export const Register = () => {
 					/>
 				</div>
 				<button type="submit" className="btn btn-primary">
-					Submit
+					Aplicar
 				</button>
 			</form>
 			{auth ? <Redirect to="/login" /> : null}
