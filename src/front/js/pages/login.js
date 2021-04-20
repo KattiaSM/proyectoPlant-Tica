@@ -1,4 +1,5 @@
 import React, { Component, useState, useContext, useEffect } from "react";
+import { Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
@@ -6,6 +7,7 @@ import { Link } from "react-router-dom";
 export const Login = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+	const [auth, setAuth] = useState(false);
 
 	const handleSubmit = e => {
 		e.preventDefault();
@@ -26,6 +28,7 @@ export const Login = () => {
 			.then(data => {
 				console.log(data);
 				sessionStorage.setItem("my_token", data.token);
+				setAuth(true);
 			})
 			.catch(err => console.log(err));
 	};
