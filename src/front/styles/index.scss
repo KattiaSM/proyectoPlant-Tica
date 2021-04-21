@@ -1,3 +1,85 @@
-/* 
-    General Styles
-*/
+@import "~bootstrap/scss/bootstrap.scss";
+
+body{margin-top:20px;}
+
+
+.content-item {
+    padding:30px 0;
+	background-color:#FFFFFF;
+}
+
+.content-item.grey {
+	background-color:#F0F0F0;
+	padding:50px 0;
+	height:100%;
+}
+
+.content-item h2 {
+	font-weight:700;
+	font-size:35px;
+	line-height:45px;
+	text-transform:uppercase;
+	margin:20px 0;
+}
+
+.content-item h3 {
+	font-weight:400;
+	font-size:20px;
+	color:#555555;
+	margin:10px 0 15px;
+	padding:0;
+}
+
+.content-headline {
+	height:1px;
+	text-align:center;
+	margin:20px 0 70px;
+}
+
+
+/* BOXES */
+
+.box {
+	background-color:#FFFFFF;
+	padding:10px 20px;
+	box-shadow: 2px 2px  rgba(0,0,0,0.1);
+	margin-bottom:20px;
+}
+
+.box h3 {
+    margin:30px 0 5px;
+	font-weight:bold;
+}
+
+.box ul {
+	margin:10px;
+}
+
+.box ul li {
+	font-size:13px;
+	border-bottom:1px dashed rgb(43, 42, 42);
+	padding:10px;
+	font-weight:600;
+}
+
+.box ul li:last-child {
+	border-bottom:5px;
+}
+
+.box ul li input {
+	font-size:18px;
+	margin-right:10px;
+}
+
+#gallery .row {
+    margin:0;
+}
+
+#gallery .row > div {
+	padding:0;
+}
+
+#gallery-item h2 {
+	font-size:20px;
+	margin-top:0;
+}
