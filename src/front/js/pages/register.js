@@ -6,14 +6,21 @@ import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 
 export const Registration = () => {
+	const [name, setName] = useState("");
+	const [first_surname, setFirst_surname] = useState("");
+	const [second_surname, setSecond_surname] = useState("");
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+	const [confPassword, setConfPassword] = useState("");
 	const [auth, setAuth] = useState(false);
 
 	const handleSubmit = e => {
 		e.preventDefault();
 
 		const body = {
+			name: name,
+			first_surname: first_surname,
+			second_surname: second_surname,
 			email: email,
 			password: password
 		};
@@ -40,6 +47,39 @@ export const Registration = () => {
 			<form onSubmit={handleSubmit} style={{ width: "500px" }}>
 				<div className="mb-3">
 					<label htmlFor="exampleInputEmail1" className="form-label">
+						Nombre
+					</label>
+					<input
+						onChange={e => setName(e.target.value)}
+						type="text"
+						className="form-control"
+						id="exampleInputName"
+						aria-describedby="exampleInputName"
+					/>
+
+					<label htmlFor="exampleInputEmail1" className="form-label">
+						Primer Apellido
+					</label>
+					<input
+						onChange={e => setFirst_surname(e.target.value)}
+						type="text"
+						className="form-control"
+						id="exampleInputFirstSurname"
+						aria-describedby="exampleInputFirstSurname"
+					/>
+
+					<label htmlFor="exampleInputEmail1" className="form-label">
+						Segundo Apellido
+					</label>
+					<input
+						onChange={e => setSecond_surname(e.target.value)}
+						type="text"
+						className="form-control"
+						id="exampleInputSecondSurname"
+						aria-describedby="exampleInputSecondSurname"
+					/>
+
+					<label htmlFor="exampleInputEmail1" className="form-label">
 						Dirección de correo electrónico
 					</label>
 					<input
@@ -55,13 +95,22 @@ export const Registration = () => {
 				</div>
 				<div className="mb-3">
 					<label htmlFor="exampleInputPassword1" className="form-label">
-						Password
+						Contraseña
 					</label>
 					<input
 						onChange={e => setPassword(e.target.value)}
 						type="password"
 						className="form-control"
 						id="exampleInputPassword1"
+					/>
+					<label htmlFor="exampleInputPassword1" className="form-label">
+						Confirmar contraseña
+					</label>
+					<input
+						onChange={e => setConfPassword(e.target.value)}
+						type="password"
+						className="form-control"
+						id="exampleInputPassword2"
 					/>
 				</div>
 				<button type="submit" className="btn btn-primary">
