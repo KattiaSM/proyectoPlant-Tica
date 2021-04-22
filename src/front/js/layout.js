@@ -45,6 +45,9 @@ const Layout = () => {
 						<Route exact path="/favorites">
 							<Favorites />
 						</Route>
+						<Route exact path="/profile">
+							<Profile />
+						</Route>
 						<Route exact path="/garden">
 							<Profile />
 							<Garden />
