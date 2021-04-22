@@ -8,7 +8,7 @@ export function Garden() {
 		<div className="container">
 			<div className="row">
 				<div className="col-sm-8">
-					<img src="https://via.placeholder.com/550x350/" className="img-responsive" alt="" />
+					<img src="https://activated.org/media/images/new-beginnings_82U8Rbw.max-550x350.jpg" alt="" />
 				</div>
 				<div className="col-sm-4">
 					<div className="box">
