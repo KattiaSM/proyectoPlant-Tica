@@ -4,6 +4,7 @@ import "../../styles/home.scss";
 
 import React, { useState } from "react";
 import { Carousel, CarouselItem, CarouselControl, CarouselIndicators, CarouselCaption } from "reactstrap";
+import { Link } from "react-router-dom";
 
 const items = [
 	{
@@ -56,6 +57,14 @@ export function Home() {
 
 	return (
 		<div className="text-center m-5">
+			<div className="text-center mt-5">
+				<Link to="/register" className="btn btn-success">
+					Register!
+				</Link>
+				<Link to="/login" className="btn btn-primary">
+					Log In
+				</Link>
+			</div>
 			<div className="w-100 mb-3">
 				<Carousel activeIndex={activeIndex} next={next} previous={previous}>
 					<CarouselIndicators items={items} activeIndex={activeIndex} onClickHandler={goToIndex} />
