@@ -25,13 +25,6 @@ export const Registration = () => {
 			password: password
 		};
 
-		//esto es para el metodo para subir datos a la tabla profile que aun no existe
-		const body2 = {
-			name: name,
-			first_surname: first_surname,
-			second_surname: second_surname
-		};
-
 		fetch("https://3000-lime-mollusk-0goukxq3.ws-us03.gitpod.io/register", {
 			method: "POST",
 			body: JSON.stringify(body),
@@ -46,21 +39,6 @@ export const Registration = () => {
 			})
 			.catch(err => console.log(err));
 	};
-
-	// 		fetch("https://3000-lime-mollusk-0goukxq3.ws-us03.gitpod.io/profile", {
-	// 		method: "POST",
-	// 		body: JSON.stringify(body2),
-	// 		headers: {
-	// 			"Content-Type": "application/json"
-	// 		}
-	// 	})
-	// 		.then(res => res.json())
-	// 		.then(data => {
-	// 			console.log(data);
-	// 			setAuth(true);
-	// 		})
-	// 		.catch(err => console.log(err));
-	// };
 
 	return (
 		// <div className="mx-auto pt-5">
