@@ -8,7 +8,7 @@ const navbar = () => {
 	return (
 		<nav className="navbar navbar-expand-lg navbar-dark bg-info">
 			{/* Logo? */}
-			<Link to="/demo">
+			<Link to="/">
 				<a className="navbar-brand" href="#">
 					Plant-Tica
 				</a>
@@ -17,7 +17,7 @@ const navbar = () => {
 			{/* Secciones */}
 			<div className="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul className="navbar-nav mr-auto">
-					<LinkNav name="Favoritos" to="/favorites" />
+					<LinkNav name="Favoritos(5)" to="/favorites" />
 					<LinkNav name="Garden" to="/garden" />
 					<LinkNav name="Registrarse" to="/register" />
 					<LinkNav name="Ingresar" to="/login" />
