@@ -66,12 +66,12 @@ export function Plant() {
 						src="https://activated.org/media/images/new-beginnings_82U8Rbw.max-550x350.jpg"
 						alt="Card image cap"
 					/>
-				</div>
-				<div className="col-6">
 					<div className="box">
 						<h2>My Plants</h2>
 						<h3>To Do List</h3>
 					</div>
+				</div>
+				<div className="col-6">
 					<ListGroup>
 						<ListGroupItem className="justify-content-between">
 							{" "}
@@ -94,6 +94,22 @@ export function Plant() {
 							<div className="m-1">
 								<Label check>
 									<Input type="checkbox" className="ps-2" /> Fertilizante
+								</Label>
+							</div>
+						</ListGroupItem>
+						<ListGroupItem className="justify-content-between">
+							{" "}
+							<div className="m-1">
+								<Label check>
+									<Input type="checkbox" className="ps-2" /> Luz
+								</Label>
+							</div>
+						</ListGroupItem>
+						<ListGroupItem className="justify-content-between">
+							{" "}
+							<div className="m-1">
+								<Label check>
+									<Input type="checkbox" className="ps-2" /> Luz
 								</Label>
 							</div>
 						</ListGroupItem>
