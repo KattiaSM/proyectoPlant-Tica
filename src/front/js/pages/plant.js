@@ -2,7 +2,7 @@ import React, { Component, useState, useContext, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
-import { ListGroup, ListGroupItem, Badge, CardImg, Label, Input } from "reactstrap";
+import { ListGroup, ListGroupItem, Badge, CardImg, Label, Input, FormGroup, Col } from "reactstrap";
 
 export function Plant() {
 	let data = [
@@ -57,71 +57,191 @@ export function Plant() {
 	];
 
 	return (
-		<div className="m-5 w-50">
+		<div className="m-5">
 			<div className="row">
-				<div className="col-6">
-					<CardImg
-						top
-						width="100%"
-						src="https://activated.org/media/images/new-beginnings_82U8Rbw.max-550x350.jpg"
-						alt="Card image cap"
-					/>
-					<div className="box">
-						<h2>My Plants</h2>
-						<h3>To Do List</h3>
+				<div className="col-6 bg-light border border-rounded rounded-2">
+					<div className="row d-flex justify-content-center mb-2">
+						<h1>Inserta aquí los datos de tu planta</h1>
+					</div>
+					<div className="row d-flex justify-content-center">
+						<FormGroup row>
+							<Label for="exampleEmail" className="me-2" lg={2}>
+								Nombre
+							</Label>
+							<Col lg={10}>
+								<Input type="text" name="text" id="exampleEmail" placeholder="Nombre de la planta" />
+							</Col>
+							<Label for="exampleEmail" className="me-2" lg={2}>
+								URL
+							</Label>
+							<Col lg={10}>
+								<Input
+									type="text"
+									name="text"
+									id="exampleEmail"
+									placeholder="URL de la imagen de la planta"
+								/>
+							</Col>
+						</FormGroup>
+					</div>
+					<div className="row d-flex justify-content-center mb-2">
+						<h1>Tareas para tu planta</h1>
+					</div>
+					<div className="row d-flex justify-content-center">
+						<FormGroup row>
+							<Label for="exampleEmail" className="me-2" lg={2}>
+								Tarea
+							</Label>
+							<Col lg={10}>
+								<Input type="text" name="text" id="exampleEmail" placeholder="Ej: Agua" />
+							</Col>
+							<Label for="exampleEmail" className="me-2" lg={2}>
+								Frecuencia
+							</Label>
+							<Col lg={10}>
+								<Input type="text" name="text" id="exampleEmail" placeholder="Ej: 10 horas/días" />
+							</Col>
+						</FormGroup>
 					</div>
 				</div>
 				<div className="col-6">
-					<ListGroup>
-						<ListGroupItem className="justify-content-between">
-							{" "}
-							<div className="m-1 mt-0 mb-0">
-								<Label check>
-									<Input type="checkbox" className="ps-2" /> Agua
-								</Label>
+					<div className="row d-flex justify-content-center mb-2">
+						<h1>Previsualización</h1>
+					</div>
+					<div className="row">
+						<div className="col-6">
+							<CardImg
+								top
+								width="100%"
+								src="https://activated.org/media/images/new-beginnings_82U8Rbw.max-550x350.jpg"
+								alt="Card image cap"
+							/>
+							<div className="box">
+								<h2>Quercus Rotundifolia</h2>
+								<h3>Lista de Tareas</h3>
 							</div>
-						</ListGroupItem>
-						<ListGroupItem className="justify-content-between">
-							{" "}
-							<div className="m-1">
-								<Label check>
-									<Input type="checkbox" className="ps-2" /> Abono
-								</Label>
-							</div>
-						</ListGroupItem>
-						<ListGroupItem className="justify-content-between">
-							{" "}
-							<div className="m-1">
-								<Label check>
-									<Input type="checkbox" className="ps-2" /> Fertilizante
-								</Label>
-							</div>
-						</ListGroupItem>
-						<ListGroupItem className="justify-content-between">
-							{" "}
-							<div className="m-1">
-								<Label check>
-									<Input type="checkbox" className="ps-2" /> Luz
-								</Label>
-							</div>
-						</ListGroupItem>
-						<ListGroupItem className="justify-content-between">
-							{" "}
-							<div className="m-1">
-								<Label check>
-									<Input type="checkbox" className="ps-2" /> Luz
-								</Label>
-							</div>
-						</ListGroupItem>
-						<ListGroupItem className="justify-content-between">
-							{" "}
-							<div className="m-1">
-								<Label check>
-									<Input type="checkbox" className="ps-2" /> Luz
-								</Label>
-							</div>
-						</ListGroupItem>
-					</ListGroup>
+						</div>
+						<div className="col-6">
+							<ListGroup>
+								<ListGroupItem className="justify-content-between">
+									{" "}
+									<div className="m-1 mt-0 mb-0">
+										<Label check>
+											<Input type="checkbox" className="ps-2" /> Agua
+										</Label>
+									</div>
+								</ListGroupItem>
+								<ListGroupItem className="justify-content-between">
+									{" "}
+									<div className="m-1">
+										<Label check>
+											<Input type="checkbox" className="ps-2" /> Abono
+										</Label>
+									</div>
+								</ListGroupItem>
+								<ListGroupItem className="justify-content-between">
+									{" "}
+									<div className="m-1">
+										<Label check>
+											<Input type="checkbox" className="ps-2" /> Fertilizante
+										</Label>
+									</div>
+								</ListGroupItem>
+								<ListGroupItem className="justify-content-between">
+									{" "}
+									<div className="m-1">
+										<Label check>
+											<Input type="checkbox" className="ps-2" /> Luz
+										</Label>
+									</div>
+								</ListGroupItem>
+								<ListGroupItem className="justify-content-between">
+									{" "}
+									<div className="m-1">
+										<Label check>
+											<Input type="checkbox" className="ps-2" /> Luz
+										</Label>
+									</div>
+								</ListGroupItem>
+								<ListGroupItem className="justify-content-between">
+									{" "}
+									<div className="m-1">
+										<Label check>
+											<Input type="checkbox" className="ps-2" /> Luz
+										</Label>
+									</div>
+								</ListGroupItem>
+							</ListGroup>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div className="w-50 mt-5">
+				<div className="row">
+					<div className="col-6">
+						<CardImg
+							top
+							width="100%"
+							src="https://activated.org/media/images/new-beginnings_82U8Rbw.max-550x350.jpg"
+							alt="Card image cap"
+						/>
+						<div className="box">
+							<h2>Quercus Rotundifolia</h2>
+							<h3>Lista de Tareas</h3>
+						</div>
+					</div>
+					<div className="col-6">
+						<ListGroup>
+							<ListGroupItem className="justify-content-between">
+								{" "}
+								<div className="m-1 mt-0 mb-0">
+									<Label check>
+										<Input type="checkbox" className="ps-2" /> Agua
+									</Label>
+								</div>
+							</ListGroupItem>
+							<ListGroupItem className="justify-content-between">
+								{" "}
+								<div className="m-1">
+									<Label check>
+										<Input type="checkbox" className="ps-2" /> Abono
+									</Label>
+								</div>
+							</ListGroupItem>
+							<ListGroupItem className="justify-content-between">
+								{" "}
+								<div className="m-1">
+									<Label check>
+										<Input type="checkbox" className="ps-2" /> Fertilizante
+									</Label>
+								</div>
+							</ListGroupItem>
+							<ListGroupItem className="justify-content-between">
+								{" "}
+								<div className="m-1">
+									<Label check>
+										<Input type="checkbox" className="ps-2" /> Luz
+									</Label>
+								</div>
+							</ListGroupItem>
+							<ListGroupItem className="justify-content-between">
+								{" "}
+								<div className="m-1">
+									<Label check>
+										<Input type="checkbox" className="ps-2" /> Luz
+									</Label>
+								</div>
+							</ListGroupItem>
+							<ListGroupItem className="justify-content-between">
+								{" "}
+								<div className="m-1">
+									<Label check>
+										<Input type="checkbox" className="ps-2" /> Luz
+									</Label>
+								</div>
+							</ListGroupItem>
+						</ListGroup>
+					</div>
 				</div>
 			</div>
 		</div>
