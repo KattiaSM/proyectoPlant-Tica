@@ -1,5 +1,11 @@
 from flask_sqlalchemy import SQLAlchemy
 import enum
+import os
+import sys
+from sqlalchemy import Column, ForeignKey, Integer, String, Boolean
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import relationship
+from sqlalchemy import create_engine
 
 db = SQLAlchemy()
 
@@ -14,6 +20,10 @@ class User(db.Model):
     email = db.Column(db.String(250), unique=True)
     password = db.Column(db.String(80), unique=False, nullable=False)
     is_active = db.Column(db.Boolean(), unique=False, nullable=False)
+    profiles = db.relationship('Profile',lazy=True)
+    gardens = db.relationship('Garden',lazy=True)
+    todolists = db.relationship('Todolist',lazy=True)
+
 
 
     def __repr__(self):
@@ -34,9 +44,9 @@ class User(db.Model):
 
 class Plant(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    commun_name = db.Column(db.String(100), unique=true, nullable=False)
+    commun_name = db.Column(db.String(100), unique=True, nullable=False)
     api_cientific_name = db.Column(db.String(100), nullable=False)
-    local_cientific_name = db.Column(db.String(100), unique=true, nullable=False)
+    local_cientific_name = db.Column(db.String(100), unique=True, nullable=False)
     category = db.Column(db.String(100), unique=False, nullable=False)
     general = db.Column(db.String(100), unique=False, nullable=False)
     utilization = db.Column(db.String(100), unique=False, nullable=False)
@@ -48,6 +58,15 @@ class Plant(db.Model):
     germination = db.Column(db.String(50), unique=False, nullable=False)
     height = db.Column(db.String(50), unique=False)
     harving = db.Column(db.String(50), unique=False, nullable=False)
+    water_freq = db.Column(db.String(50), unique=False)
+    last_water = db.Column(db.Date)
+    fertilizer_freq	= db.Column(db.String(50), unique=False)
+    last_fertilizer	= db.Column(db.Date)
+    prunning_freq= db.Column(db.String(50), unique=False)
+    last_prunning= db.Column(db.Date)
+    pesticide_freq = db.Column(db.String(50), unique=False)
+    last_pesticide = db.Column(db.Date)
+    todolists = db.relationship('Todolist',lazy=True)
 
 
     def __repr__(self):
@@ -75,11 +94,13 @@ class Plant(db.Model):
 
 class Profile(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    user_name = db.Column(db.String(50), ForeignKey('User.user_name'))
-    personal_description = db.Column(db.String(100), nullable=False)
-    profession = db.Column(db.String(100), nullable=False)
-    location = db.Column(db.String(50), nullable=False)
+    user_name = db.Column(db.String(50), ForeignKey('user.user_name'))
     user_image = db.Column(db.String(2000))
+    first_name = db.Column(db.String(100), nullable=False)
+    last_name = db.Column(db.String(100), nullable=False)
+    personal_description = db.Column(db.String(100), nullable=False)
+    occupation = db.Column(db.String(100), nullable=False)
+    location = db.Column(db.String(50), nullable=False)
     hobbies = db.Column(db.String(250))
 
 
@@ -90,17 +111,19 @@ class Profile(db.Model):
         return {
             "id": self.id,
             "user_name": self.user_name,
-            "personal_description": self.personal_description,
-            "profession": self.profession,
-            "location": self.location,
             "user_image": self.user_image,
+            "first_name": self.first_name,
+            "last_name": self.last_name,
+            "personal_description": self.personal_description,
+            "occupation": self.occupation,
+            "location": self.location,
             "hobbies": self.hobbies
         }
 
 class Garden(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    user_name = db.Column(db.String(50), ForeignKey('User.user_name'))
-    status = db.Column(db.String(100), nullable=False)
+    user_name =  db.Column(db.String(50), ForeignKey('user.user_name'))
+    status = db.Column(db.String(100))
     photo1 = db.Column(db.String(100))
 
 
@@ -112,124 +135,23 @@ class Garden(db.Model):
             "id": self.id,
             "user_name": self.user_name,
             "status": self.status,
-            "location": self.location
+            "photo1": self.photo1
         }
 
 
-# class People(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     name = db.Column(db.String(250), nullable=False)
-#     birth_year = db.Column(db.Date)
-#     height = db.Column(db.Integer)
-#     mass = db.Column(db.Integer)
-#     people_image = db.Column(db.String(2000))
-#     gender_cat_id = db.Column(db.Integer, db.ForeignKey('gender_cat.id'))
-#     hair_color_cat_id = db.Column(db.Integer, db.ForeignKey('hair_color_cat.id'))
-#     skin_color_cat_id = db.Column(db.Integer, db.ForeignKey('skin_color_cat.id'))
-#     eye_color_cat_id = db.Column(db.Integer, db.ForeignKey('eye_color_cat.id'))
 
-#     def __repr__(self):
-#         return '<People %r>' % self.name
+class Todolist(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.String(50), ForeignKey('user.user_name'))
+    plant_id = db.Column(db.String(100), ForeignKey('plant.commun_name'))
 
-#     def serialize(self):
-#         return {
-#             "id": self.id,
-#             "name": self.name,
-#             "birth_year": self.birth_year,
-#             "height": self.height,
-#             "mass": self.mass,
-#             "people_image": self.people_image,
-#             "gender_cat_id": self.gender_cat_id,
-#             "hair_color_cat_id": self.hair_color_cat_id,
-#             "skin_color_cat_id": self.skin_color_cat_id,
-#             "eye_color_cat_id": self.eye_color_cat_id
-#         }
 
-# # Modelo para la tabla [Planet]
-# class Planet(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     name = db.Column(db.String(250), nullable=False)
-#     rotation_period = db.Column(db.Integer)
-#     orbital_period = db.Column(db.Integer) 
-#     diameter = db.Column(db.Integer)
-#     gravity = db.Column(db.String(50))
-#     surface_water = db.Column(db.Integer)
-#     population = db.Column(db.Integer)
-#     planet_image = db.Column(db.String(2000))
-#     climate_cat_id = db.Column(db.Integer, db.ForeignKey('climate_cat.id'))
-#     terrain_cat_id = db.Column(db.Integer, db.ForeignKey('terrain_cat.id'))
+    def __repr__(self):
+        return '<Todolist %r>' % self.id
 
-#     def __repr__(self):
-#         return '<Planet %r>' % self.name
-
-#     def serialize(self):
-#         return {
-#             "id": self.id,
-#             "name": self.name,
-#             "rotation_period": self.rotation_period,
-#             "orbital_period": self.orbital_period,
-#             "diameter": self.diameter,
-#             "gravity": self.gravity,
-#             "surface_water": self.surface_water,
-#             "population": self.population,
-#             "planet_image": self.planet_image,
-#             "climate_cat_id": self.climate_cat_id,
-#             "terrain_cat_id": self.terrain_cat_id
-#         }
-
-# # Modelo para la tabla [Vehicle]
-# class Vehicle(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     name = db.Column(db.String(250), nullable=False)
-#     model = db.Column(db.String(100))
-#     manufacturer = db.Column(db.String(100)) 
-#     cost_in_credits = db.Column(db.Integer)
-#     length = db.Column(db.Float)
-#     max_atmosphering_speed = db.Column(db.Integer)
-#     crew = db.Column(db.Integer)
-#     passengers = db.Column(db.Integer)
-#     cargo_capacity = db.Column(db.Integer)
-#     consumables = db.Column(db.String(100))
-#     vehicle_image = db.Column(db.String(2000))
-#     vehicle_class_cat_id = db.Column(db.Integer, db.ForeignKey('vehicle_class_cat.id'))
-
-#     def __repr__(self):
-#         return '<Vehicle %r>' % self.name
-
-#     def serialize(self):
-#         return {
-#             "id": self.id,
-#             "name": self.name,
-#             "model": self.model,
-#             "manufacturer": self.manufacturer,
-#             "cost_in_credits": self.cost_in_credits,
-#             "length": self.length,
-#             "max_atmosphering_speed": self.max_atmosphering_speed,
-#             "crew": self.crew,
-#             "passengers": self.passengers,
-#             "cargo_capacity": self.cargo_capacity,
-#             "consumables": self.consumables,
-#             "vehicle_image": self.vehicle_image,
-#             "vehicle_class_cat_id": self.vehicle_class_cat_id
-#         }
-
-# # Modelo para la tabla [Favorite]
-# class Favorite(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     name = db.Column(db.String(250), nullable=False)
-#     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-#     favorite_id = db.Column(db.Integer, nullable=False)
-#     favorite_type = db.Column(db.Integer, nullable=False)
-#     # favorite_type = db.Column(db.Enum(EntityTypeEnum), nullable=False)
-
-#     def __repr__(self):
-#         return '<Favorite %r>' % self.user_id
-
-#     def serialize(self):
-#         return {
-#             "id": self.id,
-#             "name": self.name,
-#             "user_id": self.user_id,
-#             "favorite_id": self.favorite_id,
-#             "favorite_type": self.favorite_type
-#         }
+    def serialize(self):
+        return {
+            "id": self.id,
+            "user_id": self.user_id,
+            "plant_id": self.plant_id
+        }
