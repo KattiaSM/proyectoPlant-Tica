@@ -10,6 +10,8 @@ import { Login } from "./pages/login";
 import { Profile } from "./pages/profile";
 import { Garden } from "./pages/garden";
 import { Favorites } from "./pages/favorites";
+import { Plant } from "./pages/plant";
+
 import injectContext from "./store/appContext";
 
 import Navbar from "./component/navbar/navbar";
@@ -32,6 +34,9 @@ const Layout = () => {
 						</Route>
 						<Route exact path="/demo">
 							<Demo />
+						</Route>
+						<Route exact path="/plant">
+							<Plant />
 						</Route>
 						<Route exact path="/single/:theid">
 							<Single />
