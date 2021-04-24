@@ -3,7 +3,18 @@ import rigoImage from "../../img/rigo-baby.jpg";
 import "../../styles/home.scss";
 
 import React, { useState } from "react";
-import { Carousel, CarouselItem, CarouselControl, CarouselIndicators, CarouselCaption } from "reactstrap";
+import {
+	Carousel,
+	CarouselItem,
+	CarouselControl,
+	CarouselIndicators,
+	CarouselCaption,
+	Toast,
+	ToastBody,
+	ToastHeader,
+	Jumbotron,
+	Button
+} from "reactstrap";
 import { Link } from "react-router-dom";
 
 const items = [
@@ -57,14 +68,6 @@ export function Home() {
 
 	return (
 		<div className="text-center m-5">
-			<div className="text-center mt-5">
-				<Link to="/register" className="btn btn-success">
-					Register!
-				</Link>
-				<Link to="/login" className="btn btn-primary">
-					Log In
-				</Link>
-			</div>
 			<div className="w-100 mb-3">
 				<Carousel activeIndex={activeIndex} next={next} previous={previous}>
 					<CarouselIndicators items={items} activeIndex={activeIndex} onClickHandler={goToIndex} />
@@ -75,54 +78,26 @@ export function Home() {
 			</div>
 			<div className="container d-flex justify-content-center pt-3">
 				<div className="row d-flex justify-content-center">
-					<div className="col-4">
-						<div className="card m-1">
-							<h5 className="card-title m-1">Aprendizaje</h5>
-							<img
-								src="https://s1.1zoom.me/prev/579/Abstraction_Vector_Graphics_Texture_578280_600x400.jpg"
-								className="card-img-top pt-1"
-								alt="..."
-							/>
-							<div className="card-body">
-								<p className="card-text">
-									Utú es un banco de preguntas para las pruebas de aptitud académica de las
-									universidades públicas de Costa Rica.
-								</p>
-							</div>
-						</div>
-					</div>
-					<div className="col-4">
-						<div className="card m-1">
-							<h5 className="card-title m-1">Práctica</h5>
-							<img
-								src="https://s1.1zoom.me/prev/579/Abstraction_Vector_Graphics_Texture_578280_600x400.jpg"
-								className="card-img-top pt-1"
-								alt="..."
-							/>
-							<div className="card-body">
-								<p className="card-text">
-									Utú es una plataforma gratuita, creada con el fin de ofrecer a los costarricenses un
-									medio de práctica para las pruebas.
-								</p>
-							</div>
-						</div>
-					</div>
+					<div className="col-12">
+						<Jumbotron>
+							<h1 className="display-3">Gracias por visitar Plant-Tica</h1>
+							<p className="lead">
+								Un espacio para aprender y compartir sobre plantas de Costa Rica... y ¿por qué no?
+								empezar a tener tu propio jardín con esas planticas 🇨🇷 que siempre has querido.
+							</p>
+							<p className="lead">¿Ya tenés tu huerta o jardín?</p>
+							<hr className="my-2" />
+							<p className="mt-3">
+								En plant-tica te ayudamos y motivamos a seguir cuidándolo y además mostrarlo para que
+								¡más gente lo pueda apreciar!.
+							</p>
 
-					<div className="col-4">
-						<div className="card m-1">
-							<h5 className="card-title m-1">Mejora</h5>
-							<img
-								src="https://s1.1zoom.me/prev/579/Abstraction_Vector_Graphics_Texture_578280_600x400.jpg"
-								className="card-img-top pt-1"
-								alt="..."
-							/>
-							<div className="card-body">
-								<p className="card-text">
-									Utú está trabajando para ofrecer a futuro las explicaciones de los enunciados dentro
-									de la plataforma.
-								</p>
-							</div>
-						</div>
+							<Button color="success" className="mt-3 text-light">
+								<Link to="/register" className="text-light">
+									¡Registrarme!
+								</Link>
+							</Button>
+						</Jumbotron>
 					</div>
 				</div>
 			</div>
