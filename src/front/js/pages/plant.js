@@ -2,7 +2,7 @@ import React, { Component, useState, useContext, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
-import { ListGroup, ListGroupItem, Badge, CardImg, Label, Input, FormGroup, Col } from "reactstrap";
+import { ListGroup, ListGroupItem, Badge, Button, CardImg, Label, Input, FormGroup, Col } from "reactstrap";
 
 export function Plant() {
 	let data = [
@@ -99,9 +99,17 @@ export function Plant() {
 								Frecuencia
 							</Label>
 							<Col lg={10}>
-								<Input type="text" name="text" id="exampleEmail" placeholder="Ej: 10 horas/días" />
+								<Input
+									type="text"
+									name="text"
+									id="exampleEmail"
+									placeholder="Ej: 10 -- Insertar solamente horas"
+								/>
 							</Col>
 						</FormGroup>
+					</div>
+					<div className="row d-flex justify-content-center">
+						<Button color="secondary">Crear nueva tarea</Button> <Button color="success">Finalizar</Button>
 					</div>
 				</div>
 				<div className="col-6">
