@@ -5,6 +5,18 @@ import { Link } from "react-router-dom";
 import { ListGroup, ListGroupItem, Badge, Button, CardImg, Label, Input, FormGroup, Col } from "reactstrap";
 
 export function Plant() {
+	const [plantName, setPlantName] = useState("Aquí irá el nombre de tu planta");
+	const [plantImg, setPlantImg] = useState(
+		"https://activated.org/media/images/new-beginnings_82U8Rbw.max-550x350.jpg"
+	);
+
+	function handleTitlePlant(event) {
+		setPlantName(event.target.value);
+	}
+	function handlePlantImg(event) {
+		setPlantImg(event.target.value);
+	}
+
 	let data = [
 		{
 			scientific_name: "Quercus Rotundifolia",
@@ -69,7 +81,13 @@ export function Plant() {
 								Nombre
 							</Label>
 							<Col lg={10}>
-								<Input type="text" name="text" id="exampleEmail" placeholder="Nombre de la planta" />
+								<Input
+									type="text"
+									name="text"
+									id="exampleEmail"
+									placeholder="Nombre de la planta"
+									onChange={handleTitlePlant}
+								/>
 							</Col>
 							<Label for="exampleEmail" className="me-2" lg={2}>
 								URL
@@ -80,6 +98,7 @@ export function Plant() {
 									name="text"
 									id="exampleEmail"
 									placeholder="URL de la imagen de la planta"
+									onChange={handlePlantImg}
 								/>
 							</Col>
 						</FormGroup>
@@ -118,14 +137,9 @@ export function Plant() {
 					</div>
 					<div className="row">
 						<div className="col-6">
-							<CardImg
-								top
-								width="100%"
-								src="https://activated.org/media/images/new-beginnings_82U8Rbw.max-550x350.jpg"
-								alt="Card image cap"
-							/>
+							<CardImg top width="100%" src={plantImg} alt="Card image cap" />
 							<div className="box">
-								<h2>Quercus Rotundifolia</h2>
+								<h2>{plantName}</h2>
 								<h3>Lista de Tareas</h3>
 							</div>
 						</div>
@@ -194,7 +208,7 @@ export function Plant() {
 							alt="Card image cap"
 						/>
 						<div className="box">
-							<h2>Quercus Rotundifolia</h2>
+							<h2>Prueba</h2>
 							<h3>Lista de Tareas</h3>
 						</div>
 					</div>
