@@ -2,16 +2,16 @@ import React, { Component, useState, useContext, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
-import { ListGroup, ListGroupItem, Badge, Button, CardImg, Label, Input, FormGroup, Col } from "reactstrap";
+import { ListGroup, ListGroupItem, Button, CardImg, Label, Input, FormGroup, Col } from "reactstrap";
 
 export function Plant() {
 	const [plantName, setPlantName] = useState("Aquí irá el nombre de tu planta");
 	const [plantImg, setPlantImg] = useState(
 		"https://activated.org/media/images/new-beginnings_82U8Rbw.max-550x350.jpg"
 	);
-	const [focusTask, setFocusTask] = useState("Aquí se encuentra tu tarea");
-	const [editTodos, setEditTodos] = useState([{ task: "Tu tarea", freq: "24" }], [{ task: "Tu tarea", freq: "24" }]);
-	const [finalTodos, setFinalTodos] = useState([{ task: "Tu tarea", freq: "24" }]);
+	//const [focusTask, setFocusTask] = useState("Aquí se encuentra tu tarea");
+	const [editTodos, setEditTodos] = useState([]);
+	const [finalTodos, setFinalTodos] = useState([]);
 
 	function handleTitlePlant(event) {
 		setPlantName(event.target.value);
@@ -27,7 +27,6 @@ export function Plant() {
 	}
 	function editNameTask(event, index_internal) {
 		let read = [];
-
 		editTodos.map(function(element, index) {
 			if (index_internal == index) {
 				read.push(element);
@@ -37,7 +36,7 @@ export function Plant() {
 		});
 
 		setEditTodos(read);
-		setFinalTodos(editTodos);
+		setFinalTodos(read);
 	}
 
 	function editFreqTask(event, index_internal) {
@@ -55,11 +54,11 @@ export function Plant() {
 		setFinalTodos(editTodos);
 	}
 
-	function updateResponsiveTodos(finalTodos) {
-		if (finalTodos == undefined) {
+	function updateResponsiveTodos(editTodos) {
+		if (editTodos == undefined) {
 			return <div>Cargando</div>;
 		} else {
-			let temporal = finalTodos.map((item, index) => (
+			let temporal = editTodos.map((item, index) => (
 				<div key={index}>
 					<FormGroup row>
 						<Label for="exampleEmail" className="me-2" lg={2}>
@@ -93,11 +92,11 @@ export function Plant() {
 		}
 	}
 
-	function updatePrevTodos(finalTodos) {
-		if (finalTodos == undefined) {
+	function updatePrevTodos(editTodos) {
+		if (editTodos == undefined) {
 			return <div>Cargando</div>;
 		} else {
-			let temporal = finalTodos.map((item, index) => (
+			let temporal = editTodos.map((item, index) => (
 				<div key={index}>
 					<ListGroupItem className="justify-content-between">
 						{" "}
@@ -112,7 +111,8 @@ export function Plant() {
 			return temporal;
 		}
 	}
-	let responsive_todos = updateResponsiveTodos(finalTodos);
+
+	let responsive_todos = updateResponsiveTodos(editTodos);
 	let prev_todos = updatePrevTodos(finalTodos);
 
 	useEffect(() => {
@@ -122,11 +122,7 @@ export function Plant() {
 		if (plantName == undefined || plantName == "") {
 			setPlantName("Aquí irá el nombre de tu planta");
 		}
-		setFinalTodos(editTodos);
-
-		responsive_todos = updateResponsiveTodos(finalTodos);
-		prev_todos = updatePrevTodos(finalTodos);
-		//console.log(editTodos[0].task);
+		//responsive_todos = updateResponsiveTodos(finalTodos);
 	});
 
 	return (
