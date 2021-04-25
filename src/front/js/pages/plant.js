@@ -9,6 +9,9 @@ export function Plant() {
 	const [plantImg, setPlantImg] = useState(
 		"https://activated.org/media/images/new-beginnings_82U8Rbw.max-550x350.jpg"
 	);
+	const [focusTask, setFocusTask] = useState("Aquí se encuentra tu tarea");
+	const [editTodos, setEditTodos] = useState([{ task: "Tu tarea", freq: "24" }], [{ task: "Tu tarea", freq: "24" }]);
+	const [finalTodos, setFinalTodos] = useState([{ task: "Tu tarea", freq: "24" }]);
 
 	function handleTitlePlant(event) {
 		setPlantName(event.target.value);
@@ -16,57 +19,115 @@ export function Plant() {
 	function handlePlantImg(event) {
 		setPlantImg(event.target.value);
 	}
+	function createNewTask() {
+		let read = editTodos;
+		read.push({ task: "Tu tarea", freq: "24" });
+		setEditTodos(read);
+		setFinalTodos(editTodos);
+	}
+	function editNameTask(event, index_internal) {
+		let read = [];
 
-	let data = [
-		{
-			scientific_name: "Quercus Rotundifolia",
-			synonymous: "Roble de Hoja Perenne",
-			year: "1785",
-			family: "Fagaceae",
-			scientific_expanded: "Quercus rotundifolia f. dolichocalyx",
-			url: "https://bs.plantnet.org/image/o/1a03948baf0300da25558c2448f086d39b41ca30"
-		},
-		{
-			scientific_name: "Urtica-diotica",
-			synonymous: "Ortiga",
-			year: "1753",
-			family: "Urticaceae",
-			scientific_expanded: "Urtica haussknechtii",
-			url: "https://bs.plantnet.org/image/o/85256a1c2c098e254fefe05040626a4df49ce248"
-		},
-		{
-			scientific_name: "Dactylis glomerata",
-			synonymous: "Pastos de la huerta",
-			year: "1753",
-			family: "Poaceae",
-			scientific_expanded: "Dactylis glomerata subsp. himalayensis",
-			url: "https://bs.plantnet.org/image/o/428f40dadfa0281dc890ead17fcd07882f9efb09"
-		},
-		{
-			scientific_name: "Festuca rubra",
-			synonymous: "Festuca roja",
-			year: "1753",
-			family: "Fagaceae",
-			scientific_expanded: "Quercus rotundifolia f. dolichocalyx",
-			url: "https://bs.plantnet.org/image/o/0b932c8a275efc79f473a71bec20d6f15e9b6b90"
-		},
-		{
-			scientific_name: "Plantago lanceolata",
-			synonymous: "Plátano de hoja estrecha",
-			year: "1753",
-			family: "Poaceae",
-			scientific_expanded: "Festuca austrodolomitica",
-			url: "https://bs.plantnet.org/image/o/78a8374f009e6ed2dc71ca17d18e4271ea0a2a7b"
-		},
-		{
-			scientific_name: "Quercus robur",
-			synonymous: "Roble inglés",
-			year: "1753",
-			family: "Fagaceae",
-			scientific_expanded: "Quercus robur subsp. broteroan",
-			url: "https://bs.plantnet.org/image/o/2292b670683abdaac354389514105df0018d9ef8"
+		editTodos.map(function(element, index) {
+			if (index_internal == index) {
+				read.push(element);
+			} else {
+				read.push({ task: event.target.value, freq: editTodos[index].freq });
+			}
+		});
+
+		setEditTodos(read);
+		setFinalTodos(editTodos);
+	}
+
+	function editFreqTask(event, index_internal) {
+		let read = [];
+
+		editTodos.map(function(element, index) {
+			if (index_internal == index) {
+				read.push(element);
+			} else {
+				read.push({ task: editTodos[index].task, freq: event.target.value });
+			}
+		});
+
+		setEditTodos(read);
+		setFinalTodos(editTodos);
+	}
+
+	function updateResponsiveTodos(finalTodos) {
+		if (finalTodos == undefined) {
+			return <div>Cargando</div>;
+		} else {
+			let temporal = finalTodos.map((item, index) => (
+				<div key={index}>
+					<FormGroup row>
+						<Label for="exampleEmail" className="me-2" lg={2}>
+							Tarea
+						</Label>
+						<Col lg={10}>
+							<Input
+								type="text"
+								name="text"
+								id="exampleEmail"
+								placeholder="Ej: Agua"
+								onChange={() => editNameTask(event, index)}
+							/>
+						</Col>
+						<Label for="exampleEmail" className="me-2" lg={2}>
+							Frecuencia
+						</Label>
+						<Col lg={10}>
+							<Input
+								type="text"
+								name="text"
+								id="exampleEmail"
+								placeholder="Ej: 10 -- Insertar solamente horas"
+								onChange={() => editFreqTask(event, index)}
+							/>
+						</Col>
+					</FormGroup>
+				</div>
+			));
+			return temporal;
 		}
-	];
+	}
+
+	function updatePrevTodos(finalTodos) {
+		if (finalTodos == undefined) {
+			return <div>Cargando</div>;
+		} else {
+			let temporal = finalTodos.map((item, index) => (
+				<div key={index}>
+					<ListGroupItem className="justify-content-between">
+						{" "}
+						<div className="m-1">
+							<Label check>
+								<Input type="checkbox" className="ps-2" /> {item.task}
+							</Label>
+						</div>
+					</ListGroupItem>
+				</div>
+			));
+			return temporal;
+		}
+	}
+	let responsive_todos = updateResponsiveTodos(finalTodos);
+	let prev_todos = updatePrevTodos(finalTodos);
+
+	useEffect(() => {
+		if (plantImg == undefined || plantImg == "") {
+			setPlantImg("https://activated.org/media/images/new-beginnings_82U8Rbw.max-550x350.jpg");
+		}
+		if (plantName == undefined || plantName == "") {
+			setPlantName("Aquí irá el nombre de tu planta");
+		}
+		setFinalTodos(editTodos);
+
+		responsive_todos = updateResponsiveTodos(finalTodos);
+		prev_todos = updatePrevTodos(finalTodos);
+		//console.log(editTodos[0].task);
+	});
 
 	return (
 		<div className="m-5">
@@ -106,29 +167,12 @@ export function Plant() {
 					<div className="row d-flex justify-content-center mb-2">
 						<h1>Tareas para tu planta</h1>
 					</div>
+					<div className="row d-flex justify-content-center">{responsive_todos}</div>
 					<div className="row d-flex justify-content-center">
-						<FormGroup row>
-							<Label for="exampleEmail" className="me-2" lg={2}>
-								Tarea
-							</Label>
-							<Col lg={10}>
-								<Input type="text" name="text" id="exampleEmail" placeholder="Ej: Agua" />
-							</Col>
-							<Label for="exampleEmail" className="me-2" lg={2}>
-								Frecuencia
-							</Label>
-							<Col lg={10}>
-								<Input
-									type="text"
-									name="text"
-									id="exampleEmail"
-									placeholder="Ej: 10 -- Insertar solamente horas"
-								/>
-							</Col>
-						</FormGroup>
-					</div>
-					<div className="row d-flex justify-content-center">
-						<Button color="secondary">Crear nueva tarea</Button> <Button color="success">Finalizar</Button>
+						<Button color="secondary" onClick={() => createNewTask()}>
+							Crear nueva tarea
+						</Button>{" "}
+						<Button color="success">Finalizar</Button>
 					</div>
 				</div>
 				<div className="col-6">
@@ -143,58 +187,7 @@ export function Plant() {
 								<h3>Lista de Tareas</h3>
 							</div>
 						</div>
-						<div className="col-6">
-							<ListGroup>
-								<ListGroupItem className="justify-content-between">
-									{" "}
-									<div className="m-1 mt-0 mb-0">
-										<Label check>
-											<Input type="checkbox" className="ps-2" /> Agua
-										</Label>
-									</div>
-								</ListGroupItem>
-								<ListGroupItem className="justify-content-between">
-									{" "}
-									<div className="m-1">
-										<Label check>
-											<Input type="checkbox" className="ps-2" /> Abono
-										</Label>
-									</div>
-								</ListGroupItem>
-								<ListGroupItem className="justify-content-between">
-									{" "}
-									<div className="m-1">
-										<Label check>
-											<Input type="checkbox" className="ps-2" /> Fertilizante
-										</Label>
-									</div>
-								</ListGroupItem>
-								<ListGroupItem className="justify-content-between">
-									{" "}
-									<div className="m-1">
-										<Label check>
-											<Input type="checkbox" className="ps-2" /> Luz
-										</Label>
-									</div>
-								</ListGroupItem>
-								<ListGroupItem className="justify-content-between">
-									{" "}
-									<div className="m-1">
-										<Label check>
-											<Input type="checkbox" className="ps-2" /> Luz
-										</Label>
-									</div>
-								</ListGroupItem>
-								<ListGroupItem className="justify-content-between">
-									{" "}
-									<div className="m-1">
-										<Label check>
-											<Input type="checkbox" className="ps-2" /> Luz
-										</Label>
-									</div>
-								</ListGroupItem>
-							</ListGroup>
-						</div>
+						<div className="col-6">{prev_todos}</div>
 					</div>
 				</div>
 			</div>
