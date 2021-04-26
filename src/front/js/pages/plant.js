@@ -9,9 +9,8 @@ export function Plant() {
 	const [plantImg, setPlantImg] = useState(
 		"https://activated.org/media/images/new-beginnings_82U8Rbw.max-550x350.jpg"
 	);
-	//const [focusTask, setFocusTask] = useState("Aquí se encuentra tu tarea");
-	const [editTodos, setEditTodos] = useState([]);
 
+	const [editTodos, setEditTodos] = useState([]);
 	const [list, setList] = useState(["Tarea"]);
 	const [freqList, setFreqList] = useState(["Tarea"]);
 
@@ -24,12 +23,16 @@ export function Plant() {
 	function createNewTask() {
 		let read = list;
 		read.push("Tu tarea");
-		setPlantName(() => setList(read));
+		setPlantName(() => {
+			setList(read);
+		});
 	}
 	function editNameTask(event, index_internal) {
 		let read = list;
 		read[index_internal] = event.target.value;
-		setPlantName(() => setList(read));
+		setPlantName(() => {
+			setList(read);
+		});
 	}
 
 	function editFreqTask(event, index_internal) {
@@ -106,8 +109,6 @@ export function Plant() {
 		if (plantName == undefined || plantName == "") {
 			setPlantName("Aquí irá el nombre de tu planta");
 		}
-
-		//responsive_todos = updateResponsiveTodos(finalTodos);
 
 		setList(list);
 	});
