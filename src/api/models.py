@@ -89,6 +89,14 @@ class Plant(db.Model):
             "germination": self.germination,
             "height": self.height,
             "harving": self.harving,
+            "water_freq": self.water_freq,
+            "last_water": self.last_water,
+            "fertilizer_freq": self.fertilizer_freq,
+            "last_fertilizer": self.last_fertilizer,
+            "prunning_freq": self.prunning_freq,
+            "last_prunning": self.last_prunning,
+            "pesticide_freq": self.pesticide_freq,
+            "last_pesticide": self.last_pesticide
         }
 
 
