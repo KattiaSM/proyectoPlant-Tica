@@ -10,7 +10,7 @@ import { Login } from "./pages/login";
 import { Profile } from "./pages/profile";
 import { Garden } from "./pages/garden";
 import { Favorites } from "./pages/favorites";
-import { Plant } from "./pages/plant";
+import { CreateTodo } from "./pages/create_todo";
 
 import injectContext from "./store/appContext";
 
@@ -35,8 +35,8 @@ const Layout = () => {
 						<Route exact path="/demo">
 							<Demo />
 						</Route>
-						<Route exact path="/plant">
-							<Plant />
+						<Route exact path="/create">
+							<CreateTodo />
 						</Route>
 						<Route exact path="/single/:theid">
 							<Single />

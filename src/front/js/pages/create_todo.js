@@ -4,7 +4,7 @@ import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import { ListGroup, ListGroupItem, Button, CardImg, Label, Input, FormGroup, Col } from "reactstrap";
 
-export function Plant() {
+export function CreateTodo() {
 	const [plantName, setPlantName] = useState("Aquí irá el nombre de tu planta");
 	const [plantImg, setPlantImg] = useState(
 		"https://activated.org/media/images/new-beginnings_82U8Rbw.max-550x350.jpg"
