@@ -2,6 +2,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			message: null,
+			name: "Acá irá el nombre de tu planta",
 			demo: [
 				{
 					title: "FIRST",
@@ -17,8 +18,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
-			exampleFunction: () => {
-				getActions().changeColor(0, "green");
+			changeName: name_doc => {
+				if (name_doc == "" || name_doc == undefined) {
+					setStore({ name: "Aquí irá el nombre de tu planta" });
+				} else {
+					setStore({ name: name_doc });
+				}
 			},
 
 			getMessage: () => {
