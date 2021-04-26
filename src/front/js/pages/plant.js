@@ -13,21 +13,26 @@ export function Plant() {
 	const [editTodos, setEditTodos] = useState([]);
 	const [list, setList] = useState(["Tarea"]);
 	const [freqList, setFreqList] = useState(["Tarea"]);
-
+	const { store, actions } = useContext(Context);
+	const name = "";
 	function handleTitlePlant(event) {
+		actions.changeName(event.target.value);
 		setPlantName(event.target.value);
 	}
 	function handlePlantImg(event) {
 		setPlantImg(event.target.value);
 	}
 	function createNewTask() {
+		let tit = plantName;
 		let read = list;
+		console.log(plantName);
 		read.push("Tu tarea");
 		setPlantName(() => {
 			setList(read);
 		});
 	}
 	function editNameTask(event, index_internal) {
+		let tit = plantName;
 		let read = list;
 		read[index_internal] = event.target.value;
 		setPlantName(() => {
@@ -167,7 +172,10 @@ export function Plant() {
 						<div className="col-6">
 							<CardImg top width="100%" src={plantImg} alt="Card image cap" />
 							<div className="box">
-								<h2>{plantName}</h2>
+								<h2>
+									{store.name}
+									<p id="plant_title">{plantName}</p>
+								</h2>
 								<h3>Lista de Tareas</h3>
 							</div>
 						</div>
