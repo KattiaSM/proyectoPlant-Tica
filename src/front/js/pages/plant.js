@@ -1,4 +1,4 @@
-import React, { Component, useState, useContext, useEffect } from "react";
+import React, { Component, useState, useContext, useEffect, useLayoutEffect } from "react";
 import PropTypes from "prop-types";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
@@ -11,7 +11,9 @@ export function Plant() {
 	);
 	//const [focusTask, setFocusTask] = useState("Aquí se encuentra tu tarea");
 	const [editTodos, setEditTodos] = useState([]);
-	const [finalTodos, setFinalTodos] = useState([]);
+
+	const [list, setList] = useState(["Tarea"]);
+	const [freqList, setFreqList] = useState(["Tarea"]);
 
 	function handleTitlePlant(event) {
 		setPlantName(event.target.value);
@@ -20,45 +22,27 @@ export function Plant() {
 		setPlantImg(event.target.value);
 	}
 	function createNewTask() {
-		let read = editTodos;
-		read.push({ task: "Tu tarea", freq: "24" });
-		setEditTodos(read);
-		setFinalTodos(editTodos);
+		let read = list;
+		read.push("Tu tarea");
+		setPlantName(() => setList(read));
 	}
 	function editNameTask(event, index_internal) {
-		let read = [];
-		editTodos.map(function(element, index) {
-			if (index_internal == index) {
-				read.push(element);
-			} else {
-				read.push({ task: event.target.value, freq: editTodos[index].freq });
-			}
-		});
-
-		setEditTodos(read);
-		setFinalTodos(read);
+		let read = list;
+		read[index_internal] = event.target.value;
+		setPlantName(() => setList(read));
 	}
 
 	function editFreqTask(event, index_internal) {
-		let read = [];
-
-		editTodos.map(function(element, index) {
-			if (index_internal == index) {
-				read.push(element);
-			} else {
-				read.push({ task: editTodos[index].task, freq: event.target.value });
-			}
-		});
-
-		setEditTodos(read);
-		setFinalTodos(editTodos);
+		let read = freqList;
+		read[index_internal] = event.target.value;
+		setPlantName(() => setFreqList(read));
 	}
 
-	function updateResponsiveTodos(editTodos) {
-		if (editTodos == undefined) {
+	function updateResponsiveTodos() {
+		if (list == undefined) {
 			return <div>Cargando</div>;
 		} else {
-			let temporal = editTodos.map((item, index) => (
+			let temporal = list.map((item, index) => (
 				<div key={index}>
 					<FormGroup row>
 						<Label for="exampleEmail" className="me-2" lg={2}>
@@ -92,17 +76,17 @@ export function Plant() {
 		}
 	}
 
-	function updatePrevTodos(editTodos) {
-		if (editTodos == undefined) {
+	function updatePrevTodos() {
+		if (list == undefined) {
 			return <div>Cargando</div>;
 		} else {
-			let temporal = editTodos.map((item, index) => (
+			let temporal = list.map((item, index) => (
 				<div key={index}>
 					<ListGroupItem className="justify-content-between">
 						{" "}
 						<div className="m-1">
 							<Label check>
-								<Input type="checkbox" className="ps-2" /> {item.task}
+								<Input type="checkbox" className="ps-2" /> {item}
 							</Label>
 						</div>
 					</ListGroupItem>
@@ -112,17 +96,20 @@ export function Plant() {
 		}
 	}
 
-	let responsive_todos = updateResponsiveTodos(editTodos);
-	let prev_todos = updatePrevTodos(finalTodos);
+	let responsive_todos = updateResponsiveTodos();
+	let prev_todos = updatePrevTodos();
 
-	useEffect(() => {
+	useLayoutEffect(() => {
 		if (plantImg == undefined || plantImg == "") {
 			setPlantImg("https://activated.org/media/images/new-beginnings_82U8Rbw.max-550x350.jpg");
 		}
 		if (plantName == undefined || plantName == "") {
 			setPlantName("Aquí irá el nombre de tu planta");
 		}
+
 		//responsive_todos = updateResponsiveTodos(finalTodos);
+
+		setList(list);
 	});
 
 	return (
