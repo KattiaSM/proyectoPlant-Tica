@@ -19,7 +19,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 		actions: {
 			// Use getActions to call a function within a fuction
 			changeName: name_doc => {
-				setStore({ name: name_doc });
+				if (name_doc == "" || name_doc == undefined) {
+					setStore({ name: "Aquí irá el nombre de tu planta" });
+				} else {
+					setStore({ name: name_doc });
+				}
 			},
 
 			getMessage: () => {
