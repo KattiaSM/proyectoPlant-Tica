@@ -91,7 +91,7 @@ export function CreateTodo() {
 	//Cuando la imagen se carga, se actualiza la imagen de la previsualización con el URL de la nube
 	async function uploadImg(file) {
 		//Hello
-		setPlantImg("https://www.parroquiasanbartolome.org/wp-content/uploads/2020/09/Preloader_1.gif");
+		setPlantImg("https://i.gifer.com/ZdPH.gif");
 		const CLOUDINARY_UPLOAD_URL = "https://api.cloudinary.com/v1_1/dubb4luoi/image/upload";
 		const formData = new FormData();
 		formData.append("file", file);
