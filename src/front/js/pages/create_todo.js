@@ -92,7 +92,7 @@ export function CreateTodo() {
 	//Cuando la imagen se carga, se actualiza la imagen de la previsualización con el URL de la nube
 	async function uploadImg(file) {
 		//Hello
-		setPlantImg("https://i.gifer.com/ZdPH.gif");
+		setPlantImg("https://i.pinimg.com/originals/e8/88/d4/e888d4feff8fd5ff63a965471a94b874.gif");
 		const CLOUDINARY_UPLOAD_URL = "https://api.cloudinary.com/v1_1/dubb4luoi/image/upload";
 		const formData = new FormData();
 		formData.append("file", file);
