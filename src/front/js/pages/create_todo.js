@@ -88,6 +88,7 @@ export function CreateTodo() {
 	}
 
 	//Esta función se encarga de realizar el Fetch de la imagen del usuario
+	//Cuando se ingresa a la función se asigna temporalmente una imagen de carga, cuando el API retorna success, se asigna la imagen a la que se subió a la nube
 	//Cuando la imagen se carga, se actualiza la imagen de la previsualización con el URL de la nube
 	async function uploadImg(file) {
 		//Hello
