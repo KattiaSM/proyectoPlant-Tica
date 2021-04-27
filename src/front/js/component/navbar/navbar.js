@@ -25,6 +25,10 @@ const navbar = () => {
 			</div>
 
 			<Search />
+
+			<button type="button" className="btn btn-outline-light ml-2">
+				Cerrar Sesión
+			</button>
 		</nav>
 	);
 };

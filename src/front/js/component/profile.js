@@ -40,6 +40,11 @@ const profile = props => {
 												<p className="f-w-600 mb-1">Hobbies</p>
 												<h6 className="text-muted f-w-400">{props.hobbies}</h6>
 											</div>
+											<div className="col-sm-12 mb-2">
+												<button type="button" className="btn btn-block btn-outline-info">
+													Cerrar Sesión
+												</button>
+											</div>
 										</div>
 									</div>
 								</div>
