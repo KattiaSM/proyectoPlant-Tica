@@ -16,25 +16,29 @@ import {
 } from "reactstrap";
 
 export function CreateTodo() {
-	const [plantName, setPlantName] = useState("Aquí irá el nombre de tu planta");
+	const [plantName, setPlantName] = useState("Aquí irá el nombre de tu planta"); //Almacena el nombre de la planta
 	const [plantImg, setPlantImg] = useState(
 		"https://activated.org/media/images/new-beginnings_82U8Rbw.max-550x350.jpg"
-	);
+	); //Almacena el URL de la planta
 
 	const [editTodos, setEditTodos] = useState([]);
-	const [list, setList] = useState(["Tarea"]);
-	const [freqList, setFreqList] = useState([""]);
-	const [typeList, setTypeList] = useState(["Horas"]);
+	const [list, setList] = useState(["Tarea"]); //Contiene los nombres de las tareas
+	const [freqList, setFreqList] = useState([""]); //Contiene las frecuencias de las tareas
+	const [typeList, setTypeList] = useState(["Horas"]); //Contiene los tipos de frecuencia de las tareas días/horas
 	const { store, actions } = useContext(Context);
 	const name = "";
 
+	//La siguiente función actualiza el nombre de la planta cada vez que es llamada por el evento onChange
 	function handleTitlePlant(event) {
 		actions.changeName(event.target.value);
 		setPlantName(event.target.value);
 	}
+	//La siguiente función actualiza el URL de la planta cada vez que es llamada por el evento onChange
 	function handlePlantImg(event) {
 		setPlantImg(event.target.value);
 	}
+	//La siguiente función crea tres nuevos valores en tres listas, las listas contienen lo siguiente
+	//list: contiene el nombre de la tarea, freqList: contiene la frecuencia de la tarea, typeList : contiene el tipo de frequencia días/horas
 	function createNewTask() {
 		let tit = plantName;
 		let read = list;
@@ -49,7 +53,8 @@ export function CreateTodo() {
 			setFreqList(read3);
 		});
 	}
-
+	//La siguiente función obtiene un evento, cada vez que se cambia el nombre de una tarea
+	//este obtiene el evento y el index para modificas el array list, que contiene el name task
 	function editNameTask(event, index_internal) {
 		let tit = plantName;
 		let read = list;
@@ -58,13 +63,15 @@ export function CreateTodo() {
 			setList(read);
 		});
 	}
-
+	//La siguiente función obtiene un evento, cada vez que se cambia la frecuencia de una tarea
+	//este obtiene el evento y el index para modificas el array freqlist, que contiene las frecuencias
 	function editFreqTask(event, index_internal) {
 		let read = freqList;
 		read[index_internal] = event.target.value;
 		setPlantName(() => setFreqList(read));
 	}
-
+	//La siguiente función obtiene un evento, cada vez que se cambia el tipo de frecuencia de una tarea
+	//este obtiene el evento y el index para modificas el array typeList, que contiene días/horas
 	function editTypeTask(type, index_internal) {
 		let change = "Horas";
 		if (type === "Horas") {
@@ -77,19 +84,29 @@ export function CreateTodo() {
 		setPlantName(() => setTypeList(read));
 	}
 
+	//La siguiente función elimina un task, y lo hace en las tres listas que manipulan los datos
 	function deleteTask(index) {
 		let read = list;
 		let read2 = typeList;
+		let read3 = freqList;
 
 		read.splice(index, 1);
 		read2.splice(index, 1);
+		read3.splice(index, 1);
 
 		setPlantName(() => {
 			setList(read);
 			setTypeList(read2);
+			setFreqList(read3);
 		});
 	}
 
+	async function uploadImg() {
+		//Hello
+	}
+
+	//Cuando se presiona el botón finalizar la siguiente función le da formato a la información
+	//En caso de encontrar errores en los datos, aplica sus validaciones
 	function sendData() {
 		let datas = [{ plant_name: store.name }, { plant_url: plantImg }, ""];
 		let data = [];
@@ -107,6 +124,8 @@ export function CreateTodo() {
 		//console.log(datas);
 	}
 
+	//Esta función crea divs de acuerdo a la cantidad de tareas por editar
+	//Se basa leyendo el array de list y le da formato HTML, con sus respectivas funciones asignadas a index
 	function updateResponsiveTodos() {
 		if (list == undefined) {
 			return <div>Cargando</div>;
@@ -162,6 +181,7 @@ export function CreateTodo() {
 		}
 	}
 
+	//La siguiente función lee el array list y crea una simulación de cómo se verían las tareas en previsualización
 	function updatePrevTodos() {
 		if (list == undefined) {
 			return <div>Cargando</div>;
@@ -182,9 +202,12 @@ export function CreateTodo() {
 		}
 	}
 
+	//Las siguientes dos variables son las que contienen el editor de tareas y el previsualizador de tareas
 	let responsive_todos = updateResponsiveTodos();
 	let prev_todos = updatePrevTodos();
 
+	//El useEffect se encarga de validar, que si el espacio de la planta ya sea su nombre o URL se encuentran vacíos
+	//les da formato general y le asigna a cada variable un valor temporal y así no dejar la previsualización vacía
 	useLayoutEffect(() => {
 		if (plantImg == undefined || plantImg == "") {
 			setPlantImg("https://activated.org/media/images/new-beginnings_82U8Rbw.max-550x350.jpg");
@@ -244,7 +267,6 @@ export function CreateTodo() {
 										id="exampleFile"
 										accept=".jpg,.png,.jpeg,.gif"
 										onChange={() => {
-											setPlantImg(event.target.files);
 											console.log(event.target.files);
 										}}
 									/>
