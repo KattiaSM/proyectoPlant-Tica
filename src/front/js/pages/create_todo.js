@@ -2,18 +2,7 @@ import React, { Component, useState, useContext, useEffect, useLayoutEffect } fr
 import PropTypes from "prop-types";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
-import {
-	ListGroup,
-	ListGroupItem,
-	Button,
-	CardImg,
-	Label,
-	Input,
-	FormGroup,
-	Col,
-	ButtonToggle,
-	FormText
-} from "reactstrap";
+import { ListGroupItem, Button, CardImg, Label, Input, FormGroup, Col, ButtonToggle } from "reactstrap";
 
 export function CreateTodo() {
 	const [plantName, setPlantName] = useState("Aquí irá el nombre de tu planta"); //Almacena el nombre de la planta
@@ -100,8 +89,27 @@ export function CreateTodo() {
 
 	//Esta función se encarga de realizar el Fetch de la imagen del usuario
 	//Cuando la imagen se carga, se actualiza la imagen de la previsualización con el URL de la nube
-	async function uploadImg() {
+	async function uploadImg(file) {
 		//Hello
+		setPlantImg("https://img.pikbest.com/58pic/35/39/61/62K58PICb88i68HEwVnm5_PIC2018.gif!w340");
+		const CLOUDINARY_UPLOAD_URL = "https://api.cloudinary.com/v1_1/dubb4luoi/image/upload";
+		const formData = new FormData();
+		formData.append("file", file);
+		formData.append("upload_preset", "ksbjpgis"); // Replace the preset name with your own
+
+		await fetch(CLOUDINARY_UPLOAD_URL, {
+			method: "POST",
+			body: formData
+		})
+			.then(response => response.json())
+			.then(data => {
+				console.log(data);
+				if (data.secure_url !== "") {
+					console.log(data.secure_url);
+					setPlantImg(data.secure_url);
+				}
+			})
+			.catch(err => console.error(err));
 	}
 
 	//Cuando se presiona el botón finalizar la siguiente función le da formato a la información
@@ -125,7 +133,7 @@ export function CreateTodo() {
 	}
 
 	//Esta función crea divs de acuerdo a la cantidad de tareas por editar
-	//Se basa leyendo el array de list y le da formato HTML, con sus respectivas funciones asignadas a index
+	//Se basa leyendo el array de list y le da formato HTML, con sus respectivas funciones asignadas al index correspondiente
 	function updateResponsiveTodos() {
 		if (list == undefined) {
 			return <div>Cargando</div>;
@@ -256,7 +264,7 @@ export function CreateTodo() {
 									type="text"
 									name="text"
 									id="exampleEmail"
-									placeholder="URL de la imagen de la planta"
+									placeholder="Ingresar URL de imagen de la planta"
 									onChange={handlePlantImg}
 								/>
 							</Col>
@@ -268,7 +276,7 @@ export function CreateTodo() {
 										id="exampleFile"
 										accept=".jpg,.png,.jpeg,.gif"
 										onChange={() => {
-											console.log(event.target.files);
+											uploadImg(event.target.files[0]);
 										}}
 									/>
 								</div>
