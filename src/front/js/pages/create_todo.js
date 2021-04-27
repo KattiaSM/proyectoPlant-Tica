@@ -21,12 +21,10 @@ export function CreateTodo() {
 		"https://activated.org/media/images/new-beginnings_82U8Rbw.max-550x350.jpg"
 	); //Almacena el URL de la planta
 
-	const [editTodos, setEditTodos] = useState([]);
 	const [list, setList] = useState(["Tarea"]); //Contiene los nombres de las tareas
 	const [freqList, setFreqList] = useState([""]); //Contiene las frecuencias de las tareas
 	const [typeList, setTypeList] = useState(["Horas"]); //Contiene los tipos de frecuencia de las tareas días/horas
-	const { store, actions } = useContext(Context);
-	const name = "";
+	const { store, actions } = useContext(Context); //El plantName también se almacena en el store
 
 	//La siguiente función actualiza el nombre de la planta cada vez que es llamada por el evento onChange
 	function handleTitlePlant(event) {
@@ -40,7 +38,6 @@ export function CreateTodo() {
 	//La siguiente función crea tres nuevos valores en tres listas, las listas contienen lo siguiente
 	//list: contiene el nombre de la tarea, freqList: contiene la frecuencia de la tarea, typeList : contiene el tipo de frequencia días/horas
 	function createNewTask() {
-		let tit = plantName;
 		let read = list;
 		let read2 = typeList;
 		let read3 = freqList;
@@ -48,6 +45,7 @@ export function CreateTodo() {
 		read2.push("Horas");
 		read3.push("");
 		setPlantName(() => {
+			//Hace un append a los tres arrays existentes con valores predeterminados y se reestablecen los nuevos valores de los array
 			setList(read);
 			setTypeList(read2);
 			setFreqList(read3);
@@ -56,7 +54,6 @@ export function CreateTodo() {
 	//La siguiente función obtiene un evento, cada vez que se cambia el nombre de una tarea
 	//este obtiene el evento y el index para modificas el array list, que contiene el name task
 	function editNameTask(event, index_internal) {
-		let tit = plantName;
 		let read = list;
 		read[index_internal] = event.target.value;
 		setPlantName(() => {
@@ -89,11 +86,11 @@ export function CreateTodo() {
 		let read = list;
 		let read2 = typeList;
 		let read3 = freqList;
-
+		//Hace un splice a los tres arrays existentes con valores predeterminados y se reestablecen los nuevos valores de los array
 		read.splice(index, 1);
 		read2.splice(index, 1);
 		read3.splice(index, 1);
-
+		//Se establecen los nuevos arrays con la tarea eliminada
 		setPlantName(() => {
 			setList(read);
 			setTypeList(read2);
@@ -101,6 +98,8 @@ export function CreateTodo() {
 		});
 	}
 
+	//Esta función se encarga de realizar el Fetch de la imagen del usuario
+	//Cuando la imagen se carga, se actualiza la imagen de la previsualización con el URL de la nube
 	async function uploadImg() {
 		//Hello
 	}
@@ -112,16 +111,17 @@ export function CreateTodo() {
 		let data = [];
 
 		freqList.map(function(item, index) {
+			//Este map revisa que si alguna frecuencia está incorrecta la reemplaza por un valor predeterminado de 24 horas
 			if (item === "" || isNaN(parseInt(item))) {
 				freqList[index] = "24";
 			}
 		});
 
 		list.map(function(item, index) {
+			//Este map da el formato de objeto necesario para enviar los datos al API
 			data.push({ task: list[index], freq: parseInt(freqList[index]), type: typeList[index] });
 		});
 		datas[2] = { tasks: data };
-		//console.log(datas);
 	}
 
 	//Esta función crea divs de acuerdo a la cantidad de tareas por editar
@@ -203,6 +203,7 @@ export function CreateTodo() {
 	}
 
 	//Las siguientes dos variables son las que contienen el editor de tareas y el previsualizador de tareas
+	//Las funciones tienen return, este return contiene la información en formato HTML
 	let responsive_todos = updateResponsiveTodos();
 	let prev_todos = updatePrevTodos();
 
