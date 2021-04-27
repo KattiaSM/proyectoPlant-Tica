@@ -2,7 +2,18 @@ import React, { Component, useState, useContext, useEffect, useLayoutEffect } fr
 import PropTypes from "prop-types";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
-import { ListGroup, ListGroupItem, Button, CardImg, Label, Input, FormGroup, Col, ButtonToggle } from "reactstrap";
+import {
+	ListGroup,
+	ListGroupItem,
+	Button,
+	CardImg,
+	Label,
+	Input,
+	FormGroup,
+	Col,
+	ButtonToggle,
+	FormText
+} from "reactstrap";
 
 export function CreateTodo() {
 	const [plantName, setPlantName] = useState("Aquí irá el nombre de tu planta");
@@ -93,7 +104,7 @@ export function CreateTodo() {
 			data.push({ task: list[index], freq: parseInt(freqList[index]), type: typeList[index] });
 		});
 		datas[2] = { tasks: data };
-		console.log(datas);
+		//console.log(datas);
 	}
 
 	function updateResponsiveTodos() {
@@ -194,12 +205,12 @@ export function CreateTodo() {
 					</Button>
 				</Link>
 			</div>
-			<div className="row mt-2">
+			<div className="row mt-2 d-flex justify-content-center">
 				<div className="col-6 bg-light border border-rounded rounded-2">
-					<div className="row d-flex justify-content-center mb-2">
+					<div className="row d-flex justify-content-center">
 						<h1>Inserta aquí los datos de tu planta</h1>
 					</div>
-					<div className="row d-flex justify-content-center">
+					<div className="row d-flex justify-content-center m-1">
 						<FormGroup row>
 							<Label for="exampleEmail" className="me-2" lg={2}>
 								Nombre
@@ -224,6 +235,20 @@ export function CreateTodo() {
 									placeholder="URL de la imagen de la planta"
 									onChange={handlePlantImg}
 								/>
+							</Col>
+							<Col lg={12} className="d-flex justify-content-end">
+								<div>
+									<Input
+										type="file"
+										name="file"
+										id="exampleFile"
+										accept=".jpg,.png,.jpeg,.gif"
+										onChange={() => {
+											setPlantImg(event.target.files);
+											console.log(event.target.files);
+										}}
+									/>
+								</div>
 							</Col>
 						</FormGroup>
 					</div>
