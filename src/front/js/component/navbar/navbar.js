@@ -17,10 +17,12 @@ const navbar = () => {
 			{/* Secciones */}
 			<div className="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul className="navbar-nav mr-auto">
+					<LinkNav name="Plantas" to="/plants" />
 					<LinkNav name="Favoritos(5)" to="/favorites" />
 					<LinkNav name="Garden" to="/garden" />
 					<LinkNav name="Registrarse" to="/register" />
 					<LinkNav name="Ingresar" to="/login" />
+					{/* <LinkNav name="Recuperar Contraseña" to="/restore" /> */}
 				</ul>
 			</div>
 

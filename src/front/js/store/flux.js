@@ -2,7 +2,45 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			message: null,
-			name: "Acá irá el nombre de tu planta",
+			plants: [
+				{
+					name: "Chile Jalapeño",
+					scientName: "Capsicum annuum var"
+				},
+				{
+					name: "Chile Poblano / Chile Ancho",
+					scientName: "Capsicum annuum var"
+				},
+				{
+					name: "Chile Habanero Manzano",
+					scientName: "Capsicum annuum var"
+				},
+				{
+					name: "Chile Güero Húngaro Variedad Santa Fe",
+					scientName: "Capsicum annuum var"
+				},
+				{
+					name: "Betabel Remolacha",
+					scientName: "Beta vulgaris"
+				},
+				{
+					name: "Cabeza Larga",
+					scientName: "Curcubita pepo"
+				},
+				{
+					name: "Cebolla Amarilla",
+					scientName: "Allium cepa"
+				},
+				{
+					name: "Crisantemo Gigante Blanco",
+					scientName: "Leucanthemum maximum"
+				},
+				{
+					name: "Girasol Belleza de Otoño Variado",
+					scientName: "Helianthus decapetalus"
+				}
+			],
+
 			demo: [
 				{
 					title: "FIRST",

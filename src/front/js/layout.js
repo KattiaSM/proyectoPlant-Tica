@@ -11,6 +11,8 @@ import { Profile } from "./pages/profile";
 import { Garden } from "./pages/garden";
 import { Favorites } from "./pages/favorites";
 import { CreateTodo } from "./pages/create_todo";
+import { Plants } from "./pages/plants";
+import { Restore } from "./pages/restore";
 
 import injectContext from "./store/appContext";
 
@@ -56,6 +58,12 @@ const Layout = () => {
 						<Route exact path="/garden">
 							<Profile />
 							<Garden />
+						</Route>
+						<Route exact path="/plants">
+							<Plants />
+						</Route>
+						<Route exact path="/restore">
+							<Restore />
 						</Route>
 						<Route>
 							<h1>Not found!</h1>
