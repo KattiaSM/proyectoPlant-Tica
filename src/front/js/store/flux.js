@@ -2,7 +2,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			message: null,
-			todos: [],
+			todos: [
+				[
+					{ plant_Name: "Agrega plantas" },
+					{ plant_url: "https://whatsup.es/wp-content/uploads/2020/07/partes-de-la-planta-en-ingles.jpg" },
+
+					{
+						tasks: [
+							{ task: "DDDDDD", freq: 24, type: "Horas" },
+							{ task: "tarea2", freq: 24, type: "Horas" }
+						]
+					}
+				]
+			],
 			plants: [
 				{
 					name: "Chile Jalapeño",

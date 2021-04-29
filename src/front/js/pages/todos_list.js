@@ -17,17 +17,15 @@ export function TodosList() {
 
 	let genIndex = 0;
 
-	function createTodos(allTodos, listIndex) {
-		allTodos = store.todos;
-		console.log("todos con index");
-		console.log(store.todos);
-		let prueba = allTodos[genIndex][2].tasks;
-
+	function createTodos() {
+		let allTodos = store.todos;
+		console.log(allTodos[genIndex][2].tasks);
 		if (allTodos == undefined) {
-			console.log(allTodos);
+			//console.log(allTodos);
 
 			return <div>No hay tareas disponibles</div>;
 		} else {
+			let prueba = allTodos[genIndex][2].tasks;
 			let temporal = prueba.map((item, index) => (
 				<div key={index}>
 					<ListGroupItem className="justify-content-between">
@@ -49,34 +47,38 @@ export function TodosList() {
 	function createInfo(allTodos) {
 		if (allTodos === undefined) {
 			return <div>No hay tareas disponibles</div>;
-		}
-
-		let temporal = allTodos.map((item, index) => (
-			<div key={index}>
-				<div className="row">
-					<div className="col-6">
-						<CardImg top width="100%" src={item[1].plant_url} alt="Card image cap" />
-						<div className="box">
-							<h2>
-								<p id="plant_title">{item[0].plant_name}</p>
-							</h2>
-							<h3>Lista de Tareas</h3>
+		} else {
+			let temporal = allTodos.map((item, index) => (
+				<div key={index}>
+					<div className="row">
+						<div className="col-6">
+							<CardImg top width="100%" src={item[1].plant_url} alt="Card image cap" />
+							<div className="box">
+								<h2>
+									<p>{item[0].plant_Name}</p>
+								</h2>
+								<h3>Lista de Tareas</h3>
+							</div>
 						</div>
+						<div className="col-6">{createTodos}</div>
 					</div>
-					<div className="col-6">{() => createTodos(controlList, key)}</div>
 				</div>
-			</div>
-		));
-		return temporal; //Temporal es una variable de control que guarda cada elemento en formato HTML
+			));
+			return temporal; //Temporal es una variable de control que guarda cada elemento en formato HTML
+		}
 	}
 
 	let info = createInfo(store.todos);
-	let prev_todos = createTodos();
+	let whatever = createTodos();
+	//let prev_todos = createTodos();
 
 	return (
 		<div className="m-5 mt-1">
 			<div>
-				<div className="row d-flex justify-content-center mb-2">
+				<div className="row"> {info} </div>
+				<div> {createTodos} </div>
+				<div> {whatever} </div>
+				{/* <div className="row d-flex justify-content-center mb-2">
 					<h1>Previsualización</h1>
 				</div>
 				<div className="row">
@@ -90,8 +92,8 @@ export function TodosList() {
 							<h3>Lista de Tareas</h3>
 						</div>
 					</div>
-					<div className="col-6">{prev_todos}</div>
-				</div>
+					<div className="col-6">xczvzx</div>
+				</div> */}
 			</div>
 		</div>
 	);
