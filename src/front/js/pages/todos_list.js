@@ -37,12 +37,9 @@ export function TodosList() {
 	}
 
 	function createInfo() {
-		console.log("para por createInfo", genIndex);
 		if (all_data[genIndex] === undefined) {
 			return <div>No hay tareas disponibles</div>;
 		} else {
-			console.log(all_data);
-			//console.log(all_data[genIndex][1].plant_url);
 			let temporal = all_data[genIndex];
 			return (
 				<div>
@@ -71,8 +68,8 @@ export function TodosList() {
 
 	return (
 		<div className="m-5 mt-1">
-			<div>
-				<div className="row"> {todos_output} </div>
+			<div className="row">
+				<div> {todos_output} </div>
 			</div>
 		</div>
 	);

@@ -80,9 +80,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			modifyTodos: (list, oldlist) => {
 				// Hola
 				let newlist = oldlist;
-				newlist.push(list);
+				let control_list = newlist.push(list);
 				console.log(newlist);
-				setStore({ todos: newlist });
+				setStore({ todos: control_list });
 			},
 			changeColor: (index, color) => {
 				//get the store
