@@ -2,6 +2,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			message: null,
+			todos: [],
 			plants: [
 				{
 					name: "Chile Jalapeño",
@@ -64,12 +65,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-			getMessage: () => {
-				// fetching data from the backend
-				fetch(process.env.BACKEND_URL + "/api/hello")
-					.then(resp => resp.json())
-					.then(data => setStore({ message: data.message }))
-					.catch(error => console.log("Error loading message from backend", error));
+			modifyTodos: (list, oldlist) => {
+				// Hola
+				let newlist = oldlist;
+				newlist.push(list);
+				console.log(newlist);
+				setStore({ todos: newlist });
 			},
 			changeColor: (index, color) => {
 				//get the store

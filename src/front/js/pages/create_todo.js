@@ -131,6 +131,7 @@ export function CreateTodo() {
 			data.push({ task: list[index], freq: parseInt(freqList[index]), type: typeList[index] });
 		});
 		datas[2] = { tasks: data };
+		actions.modifyTodos(datas, store.todos);
 	}
 
 	//Esta función crea divs de acuerdo a la cantidad de tareas por editar
