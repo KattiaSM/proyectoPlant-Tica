@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 7f2f26349f8f
+Revision ID: cc7c345b5bb1
 Revises: 
-Create Date: 2021-04-26 16:49:50.442478
+Create Date: 2021-04-29 01:33:21.758388
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '7f2f26349f8f'
+revision = 'cc7c345b5bb1'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -23,6 +23,7 @@ def upgrade():
     sa.Column('commun_name', sa.String(length=100), nullable=False),
     sa.Column('api_cientific_name', sa.String(length=100), nullable=False),
     sa.Column('local_cientific_name', sa.String(length=100), nullable=False),
+    sa.Column('plant_image', sa.String(length=2000), nullable=True),
     sa.Column('category', sa.String(length=100), nullable=False),
     sa.Column('general', sa.String(length=500), nullable=False),
     sa.Column('utilization', sa.String(length=150), nullable=False),
@@ -60,6 +61,14 @@ def upgrade():
     sa.UniqueConstraint('email'),
     sa.UniqueConstraint('user_name')
     )
+    op.create_table('favorites',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('user_id', sa.Integer(), nullable=True),
+    sa.Column('plant_id', sa.Integer(), nullable=True),
+    sa.ForeignKeyConstraint(['plant_id'], ['plant.id'], ),
+    sa.ForeignKeyConstraint(['user_id'], ['user.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
     op.create_table('garden',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_name', sa.String(length=50), nullable=True),
@@ -83,10 +92,9 @@ def upgrade():
     )
     op.create_table('todolist',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('user_id', sa.String(length=50), nullable=True),
-    sa.Column('plant_id', sa.String(length=100), nullable=True),
-    sa.ForeignKeyConstraint(['plant_id'], ['plant.commun_name'], ),
-    sa.ForeignKeyConstraint(['user_id'], ['user.user_name'], ),
+    sa.Column('user_id', sa.Integer(), nullable=True),
+    sa.Column('tasks', sa.String(length=2000), nullable=True),
+    sa.ForeignKeyConstraint(['user_id'], ['user.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     # ### end Alembic commands ###
@@ -97,6 +105,7 @@ def downgrade():
     op.drop_table('todolist')
     op.drop_table('profile')
     op.drop_table('garden')
+    op.drop_table('favorites')
     op.drop_table('user')
     op.drop_table('plant')
     # ### end Alembic commands ###
