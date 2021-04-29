@@ -15,11 +15,20 @@ export function TodosList() {
 	const [typeList, setTypeList] = useState(["Horas"]); //Contiene los tipos de frecuencia de las tareas días/horas
 	const { store, actions } = useContext(Context); //El plantName también se almacena en el store
 
+	let genIndex = 0;
+
 	function createTodos(allTodos, listIndex) {
+		allTodos = store.todos;
+		console.log("todos con index");
+		console.log(store.todos);
+		let prueba = allTodos[genIndex][2].tasks;
+
 		if (allTodos == undefined) {
+			console.log(allTodos);
+
 			return <div>No hay tareas disponibles</div>;
 		} else {
-			let temporal = allTodos[listIndex[2].tasks.map((item, index) => (
+			let temporal = prueba.map((item, index) => (
 				<div key={index}>
 					<ListGroupItem className="justify-content-between">
 						{" "}
@@ -31,6 +40,8 @@ export function TodosList() {
 					</ListGroupItem>
 				</div>
 			));
+			genIndex++;
+
 			return temporal; //Temporal es una variable de control que guarda cada elemento en formato HTML
 		}
 	}
@@ -52,7 +63,7 @@ export function TodosList() {
 							<h3>Lista de Tareas</h3>
 						</div>
 					</div>
-					<div className="col-6">{() => createTodos(allTodos, index)}</div>
+					<div className="col-6">{() => createTodos(controlList, key)}</div>
 				</div>
 			</div>
 		));
