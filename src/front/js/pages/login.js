@@ -63,7 +63,11 @@ export const Login = () => {
 						className="form-control"
 						id="exampleInputPassword1"
 					/>
+					<small>
+						<Link to="/restore">¿Olvidaste la contraseña?</Link>
+					</small>
 				</div>
+
 				<button type="submit" className="btn btn-primary">
 					Ingresar
 				</button>
