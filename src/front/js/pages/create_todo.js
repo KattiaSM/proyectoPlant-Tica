@@ -186,7 +186,7 @@ export function CreateTodo() {
 					</FormGroup>
 				</div>
 			));
-			return temporal;
+			return temporal; //Temporal es una variable de control que guarda cada elemento en formato HTML
 		}
 	}
 
@@ -207,7 +207,7 @@ export function CreateTodo() {
 					</ListGroupItem>
 				</div>
 			));
-			return temporal;
+			return temporal; //Temporal es una variable de control que guarda cada elemento en formato HTML
 		}
 	}
 
