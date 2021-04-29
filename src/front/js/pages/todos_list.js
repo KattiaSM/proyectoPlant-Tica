@@ -5,28 +5,19 @@ import { Link } from "react-router-dom";
 import { ListGroupItem, Button, CardImg, Label, Input, FormGroup, Col, ButtonToggle } from "reactstrap";
 
 export function TodosList() {
-	const [plantName, setPlantName] = useState("Aquí irá el nombre de tu planta"); //Almacena el nombre de la planta
-	const [plantImg, setPlantImg] = useState(
-		"https://activated.org/media/images/new-beginnings_82U8Rbw.max-550x350.jpg"
-	); //Almacena el URL de la planta
-
-	const [list, setList] = useState(["Tarea"]); //Contiene los nombres de las tareas
-	const [freqList, setFreqList] = useState([""]); //Contiene las frecuencias de las tareas
-	const [typeList, setTypeList] = useState(["Horas"]); //Contiene los tipos de frecuencia de las tareas días/horas
 	const { store, actions } = useContext(Context); //El plantName también se almacena en el store
 
 	let genIndex = 0;
+	let all_data = store.todos;
 
 	function createTodos() {
-		let allTodos = store.todos;
-		console.log(allTodos[genIndex][2].tasks);
-		if (allTodos == undefined) {
-			//console.log(allTodos);
+		if (all_data[genIndex] == undefined) {
+			<div>No hay tareas en tu planta</div>;
 
 			return <div>No hay tareas disponibles</div>;
 		} else {
-			let prueba = allTodos[genIndex][2].tasks;
-			let temporal = prueba.map((item, index) => (
+			let tasks_position = all_data[genIndex][2].tasks;
+			let temporal = tasks_position.map((item, index) => (
 				<div key={index}>
 					<ListGroupItem className="justify-content-between">
 						{" "}
@@ -38,62 +29,50 @@ export function TodosList() {
 					</ListGroupItem>
 				</div>
 			));
+
 			genIndex++;
 
 			return temporal; //Temporal es una variable de control que guarda cada elemento en formato HTML
 		}
 	}
 
-	function createInfo(allTodos) {
-		if (allTodos === undefined) {
+	function createInfo() {
+		console.log("para por createInfo", genIndex);
+		if (all_data[genIndex] === undefined) {
 			return <div>No hay tareas disponibles</div>;
 		} else {
-			let temporal = allTodos.map((item, index) => (
-				<div key={index}>
-					<div className="row">
-						<div className="col-6">
-							<CardImg top width="100%" src={item[1].plant_url} alt="Card image cap" />
+			console.log(all_data);
+			//console.log(all_data[genIndex][1].plant_url);
+			let temporal = all_data[genIndex];
+			return (
+				<div>
+					<div>
+						<div>
+							<CardImg top width="100%" src={temporal[1].plant_url} alt="Card image cap" />
 							<div className="box">
 								<h2>
-									<p>{item[0].plant_Name}</p>
+									<h2>{temporal[0].plant_Name}</h2>
 								</h2>
 								<h3>Lista de Tareas</h3>
 							</div>
 						</div>
-						<div className="col-6">{createTodos}</div>
 					</div>
 				</div>
-			));
-			return temporal; //Temporal es una variable de control que guarda cada elemento en formato HTML
+			); //Temporal es una variable de control que guarda cada elemento en formato HTML
 		}
 	}
 
-	let info = createInfo(store.todos);
-	let whatever = createTodos();
-	//let prev_todos = createTodos();
+	let todos_output = all_data.map((item, index) => (
+		<div className="row" key={index}>
+			<div className="col-6"> {createInfo()} </div>
+			<div className="col-6"> {createTodos()} </div>
+		</div>
+	));
 
 	return (
 		<div className="m-5 mt-1">
 			<div>
-				<div className="row"> {info} </div>
-				<div> {createTodos} </div>
-				<div> {whatever} </div>
-				{/* <div className="row d-flex justify-content-center mb-2">
-					<h1>Previsualización</h1>
-				</div>
-				<div className="row">
-					<div className="col-6">
-						<CardImg top width="100%" src={plantImg} alt="Card image cap" />
-						<div className="box">
-							<h2>
-								{store.name}
-								<p id="plant_title">{plantName}</p>
-							</h2>
-							<h3>Lista de Tareas</h3>
-						</div>
-					</div>
-					<div className="col-6">xczvzx</div>
-				</div> */}
+				<div className="row"> {todos_output} </div>
 			</div>
 		</div>
 	);
