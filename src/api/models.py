@@ -10,6 +10,22 @@ from sqlalchemy import create_engine
 db = SQLAlchemy()
 
 
+class Todolist(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, ForeignKey('user.id'))
+    tasks = db.Column(db.String(2000))
+
+
+    def __repr__(self):
+        return '<Todolist %r>' % self.id
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "user_id": self.user_id,
+            "tasks": self.tasks
+        }
+
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
@@ -23,6 +39,8 @@ class User(db.Model):
     profiles = db.relationship('Profile',lazy=True)
     gardens = db.relationship('Garden',lazy=True)
     todolists = db.relationship('Todolist',lazy=True)
+    favorites = db.relationship('Favorites',lazy=True)
+
 
 
 
@@ -47,6 +65,7 @@ class Plant(db.Model):
     commun_name = db.Column(db.String(100), unique=True, nullable=False)
     api_cientific_name = db.Column(db.String(100), nullable=False)
     local_cientific_name = db.Column(db.String(100), unique=True, nullable=False)
+    plant_image = db.Column(db.String(2000))
     category = db.Column(db.String(100), unique=False, nullable=False)
     general = db.Column(db.String(500), unique=False, nullable=False)
     utilization = db.Column(db.String(150), unique=False, nullable=False)
@@ -66,7 +85,8 @@ class Plant(db.Model):
     last_prunning= db.Column(db.Date)
     pesticide_freq = db.Column(db.String(50), unique=False)
     last_pesticide = db.Column(db.Date)
-    todolists = db.relationship('Todolist',lazy=True)
+    favorites = db.relationship('Favorites',lazy=True)
+
 
 
     def __repr__(self):
@@ -78,6 +98,7 @@ class Plant(db.Model):
             "commun_name": self.commun_name,
             "api_cientific_name": self.api_cientific_name,
             "local_cientific_name": self.local_cientific_name,
+            "plant_image": self.plant_image,
             "general": self.general,
             "category": self.category,
             "utilization": self.utilization,
@@ -148,14 +169,15 @@ class Garden(db.Model):
 
 
 
-class Todolist(db.Model):
+
+class Favorites(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.String(50), ForeignKey('user.user_name'))
-    plant_id = db.Column(db.String(100), ForeignKey('plant.commun_name'))
+    user_id = db.Column(db.Integer, ForeignKey('user.id'))
+    plant_id = db.Column(db.Integer, ForeignKey('plant.id'))
 
 
     def __repr__(self):
-        return '<Todolist %r>' % self.id
+        return '<Favorites %r>' % self.id
 
     def serialize(self):
         return {
