@@ -58,10 +58,12 @@ const Layout = () => {
 						</Route>
 						<Route exact path="/garden">
 							<Profile />
-							<div className="row">
-								<TodosList />
+							<div className="m-5">
+								<div className="row">
+									<TodosList className="col-6" />
+									<Garden className="col-6" />
+								</div>
 							</div>
-							<Garden />
 						</Route>
 						<Route exact path="/plants">
 							<Plants />

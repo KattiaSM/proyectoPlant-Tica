@@ -11,9 +11,8 @@ export function TodosList() {
 	let all_data = store.todos;
 
 	function createTodos() {
+		let all_data = store.todos;
 		if (all_data[genIndex] == undefined) {
-			<div>No hay tareas en tu planta</div>;
-
 			return <div>No hay tareas disponibles</div>;
 		} else {
 			let tasks_position = all_data[genIndex][2].tasks;
@@ -41,6 +40,7 @@ export function TodosList() {
 			return <div>No hay tareas disponibles</div>;
 		} else {
 			let temporal = all_data[genIndex];
+			console.log(temporal[0].plant_name);
 			return (
 				<div>
 					<div>
@@ -48,7 +48,7 @@ export function TodosList() {
 							<CardImg top width="100%" src={temporal[1].plant_url} alt="Card image cap" />
 							<div className="box">
 								<h2>
-									<h2>{temporal[0].plant_Name}</h2>
+									<h2>{temporal[0].plant_name}</h2>
 								</h2>
 								<h3>Lista de Tareas</h3>
 							</div>
@@ -58,25 +58,20 @@ export function TodosList() {
 			); //Temporal es una variable de control que guarda cada elemento en formato HTML
 		}
 	}
-	console.log(all_data[2]);
 	let info = all_data;
 	let todos_output = "Cargando";
-
-	useEffect(() => {}, []);
-
 	if (store.charge_todos === false) {
 		todos_output = <div>Cargando</div>;
 	} else {
 		todos_output = info.map((item, index) => (
-			<div className="row" key={this.state.index}>
+			<div className="row" key={index}>
 				<div className="col-6"> {createInfo()} </div>
 				<div className="col-6"> {createTodos()} </div>
-				<div> {index} </div>
 			</div>
 		));
 	}
 	return (
-		<div className="m-5 mt-1">
+		<div>
 			<div className="row">
 				<div> {todos_output} </div>
 			</div>

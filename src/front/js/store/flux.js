@@ -5,7 +5,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			charge_todos: true,
 			todos: [
 				[
-					{ plant_Name: "Agrega plantas" },
+					{ plant_name: "Agrega plantas" },
 					{ plant_url: "https://whatsup.es/wp-content/uploads/2020/07/partes-de-la-planta-en-ingles.jpg" },
 
 					{
@@ -16,7 +16,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				],
 				[
-					{ plant_Name: "Agrega plantas2" },
+					{ plant_name: "Agrega plantas2" },
 					{ plant_url: "https://whatsup.es/wp-content/uploads/2020/07/partes-de-la-planta-en-ingles.jpg" },
 
 					{
@@ -96,12 +96,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 			modifyTodos: (list, oldlist) => {
-				// Hola
-				let newlist = oldlist;
-				let control_list = newlist.push(list);
-				console.log(newlist);
-				setStore({ todos: control_list });
-				setStore({ charge_todos: true });
+				setStore({ todos: oldlist, charge_todos: true });
 			},
 			changeColor: (index, color) => {
 				//get the store
