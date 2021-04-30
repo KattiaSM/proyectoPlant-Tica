@@ -58,14 +58,23 @@ export function TodosList() {
 			); //Temporal es una variable de control que guarda cada elemento en formato HTML
 		}
 	}
+	console.log(all_data[2]);
+	let info = all_data;
+	let todos_output = "Cargando";
 
-	let todos_output = all_data.map((item, index) => (
-		<div className="row" key={index}>
-			<div className="col-6"> {createInfo()} </div>
-			<div className="col-6"> {createTodos()} </div>
-		</div>
-	));
+	useEffect(() => {}, []);
 
+	if (store.charge_todos === false) {
+		todos_output = <div>Cargando</div>;
+	} else {
+		todos_output = info.map((item, index) => (
+			<div className="row" key={this.state.index}>
+				<div className="col-6"> {createInfo()} </div>
+				<div className="col-6"> {createTodos()} </div>
+				<div> {index} </div>
+			</div>
+		));
+	}
 	return (
 		<div className="m-5 mt-1">
 			<div className="row">

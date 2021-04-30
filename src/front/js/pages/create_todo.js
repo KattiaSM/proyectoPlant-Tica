@@ -132,6 +132,7 @@ export function CreateTodo() {
 		});
 		datas[2] = { tasks: data };
 		actions.modifyTodos(datas, store.todos);
+		actions.changeChargeValue();
 	}
 
 	//Esta función crea divs de acuerdo a la cantidad de tareas por editar

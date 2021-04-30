@@ -2,6 +2,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			message: null,
+			charge_todos: true,
 			todos: [
 				[
 					{ plant_Name: "Agrega plantas" },
@@ -10,6 +11,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 					{
 						tasks: [
 							{ task: "DDDDDD", freq: 24, type: "Horas" },
+							{ task: "tarea2", freq: 24, type: "Horas" }
+						]
+					}
+				],
+				[
+					{ plant_Name: "Agrega plantas2" },
+					{ plant_url: "https://whatsup.es/wp-content/uploads/2020/07/partes-de-la-planta-en-ingles.jpg" },
+
+					{
+						tasks: [
+							{ task: "tarea de abajo", freq: 24, type: "Horas" },
 							{ task: "tarea2", freq: 24, type: "Horas" }
 						]
 					}
@@ -76,13 +88,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 					setStore({ name: name_doc });
 				}
 			},
-
+			changeChargeValue: value => {
+				if (value === false) {
+					setStore({ charge_todos: true });
+				} else {
+					setStore({ charge_todos: false });
+				}
+			},
 			modifyTodos: (list, oldlist) => {
 				// Hola
 				let newlist = oldlist;
 				let control_list = newlist.push(list);
 				console.log(newlist);
 				setStore({ todos: control_list });
+				setStore({ charge_todos: true });
 			},
 			changeColor: (index, color) => {
 				//get the store
