@@ -2,6 +2,31 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			message: null,
+			charge_todos: true,
+			todos: [
+				[
+					{ plant_name: "Crea listas de tareas" },
+					{ plant_url: "https://whatsup.es/wp-content/uploads/2020/07/partes-de-la-planta-en-ingles.jpg" },
+
+					{
+						tasks: [
+							{ task: "Tarea 1", freq: 24, type: "Horas" },
+							{ task: "Tarea 2", freq: 24, type: "Horas" }
+						]
+					}
+				],
+				[
+					{ plant_name: "Lleva el conteo de tus plantas" },
+					{ plant_url: "https://whatsup.es/wp-content/uploads/2020/07/partes-de-la-planta-en-ingles.jpg" },
+
+					{
+						tasks: [
+							{ task: "Tarea 1", freq: 24, type: "Horas" },
+							{ task: "Tarea 2", freq: 24, type: "Horas" }
+						]
+					}
+				]
+			],
 			plants: [
 				{
 					name: "Chile Jalapeño",
@@ -63,13 +88,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 					setStore({ name: name_doc });
 				}
 			},
-
-			getMessage: () => {
-				// fetching data from the backend
-				fetch(process.env.BACKEND_URL + "/api/hello")
-					.then(resp => resp.json())
-					.then(data => setStore({ message: data.message }))
-					.catch(error => console.log("Error loading message from backend", error));
+			changeChargeValue: value => {
+				if (value === false) {
+					setStore({ charge_todos: true });
+				} else {
+					setStore({ charge_todos: false });
+				}
+			},
+			modifyTodos: control => {
+				const store = getStore();
+				let final_array = store.todos;
+				final_array.unshift(control);
+				setStore({ todos: final_array, charge_todos: true });
 			},
 			changeColor: (index, color) => {
 				//get the store

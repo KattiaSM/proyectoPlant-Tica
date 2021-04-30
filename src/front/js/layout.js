@@ -13,6 +13,7 @@ import { Favorites } from "./pages/favorites";
 import { CreateTodo } from "./pages/create_todo";
 import { Plants } from "./pages/plants";
 import { Restore } from "./pages/restore";
+import { TodosList } from "./pages/todos_list";
 
 import injectContext from "./store/appContext";
 
@@ -57,7 +58,12 @@ const Layout = () => {
 						</Route>
 						<Route exact path="/garden">
 							<Profile />
-							<Garden />
+							<div className="m-5">
+								<div className="row">
+									<TodosList className="col-6" />
+									<Garden className="col-6" />
+								</div>
+							</div>
 						</Route>
 						<Route exact path="/plants">
 							<Plants />

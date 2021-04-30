@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { ListGroupItem, Button, CardImg, Label, Input, FormGroup, Col, ButtonToggle } from "reactstrap";
 
 export function CreateTodo() {
+	const { store, actions } = useContext(Context); //El plantName también se almacena en el store
 	const [plantName, setPlantName] = useState("Aquí irá el nombre de tu planta"); //Almacena el nombre de la planta
 	const [plantImg, setPlantImg] = useState(
 		"https://activated.org/media/images/new-beginnings_82U8Rbw.max-550x350.jpg"
@@ -13,8 +14,7 @@ export function CreateTodo() {
 	const [list, setList] = useState(["Tarea"]); //Contiene los nombres de las tareas
 	const [freqList, setFreqList] = useState([""]); //Contiene las frecuencias de las tareas
 	const [typeList, setTypeList] = useState(["Horas"]); //Contiene los tipos de frecuencia de las tareas días/horas
-	const { store, actions } = useContext(Context); //El plantName también se almacena en el store
-
+	const [allTodos, setallTodos] = useState(store.todos); //Contiene los tipos de frecuencia de las tareas días/horas
 	//La siguiente función actualiza el nombre de la planta cada vez que es llamada por el evento onChange
 	function handleTitlePlant(event) {
 		actions.changeName(event.target.value);
@@ -104,9 +104,7 @@ export function CreateTodo() {
 		})
 			.then(response => response.json())
 			.then(data => {
-				console.log(data);
 				if (data.secure_url !== "") {
-					console.log(data.secure_url);
 					setPlantImg(data.secure_url);
 				}
 			})
@@ -116,8 +114,8 @@ export function CreateTodo() {
 	//Cuando se presiona el botón finalizar la siguiente función le da formato a la información
 	//En caso de encontrar errores en los datos, aplica sus validaciones
 	function sendData() {
-		let datas = [{ plant_name: store.name }, { plant_url: plantImg }, ""];
-		let data = [];
+		let format = [{ plant_name: store.name }, { plant_url: plantImg }, ""];
+		let tasks_push = [];
 
 		freqList.map(function(item, index) {
 			//Este map revisa que si alguna frecuencia está incorrecta la reemplaza por un valor predeterminado de 24 horas
@@ -128,9 +126,13 @@ export function CreateTodo() {
 
 		list.map(function(item, index) {
 			//Este map da el formato de objeto necesario para enviar los datos al API
-			data.push({ task: list[index], freq: parseInt(freqList[index]), type: typeList[index] });
+			tasks_push.push({ task: list[index], freq: parseInt(freqList[index]), type: typeList[index] });
 		});
-		datas[2] = { tasks: data };
+
+		actions.changeChargeValue();
+		format[2] = { tasks: tasks_push };
+		console.log(format);
+		actions.modifyTodos(format);
 	}
 
 	//Esta función crea divs de acuerdo a la cantidad de tareas por editar
@@ -232,7 +234,7 @@ export function CreateTodo() {
 	return (
 		<div className="m-5 mt-1">
 			<div className="row d-flex justify-content-end">
-				<Link to="/garden" onClick={sendData}>
+				<Link to="/garden">
 					<Button color="danger" className="m-1">
 						Salir sin salvar
 					</Button>
@@ -320,76 +322,4 @@ export function CreateTodo() {
 			</div>
 		</div>
 	);
-}
-{
-	/* 
-            <div className="w-50 mt-5">
-                <div className="row">
-                    <div className="col-6">
-                        <CardImg
-                            top
-                            width="100%"
-                            src="https://activated.org/media/images/new-beginnings_82U8Rbw.max-550x350.jpg"
-                            alt="Card image cap"
-                        />
-                        <div className="box">
-                            <h2>Prueba</h2>
-                            <h3>Lista de Tareas</h3>
-                        </div>
-                    </div>
-					<div className="col-6">
-						<ListGroup>
-							<ListGroupItem className="justify-content-between">
-								{" "}
-								<div className="m-1 mt-0 mb-0">
-									<Label check>
-										<Input type="checkbox" className="ps-2" /> Agua
-									</Label>
-								</div>
-							</ListGroupItem>
-							<ListGroupItem className="justify-content-between">
-								{" "}
-								<div className="m-1">
-									<Label check>
-										<Input type="checkbox" className="ps-2" /> Abono
-									</Label>
-								</div>
-							</ListGroupItem>
-							<ListGroupItem className="justify-content-between">
-								{" "}
-								<div className="m-1">
-									<Label check>
-										<Input type="checkbox" className="ps-2" /> Fertilizante
-									</Label>
-								</div>
-							</ListGroupItem>
-							<ListGroupItem className="justify-content-between">
-								{" "}
-								<div className="m-1">
-									<Label check>
-										<Input type="checkbox" className="ps-2" /> Luz
-									</Label>
-								</div>
-							</ListGroupItem>
-							<ListGroupItem className="justify-content-between">
-								{" "}
-								<div className="m-1">
-									<Label check>
-										<Input type="checkbox" className="ps-2" /> Luz
-									</Label>
-								</div>
-							</ListGroupItem>
-							<ListGroupItem className="justify-content-between">
-								{" "}
-								<div className="m-1">
-									<Label check>
-										<Input type="checkbox" className="ps-2" /> Luz
-									</Label>
-								</div>
-							</ListGroupItem>
-						</ListGroup>
-					</div>
-				</div>
-			</div>
-		</div> */
 }
