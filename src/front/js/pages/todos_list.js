@@ -72,6 +72,13 @@ export function TodosList() {
 	}
 	return (
 		<div>
+			<div className="row d-flex justify-content-end">
+				<Link to="/create">
+					<Button color="info" className="m-1">
+						Crear nueva lista de tareas
+					</Button>
+				</Link>
+			</div>
 			<div className="row">
 				<div> {todos_output} </div>
 			</div>

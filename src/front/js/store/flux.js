@@ -5,24 +5,24 @@ const getState = ({ getStore, getActions, setStore }) => {
 			charge_todos: true,
 			todos: [
 				[
-					{ plant_name: "Agrega plantas" },
+					{ plant_name: "Crea listas de tareas" },
 					{ plant_url: "https://whatsup.es/wp-content/uploads/2020/07/partes-de-la-planta-en-ingles.jpg" },
 
 					{
 						tasks: [
-							{ task: "DDDDDD", freq: 24, type: "Horas" },
-							{ task: "tarea2", freq: 24, type: "Horas" }
+							{ task: "Tarea 1", freq: 24, type: "Horas" },
+							{ task: "Tarea 2", freq: 24, type: "Horas" }
 						]
 					}
 				],
 				[
-					{ plant_name: "Agrega plantas2" },
+					{ plant_name: "Lleva el conteo de tus plantas" },
 					{ plant_url: "https://whatsup.es/wp-content/uploads/2020/07/partes-de-la-planta-en-ingles.jpg" },
 
 					{
 						tasks: [
-							{ task: "tarea de abajo", freq: 24, type: "Horas" },
-							{ task: "tarea2", freq: 24, type: "Horas" }
+							{ task: "Tarea 1", freq: 24, type: "Horas" },
+							{ task: "Tarea 2", freq: 24, type: "Horas" }
 						]
 					}
 				]
@@ -95,8 +95,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 					setStore({ charge_todos: false });
 				}
 			},
-			modifyTodos: (list, oldlist) => {
-				setStore({ todos: oldlist, charge_todos: true });
+			modifyTodos: control => {
+				const store = getStore();
+				let final_array = store.todos;
+				final_array.unshift(control);
+				setStore({ todos: final_array, charge_todos: true });
 			},
 			changeColor: (index, color) => {
 				//get the store

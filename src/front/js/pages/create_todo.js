@@ -131,13 +131,8 @@ export function CreateTodo() {
 
 		actions.changeChargeValue();
 		format[2] = { tasks: tasks_push };
-		console.log("lista de todos que se le pasa a flux");
 		console.log(format);
-		console.log("lista que se trae de flux");
-		console.log(allTodos);
-		let control = allTodos;
-		control.push(format);
-		actions.modifyTodos(format, control);
+		actions.modifyTodos(format);
 	}
 
 	//Esta función crea divs de acuerdo a la cantidad de tareas por editar
