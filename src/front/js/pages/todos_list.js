@@ -42,7 +42,7 @@ export function TodosList() {
 			let temporal = all_data[genIndex];
 			console.log(temporal[0].plant_name);
 			return (
-				<div>
+				<div className="container">
 					<div>
 						<div>
 							<CardImg top width="100%" src={temporal[1].plant_url} alt="Card image cap" />
@@ -64,15 +64,15 @@ export function TodosList() {
 		todos_output = <div>Cargando</div>;
 	} else {
 		todos_output = info.map((item, index) => (
-			<div className="row" key={index}>
+			<div className="mt-1 row" key={index}>
 				<div className="col-6"> {createInfo()} </div>
 				<div className="col-6"> {createTodos()} </div>
 			</div>
 		));
 	}
 	return (
-		<div>
-			<div className="row d-flex justify-content-end">
+		<div className="col-6 border border-muted rounded">
+			<div className="row d-flex justify-content-start">
 				<Link to="/create">
 					<Button color="info" className="m-1">
 						Crear nueva lista de tareas
