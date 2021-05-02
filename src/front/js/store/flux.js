@@ -3,6 +3,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 		store: {
 			message: null,
 			charge_todos: true,
+			initial_plant_name: "Aquí aparecerá el nombre de tu planta",
+			initial_img_url: "",
+			name: "Aquí aparecerá el nombre de tu planta",
 			todos: [
 				[
 					{ plant_name: "Crea listas de tareas" },
@@ -82,11 +85,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 		actions: {
 			// Use getActions to call a function within a fuction
 			changeName: name_doc => {
+				const store = getStore();
 				if (name_doc == "" || name_doc == undefined) {
-					setStore({ name: "Aquí irá el nombre de tu planta" });
+					setStore({ name: store.initial_plant_name });
 				} else {
 					setStore({ name: name_doc });
 				}
+			},
+			changeInitialName: name_doc => {
+				setStore({ initial_plant_name: name_doc });
+			},
+			changeInitialURL: plant_url => {
+				setStore({ initial_img_url: plant_url });
 			},
 			changeChargeValue: value => {
 				if (value === false) {

@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { Card, CardBody, Button, CardTitle, CardText, CardImg } from "reactstrap";
 
 export function Favorites() {
+	const { store, actions } = useContext(Context); //El plantName también se almacena en el store
 	const [data, setData] = useState([]); //Almacena las plantas
 
 	useEffect(() => {
@@ -86,6 +87,12 @@ export function Favorites() {
 		counter++;
 	});
 
+	function moveData(name, url) {
+		actions.changeInitialName(name);
+		//actions.changeName(name);
+		actions.changeInitialURL(url);
+	}
+
 	//La siguiente función se encarga de eliminar un favorito, recibe un nombre y lo compara, si lo encuentra, elimina el favorito
 
 	function deleteFav(name) {
@@ -107,9 +114,15 @@ export function Favorites() {
 				<CardImg top width="50%" src={item.url} alt="Card image cap" />
 				<div className="row d-flex justify-content-end">
 					<div className="col-6 d-flex justify-content-start ">
-						<Button className="m-1 mb-0 me-0" color="success" size="sm">
-							Sembrar <i className="fas fa-seedling" />
-						</Button>
+						<Link to="/create">
+							<Button
+								className="m-1 mb-0 me-0"
+								color="success"
+								size="sm"
+								onClick={() => moveData(item.scientific_name, item.url)}>
+								Sembrar <i className="fas fa-seedling" />
+							</Button>
+						</Link>
 					</div>
 					<div className="col-6">
 						<Button className="col-2" onClick={() => deleteFav(item.scientific_name)} close />

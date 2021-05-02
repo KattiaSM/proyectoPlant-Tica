@@ -6,10 +6,8 @@ import { ListGroupItem, Button, CardImg, Label, Input, FormGroup, Col, ButtonTog
 
 export function CreateTodo() {
 	const { store, actions } = useContext(Context); //El plantName también se almacena en el store
-	const [plantName, setPlantName] = useState("Aquí irá el nombre de tu planta"); //Almacena el nombre de la planta
-	const [plantImg, setPlantImg] = useState(
-		"https://activated.org/media/images/new-beginnings_82U8Rbw.max-550x350.jpg"
-	); //Almacena el URL de la planta
+	const [plantName, setPlantName] = useState(store.initial_plant_name); //Almacena el nombre de la planta
+	const [plantImg, setPlantImg] = useState(store.initial_img_url); //Almacena el URL de la planta
 
 	const [list, setList] = useState(["Tarea"]); //Contiene los nombres de las tareas
 	const [freqList, setFreqList] = useState([""]); //Contiene las frecuencias de las tareas
