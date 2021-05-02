@@ -45,7 +45,13 @@ export function TodosList() {
 				<div className="container">
 					<div>
 						<div>
-							<CardImg top width="100%" src={temporal[1].plant_url} alt="Card image cap" />
+							<CardImg
+								top
+								width="100%"
+								style={{ height: "15rem" }}
+								src={temporal[1].plant_url}
+								alt="Card image cap"
+							/>
 							<div className="box">
 								<h2>
 									<h2>{temporal[0].plant_name}</h2>
