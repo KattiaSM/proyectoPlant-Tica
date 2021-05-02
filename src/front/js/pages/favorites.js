@@ -106,7 +106,14 @@ export function Favorites() {
 			<Card key={index}>
 				<CardImg top width="50%" src={item.url} alt="Card image cap" />
 				<div className="row d-flex justify-content-end">
-					<Button className="col-2" onClick={() => deleteFav(item.scientific_name)} close />
+					<div className="col-6 d-flex justify-content-start ">
+						<Button className="m-1 mb-0 me-0" color="success" size="sm">
+							Sembrar <i className="fas fa-seedling" />
+						</Button>
+					</div>
+					<div className="col-6">
+						<Button className="col-2" onClick={() => deleteFav(item.scientific_name)} close />
+					</div>
 				</div>
 				<CardBody>
 					<CardTitle tag="h5">{item.scientific_name}</CardTitle>
@@ -126,12 +133,6 @@ export function Favorites() {
 	let col_1 = format(cards_col1);
 	let col_2 = format(cards_col2);
 	let col_3 = format(cards_col3);
-
-	// useEffect(() => {
-	// 	let col_1 = format(cards_col1);
-	// 	let col_2 = format(cards_col2);
-	// 	let col_3 = format(cards_col3);
-	// });
 
 	return (
 		<div className="m-5">
