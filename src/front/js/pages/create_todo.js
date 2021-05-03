@@ -239,7 +239,7 @@ export function CreateTodo() {
 				</Link>
 			</div>
 			<div className="row mt-2 d-flex justify-content-center">
-				<div className="col-6 bg-light border border-rounded rounded-2">
+				<div className="col-6 col-lg-6 col-md-12 col-sm-12 bg-light border border-rounded rounded-2">
 					<div className="row d-flex justify-content-center">
 						<h1>Inserta aquí los datos de tu planta</h1>
 					</div>
@@ -299,12 +299,12 @@ export function CreateTodo() {
 						</Link>
 					</div>
 				</div>
-				<div className="col-6">
+				<div className="col-6 col-xl-6 col-lg-12 col-md-12 col-sm-12">
 					<div className="row d-flex justify-content-center mb-2">
 						<h1>Previsualización</h1>
 					</div>
 					<div className="row">
-						<div className="col-6">
+						<div className="col-6 col-md-6 col-sm-12">
 							<CardImg top width="100%" src={plantImg} style={{ height: "20rem" }} alt="Card image cap" />
 							<div className="box">
 								<h2>
@@ -314,7 +314,7 @@ export function CreateTodo() {
 								<h3>Lista de Tareas</h3>
 							</div>
 						</div>
-						<div className="col-6">{prev_todos}</div>
+						<div className="col-6 col-md-6 col-sm-12">{prev_todos}</div>
 					</div>
 				</div>
 			</div>
