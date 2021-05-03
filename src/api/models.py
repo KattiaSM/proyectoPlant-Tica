@@ -77,12 +77,16 @@ class Plant(db.Model):
     germination = db.Column(db.String(50), unique=False, nullable=False)
     height = db.Column(db.String(50), unique=False)
     harving = db.Column(db.String(50), unique=False, nullable=False)
+    num_water_freq = db.Column(db.Integer)
     water_freq = db.Column(db.String(50), unique=False)
     last_water = db.Column(db.Date)
+    num_fertilizer_freq	= db.Column(db.Integer)
     fertilizer_freq	= db.Column(db.String(50), unique=False)
     last_fertilizer	= db.Column(db.Date)
+    num_prunning_freq= db.Column(db.Integer)
     prunning_freq= db.Column(db.String(50), unique=False)
     last_prunning= db.Column(db.Date)
+    num_pesticide_freq = db.Column(db.Integer)
     pesticide_freq = db.Column(db.String(50), unique=False)
     last_pesticide = db.Column(db.Date)
     favorites = db.relationship('Favorites',lazy=True)
@@ -111,12 +115,16 @@ class Plant(db.Model):
             "height": self.height,
             "harving": self.harving,
             "water_freq": self.water_freq,
+            "num_water_freq": self.num_water_freq,
             "last_water": self.last_water,
             "fertilizer_freq": self.fertilizer_freq,
+            "num_fertilizer_freq": self.num_fertilizer_freq,
             "last_fertilizer": self.last_fertilizer,
             "prunning_freq": self.prunning_freq,
+            "num_prunning_freq": self.num_prunning_freq,
             "last_prunning": self.last_prunning,
             "pesticide_freq": self.pesticide_freq,
+            "num_pesticide_freq": self.num_pesticide_freq,
             "last_pesticide": self.last_pesticide
         }
 
