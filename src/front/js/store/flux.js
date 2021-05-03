@@ -70,6 +70,57 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			],
 
+			favs: [
+				{
+					scientific_name: "Quercus Rotundifolia",
+					synonymous: "Roble de Hoja Perenne",
+					year: "1785",
+					family: "Fagaceae",
+					scientific_expanded: "Quercus rotundifolia f. dolichocalyx",
+					url: "https://bs.plantnet.org/image/o/1a03948baf0300da25558c2448f086d39b41ca30"
+				},
+				{
+					scientific_name: "Urtica-diotica",
+					synonymous: "Ortiga",
+					year: "1753",
+					family: "Urticaceae",
+					scientific_expanded: "Urtica haussknechtii",
+					url: "https://bs.plantnet.org/image/o/85256a1c2c098e254fefe05040626a4df49ce248"
+				},
+				{
+					scientific_name: "Dactylis glomerata",
+					synonymous: "Pastos de la huerta",
+					year: "1753",
+					family: "Poaceae",
+					scientific_expanded: "Dactylis glomerata subsp. himalayensis",
+					url: "https://bs.plantnet.org/image/o/428f40dadfa0281dc890ead17fcd07882f9efb09"
+				},
+				{
+					scientific_name: "Festuca rubra",
+					synonymous: "Festuca roja",
+					year: "1753",
+					family: "Fagaceae",
+					scientific_expanded: "Quercus rotundifolia f. dolichocalyx",
+					url: "https://bs.plantnet.org/image/o/0b932c8a275efc79f473a71bec20d6f15e9b6b90"
+				},
+				{
+					scientific_name: "Plantago lanceolata",
+					synonymous: "Plátano de hoja estrecha",
+					year: "1753",
+					family: "Poaceae",
+					scientific_expanded: "Festuca austrodolomitica",
+					url: "https://bs.plantnet.org/image/o/78a8374f009e6ed2dc71ca17d18e4271ea0a2a7b"
+				},
+				{
+					scientific_name: "Quercus robur",
+					synonymous: "Roble inglés",
+					year: "1753",
+					family: "Fagaceae",
+					scientific_expanded: "Quercus robur subsp. broteroan",
+					url: "https://bs.plantnet.org/image/o/2292b670683abdaac354389514105df0018d9ef8"
+				}
+			],
+
 			demo: [
 				{
 					title: "FIRST",
@@ -105,6 +156,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 				} else {
 					setStore({ charge_todos: false });
 				}
+			},
+			deleteFav: index => {
+				const store = getStore();
+				let temporal = store.favs;
+				temporal.splice(index, 1);
+				setStore({ favs: temporal });
 			},
 			modifyTodos: control => {
 				const store = getStore();
