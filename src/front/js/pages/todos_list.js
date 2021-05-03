@@ -64,7 +64,7 @@ export function TodosList() {
 		todos_output = <div>Cargando</div>;
 	} else {
 		todos_output = info.map((item, index) => (
-			<div className="mt-1 row" key={index}>
+			<div className="mt-1 row " key={index}>
 				<div className="col-6"> {createInfo()} </div>
 				<div className="col-6"> {createTodos()} </div>
 			</div>
