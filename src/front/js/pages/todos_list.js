@@ -74,7 +74,7 @@ export function TodosList() {
 		<div className="col-6 border border-muted rounded">
 			<div className="row d-flex justify-content-start">
 				<Link to="/create">
-					<Button color="info" className="m-1">
+					<Button color="info" className="m-2">
 						Crear nueva lista de tareas
 					</Button>
 				</Link>
