@@ -150,13 +150,13 @@ export function Favorites() {
 	return (
 		<div className="m-5">
 			<div className="row">
-				<div className="col-4">
+				<div className="col-lg-4 col-md-6 col-sm-12">
 					<div className="m-1">{col_1}</div>
 				</div>
-				<div className="col-4">
+				<div className="col-lg-4 col-md-6 col-sm-12">
 					<div className="m-1">{col_2}</div>
 				</div>
-				<div className="col-4">
+				<div className="col-lg-4 col-md-6 col-sm-12">
 					<div className="m-1">{col_3}</div>
 				</div>
 			</div>

@@ -64,7 +64,7 @@ export function TodosList() {
 		todos_output = <div>Cargando</div>;
 	} else {
 		todos_output = info.map((item, index) => (
-			<div className="m-1 col-xl " key={index}>
+			<div className="m-1 col-xl col-md-12 " key={index}>
 				<div>
 					<div className="row">
 						<div className="col-md"> {createInfo()} </div>
