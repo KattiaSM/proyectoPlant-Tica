@@ -89,7 +89,7 @@ export function Favorites() {
 
 	function moveData(name, url) {
 		actions.changeInitialName(name);
-		//actions.changeName(name);
+		actions.changeName(name);
 		actions.changeInitialURL(url);
 	}
 
@@ -114,12 +114,8 @@ export function Favorites() {
 				<CardImg top width="50%" src={item.url} alt="Card image cap" />
 				<div className="row d-flex justify-content-end">
 					<div className="col-6 d-flex justify-content-start ">
-						<Link to="/create">
-							<Button
-								className="m-1 mb-0 me-0"
-								color="success"
-								size="sm"
-								onClick={() => moveData(item.scientific_name, item.url)}>
+						<Link to="/create" onClick={() => moveData(item.scientific_name, item.url)}>
+							<Button className="m-1 mb-0 me-0" color="success" size="sm">
 								Sembrar <i className="fas fa-seedling" />
 							</Button>
 						</Link>

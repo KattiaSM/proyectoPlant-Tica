@@ -8,7 +8,7 @@ export function CreateTodo() {
 	const { store, actions } = useContext(Context); //El plantName también se almacena en el store
 	const [plantName, setPlantName] = useState(store.initial_plant_name); //Almacena el nombre de la planta
 	const [plantImg, setPlantImg] = useState(store.initial_img_url); //Almacena el URL de la planta
-
+	console.log(plantName);
 	const [list, setList] = useState(["Tarea"]); //Contiene los nombres de las tareas
 	const [freqList, setFreqList] = useState([""]); //Contiene las frecuencias de las tareas
 	const [typeList, setTypeList] = useState(["Horas"]); //Contiene los tipos de frecuencia de las tareas días/horas
