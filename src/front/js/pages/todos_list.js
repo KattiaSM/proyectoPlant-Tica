@@ -64,14 +64,18 @@ export function TodosList() {
 		todos_output = <div>Cargando</div>;
 	} else {
 		todos_output = info.map((item, index) => (
-			<div className="mt-1 row " key={index}>
-				<div className="col-6"> {createInfo()} </div>
-				<div className="col-6"> {createTodos()} </div>
+			<div className="m-1 col-xl " key={index}>
+				<div>
+					<div className="row">
+						<div className="col-md"> {createInfo()} </div>
+						<div className="col-md"> {createTodos()} </div>
+					</div>
+				</div>
 			</div>
 		));
 	}
 	return (
-		<div className="col-6 border border-muted rounded">
+		<div className="container-fluid border border-muted rounded">
 			<div className="row d-flex justify-content-start">
 				<Link to="/create">
 					<Button color="info" className="m-2">
@@ -79,8 +83,8 @@ export function TodosList() {
 					</Button>
 				</Link>
 			</div>
-			<div className="row">
-				<div> {todos_output} </div>
+			<div>
+				<div className="row"> {todos_output} </div>
 			</div>
 		</div>
 	);
