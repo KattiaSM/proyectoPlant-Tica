@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import "../../styles/garden.scss";
 export function Garden() {
 	return (
-		<div className="col-6 border border-muted rounded">
+		<div className="col-6 border border-muted rounded" style={{ display: "none" }}>
 			<div className="mt-1">
 				<div className="panel">
 					<div className="panel-body">

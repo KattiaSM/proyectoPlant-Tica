@@ -4,7 +4,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			message: null,
 			charge_todos: true,
 			initial_plant_name: "Aquí aparecerá el nombre de tu planta",
-			initial_img_url: "",
+			initial_img_url:
+				"https://64.media.tumblr.com/9e0731c5fd8e97d29a6f1f6928355572/tumblr_p2zkqfzA4B1wxub9uo1_1280.gifv",
 			name: "Aquí aparecerá el nombre de tu planta",
 			todos: [
 				[

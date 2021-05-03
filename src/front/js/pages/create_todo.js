@@ -220,10 +220,10 @@ export function CreateTodo() {
 	//les da formato general y le asigna a cada variable un valor temporal y así no dejar la previsualización vacía
 	useLayoutEffect(() => {
 		if (plantImg == undefined || plantImg == "") {
-			setPlantImg("https://activated.org/media/images/new-beginnings_82U8Rbw.max-550x350.jpg");
+			setPlantImg(store.initial_img_url);
 		}
 		if (plantName == undefined || plantName == "") {
-			setPlantName("Aquí irá el nombre de tu planta");
+			setPlantName(store.initial_plant_name);
 		}
 
 		setList(list);
@@ -305,7 +305,7 @@ export function CreateTodo() {
 					</div>
 					<div className="row">
 						<div className="col-6">
-							<CardImg top width="100%" src={plantImg} alt="Card image cap" />
+							<CardImg top width="100%" src={plantImg} style={{ height: "20rem" }} alt="Card image cap" />
 							<div className="box">
 								<h2>
 									{store.name}
