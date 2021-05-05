@@ -2,7 +2,8 @@ import React, { Component, useState, useContext, useEffect, useLayoutEffect } fr
 import PropTypes from "prop-types";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
-import { ListGroupItem, Button, CardImg, Label, Input, FormGroup, Col, ButtonToggle } from "reactstrap";
+import { ListGroupItem, Button, CardImg, Label, Input, FormGroup, Col, ButtonToggle, Badge } from "reactstrap";
+import "../../styles/todos_list.scss";
 
 export function CreateTodo() {
 	const { store, actions } = useContext(Context); //El plantName también se almacena en el store
@@ -14,6 +15,7 @@ export function CreateTodo() {
 	const [typeList, setTypeList] = useState(["Horas"]); //Contiene los tipos de frecuencia de las tareas días/horas
 	const [allTodos, setallTodos] = useState(store.todos); //Contiene los tipos de frecuencia de las tareas días/horas
 	//La siguiente función actualiza el nombre de la planta cada vez que es llamada por el evento onChange
+	let plant_url = "url(" + plantImg + ")";
 	function handleTitlePlant(event) {
 		actions.changeName(event.target.value);
 		setPlantName(event.target.value);
@@ -197,11 +199,10 @@ export function CreateTodo() {
 		} else {
 			let temporal = list.map((item, index) => (
 				<div key={index}>
-					<ListGroupItem className="justify-content-between">
-						{" "}
-						<div className="m-1">
-							<Label check>
-								<Input type="checkbox" className="ps-2" /> {item}
+					<ListGroupItem key={index} className="justify-content-between bg-transparent">
+						<div className="m-1 ">
+							<Label check id="text-border2">
+								<Input type="checkbox" /> {item}
 							</Label>
 						</div>
 					</ListGroupItem>
@@ -225,7 +226,7 @@ export function CreateTodo() {
 		if (plantName == undefined || plantName == "") {
 			setPlantName(store.initial_plant_name);
 		}
-
+		plant_url = "url(" + plantImg + ")";
 		setList(list);
 	});
 
@@ -233,7 +234,7 @@ export function CreateTodo() {
 		<div className="m-5 mt-1">
 			<div className="row d-flex justify-content-end">
 				<Link to="/garden">
-					<Button color="danger" className="m-1">
+					<Button color="danger" className="m-1 rounded-pill">
 						Salir sin salvar
 					</Button>
 				</Link>
@@ -289,11 +290,11 @@ export function CreateTodo() {
 					</div>
 					<div className="row d-flex justify-content-center">{responsive_todos}</div>
 					<div className="row d-flex justify-content-center">
-						<Button color="secondary" className="m-1" onClick={() => createNewTask()}>
+						<Button color="secondary" className="m-1 rounded-pill" onClick={() => createNewTask()}>
 							Crear nueva tarea
 						</Button>{" "}
 						<Link to="/garden" onClick={sendData}>
-							<Button color="info" className="m-1">
+							<Button color="info" className="m-1 rounded-pill">
 								Finalizar
 							</Button>
 						</Link>
@@ -303,18 +304,28 @@ export function CreateTodo() {
 					<div className="row d-flex justify-content-center mb-2">
 						<h1>Previsualización</h1>
 					</div>
-					<div className="row">
-						<div className="col-6 col-md-6 col-sm-12">
-							<CardImg top width="100%" src={plantImg} style={{ height: "20rem" }} alt="Card image cap" />
-							<div className="box">
-								<h2>
-									{store.name}
-									<p id="plant_title">{plantName}</p>
-								</h2>
-								<h3>Lista de Tareas</h3>
+					<div className="row d-flex justify-content-center">
+						<div>
+							<div className="m-0 col-xl-12 col-lg-12 col-md-12 col-sm-12">
+								<div className="shadow-lg">
+									<div
+										className="bg-image p-4 text-center shadow-1-strong rounded rounded-5 mb-5 text-white "
+										id="height"
+										style={{
+											backgroundImage: plant_url
+										}}>
+										<div className="row">
+											<h1 id="text-border" className="col-12">
+												{plantName}
+											</h1>
+										</div>
+										<div className="row d-flex justify-content-start">
+											<div className=" col-xl-6 col-lg-8 col-md-10 col-sm-12">{prev_todos}</div>
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
-						<div className="col-6 col-md-6 col-sm-12">{prev_todos}</div>
 					</div>
 				</div>
 			</div>
