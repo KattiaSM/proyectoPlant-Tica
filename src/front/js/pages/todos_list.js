@@ -13,6 +13,11 @@ export function TodosList() {
 	useEffect(() => {
 		setall_Data(store.todos);
 	});
+
+	function delTodo(index) {
+		actions.deleteTodo(index);
+	}
+
 	function createTodos() {
 		let all_data = store.todos;
 		if (all_data[genIndex] == undefined) {
@@ -23,7 +28,7 @@ export function TodosList() {
 				<ListGroupItem key={index} className="justify-content-between bg-transparent">
 					<div className="m-1 ">
 						<Label check id="text-border2">
-							<Input type="checkbox" /> Tarea de prueba
+							<Input type="checkbox" /> {item.task}
 						</Label>
 					</div>
 				</ListGroupItem>
@@ -53,10 +58,7 @@ export function TodosList() {
 							</Button>
 							<Button
 								className="bg-danger border-danger border-rounded-top m-0 me-2 p-0 d-flex align-items-end"
-								onClick={() => {
-									actions.deleteTodo(genIndex);
-									console.log("hola");
-								}}>
+								onClick={() => delTodo(genIndex)}>
 								<Badge color="danger" pill>
 									X
 								</Badge>
@@ -75,8 +77,8 @@ export function TodosList() {
 									{temporal[0].plant_name}
 								</h1>
 							</div>
-							<div className="row d-flex justify-content-start col-xl-6 col-lg-6 col-md-9 col-sm-12">
-								{createTodos()}
+							<div className="row d-flex justify-content-start">
+								<div className=" col-xl-6 col-lg-8 col-md-10 col-sm-12">{createTodos()}</div>
 							</div>
 						</div>
 					</div>
@@ -93,7 +95,7 @@ export function TodosList() {
 			<div className="col-xl-4 col-lg-6 col-md-12 col-sm-12 " key={index}>
 				<div>
 					<div className="row">
-						<div className="col-lg-12 col-md-12 col-sm-12"> {createInfo()} </div>
+						<div className="col-xl-12 col-lg-12 col-md-12 col-sm-12"> {createInfo()} </div>
 					</div>
 				</div>
 			</div>
