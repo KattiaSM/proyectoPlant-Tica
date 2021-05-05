@@ -240,7 +240,7 @@ export function CreateTodo() {
 				</Link>
 			</div>
 			<div className="row mt-2 d-flex justify-content-center">
-				<div className="col-6 col-lg-6 col-md-12 col-sm-12 bg-light border border-rounded rounded-2">
+				<div className="col-6 col-lg-6 col-md-12 col-sm-12 bg-light border shadow-1-strong rounded rounded-5">
 					<div className="row d-flex justify-content-center">
 						<h1>Inserta aquí los datos de tu planta</h1>
 					</div>
