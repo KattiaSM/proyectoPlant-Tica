@@ -163,6 +163,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 				temporal.splice(index, 1);
 				setStore({ favs: temporal });
 			},
+			deleteTodo: index => {
+				const store = getStore();
+				let temporal = store.todos;
+				temporal.splice(index, 1);
+				setStore({ todos: temporal });
+			},
 			modifyTodos: control => {
 				const store = getStore();
 				let final_array = store.todos;
