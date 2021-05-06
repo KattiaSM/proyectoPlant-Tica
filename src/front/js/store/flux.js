@@ -183,6 +183,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const store = getStore();
 				let temporal = store.todos;
 				if (temporal.length > 1) {
+					console.log(index);
 					temporal.splice(index, 1);
 					setStore({ todos: temporal });
 				} else {

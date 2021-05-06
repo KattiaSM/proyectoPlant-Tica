@@ -15,6 +15,7 @@ export function TodosList() {
 	});
 
 	function delTodo(index) {
+		console.log(index);
 		actions.deleteTodo(index);
 	}
 	function handleModifyInfo(info) {
@@ -52,7 +53,7 @@ export function TodosList() {
 			return <div>No hay tareas disponibles</div>;
 		} else {
 			let temporal = all_data[genIndex];
-
+			let deleteIndex = genIndex;
 			let plant_url = "url(" + temporal[1].plant_url + ")";
 
 			return (
@@ -69,7 +70,7 @@ export function TodosList() {
 
 							<Button
 								className="bg-danger border-danger border-rounded-top m-0 me-2 p-0 d-flex align-items-end"
-								onClick={() => delTodo(genIndex - 1)}>
+								onClick={() => delTodo(deleteIndex)}>
 								<Badge color="danger" pill>
 									X
 								</Badge>
