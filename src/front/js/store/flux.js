@@ -10,18 +10,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 			name: "Aquí aparecerá el nombre de tu planta",
 			todos: [
 				[
-					{ plant_name: "Crea listas de tareas" },
+					{ plant_name: "Realiza listas de tareas" },
 					{ plant_url: "https://media1.giphy.com/media/3ohs4i3JaSelQpFYVW/giphy.gif" },
 
 					{
 						tasks: [
-							{ task: "Tarea 1", freq: 24, type: "Horas" },
-							{ task: "Tarea 2", freq: 24, type: "Horas" }
+							{ task: "Agua", freq: 24, type: "Horas" },
+							{ task: "Abono", freq: 24, type: "Horas" }
 						]
 					}
 				],
 				[
-					{ plant_name: "Lleva el conteo de tus plantas" },
+					{ plant_name: "Cuidá tus plantas" },
 					{
 						plant_url:
 							"https://ecoosfera.com/wp-content/imagenes/2020/11/plantas-time-lapse-movimiento-vida.gif"
@@ -29,8 +29,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 					{
 						tasks: [
-							{ task: "Tarea 1", freq: 24, type: "Horas" },
-							{ task: "Tarea 2", freq: 24, type: "Horas" }
+							{ task: "Sustrato", freq: 24, type: "Horas" },
+							{ task: "Amor <3", freq: 24, type: "Horas" }
+						]
+					}
+				],
+				[
+					{ plant_name: "Llevá el conteo de tus plantas" },
+					{
+						plant_url: "https://media2.giphy.com/media/3o6ZtaClRw5uXz18JO/giphy.gif"
+					},
+					{
+						tasks: [
+							{ task: "Luz", freq: 24, type: "Horas" },
+							{ task: "Enraizante", freq: 24, type: "Horas" }
 						]
 					}
 				]

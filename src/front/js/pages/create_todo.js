@@ -235,7 +235,7 @@ export function CreateTodo() {
 		<div className="m-5 mt-1">
 			<div className="row d-flex justify-content-end">
 				<Link to="/garden">
-					<Button color="danger" className="m-1 rounded-pill" onClick={() => actions.restoreDataToModify()}>
+					<Button color="danger" className="m-1 rounded-pill">
 						Salir sin salvar
 					</Button>
 				</Link>
