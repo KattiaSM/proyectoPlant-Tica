@@ -66,6 +66,12 @@ export const Registration = () => {
 			password: password
 		};
 
+		fetch("https://3001-amber-gayal-y1axfaw6.ws-us03.gitpod.io/api/register", {
+			method: "POST",
+			body: JSON.stringify(body),
+			headers: {
+				"Content-Type": "application/json"
+
 		let inputs = e.target.getElementsByTagName("input");
 		let formValid = false;
 

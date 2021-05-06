@@ -1,6 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
+			userLogged: false,
 			message: null,
 			charge_todos: true,
 			initial_plant_name: "Aquí aparecerá el nombre de tu planta",
@@ -197,6 +198,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 				final_array.unshift(control);
 				setStore({ todos: final_array, charge_todos: true });
 			},
+
+			logout: () => {
+				localStorage.setItem("x-access-token", null);
+
+				setStore({ userLogged: false });
+
+				// Se configura la opción del home
+				getActions().activeOption("/login");
+
+				ShowAlert("top-end", "success", "", "¡Sesión cerrada exitosamente!", false, true, 2000);
+			},
+
 			moveDataToModify: control => {
 				let temporal = control;
 				let tasks = [];
@@ -213,6 +226,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			restoreDataToModify: () => {
 				setStore({ info_create_todos: [["Tu tarea"], [""], ["Horas"]] });
 			},
+
 			changeColor: (index, color) => {
 				//get the store
 				const store = getStore();
