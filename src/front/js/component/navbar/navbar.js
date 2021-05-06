@@ -1,10 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import LinkNav from "./LinkNav";
 import Search from "./Search";
+import { Context } from "../../store/appContext";
 
 //Barra de navegacion de la
-const navbar = () => {
+const Navbar = () => {
+	const getFavorites = () => {
+		const { store } = useContext(Context);
+
+		return "Favoritos(" + store.favs.length + ")";
+	};
+
 	return (
 		<nav className="navbar navbar-expand-lg navbar-dark bg-info">
 			{/* Logo? */}
@@ -18,11 +25,10 @@ const navbar = () => {
 			<div className="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul className="navbar-nav mr-auto">
 					<LinkNav name="Plantas" to="/plants" />
-					<LinkNav name="Favoritos(5)" to="/favorites" />
+					<LinkNav name={getFavorites()} to="/favorites" />
 					<LinkNav name="Garden" to="/garden" />
 					<LinkNav name="Registrarse" to="/register" />
 					<LinkNav name="Ingresar" to="/login" />
-					{/* <LinkNav name="Recuperar Contraseña" to="/restore" /> */}
 				</ul>
 			</div>
 
@@ -35,4 +41,4 @@ const navbar = () => {
 	);
 };
 
-export default navbar;
+export default Navbar;

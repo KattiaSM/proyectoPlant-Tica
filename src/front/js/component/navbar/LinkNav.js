@@ -4,9 +4,13 @@ import { NavLink } from "react-router-dom";
 
 const LinkNav = props => {
 	return (
-		<NavLink exact activeClassName="active" to={props.to}>
+		<NavLink
+			exact
+			style={{ textDecoration: "none" }}
+			activeStyle={{ fontWeight: "bold", textDecoration: "underline" }}
+			to={props.to}>
 			<li className="nav-item">
-				<a className="nav-link">{props.name}</a>
+				<a className="nav-link text-white">{props.name}</a>
 			</li>
 		</NavLink>
 	);

@@ -59,7 +59,7 @@ const Layout = () => {
 						<Route exact path="/garden">
 							<Profile />
 							<div className="m-5 mt-0">
-								<div className="row">
+								<div className="row justify-content-center">
 									<TodosList />
 									<Garden />
 								</div>

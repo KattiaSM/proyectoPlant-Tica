@@ -2,20 +2,19 @@ import React, { Component, useState, useContext, useEffect, useLayoutEffect } fr
 import PropTypes from "prop-types";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
-import { ListGroupItem, Button, CardImg, Label, Input, FormGroup, Col, ButtonToggle } from "reactstrap";
+import { ListGroupItem, Button, CardImg, Label, Input, FormGroup, Col, ButtonToggle, Badge } from "reactstrap";
+import "../../styles/todos_list.scss";
 
 export function CreateTodo() {
 	const { store, actions } = useContext(Context); //El plantName también se almacena en el store
-	const [plantName, setPlantName] = useState("Aquí irá el nombre de tu planta"); //Almacena el nombre de la planta
-	const [plantImg, setPlantImg] = useState(
-		"https://activated.org/media/images/new-beginnings_82U8Rbw.max-550x350.jpg"
-	); //Almacena el URL de la planta
-
-	const [list, setList] = useState(["Tarea"]); //Contiene los nombres de las tareas
-	const [freqList, setFreqList] = useState([""]); //Contiene las frecuencias de las tareas
-	const [typeList, setTypeList] = useState(["Horas"]); //Contiene los tipos de frecuencia de las tareas días/horas
+	const [plantName, setPlantName] = useState(store.initial_plant_name); //Almacena el nombre de la planta
+	const [plantImg, setPlantImg] = useState(store.initial_img_url); //Almacena el URL de la planta
+	const [list, setList] = useState(store.info_create_todos[0]); //Contiene los nombres de las tareas
+	const [freqList, setFreqList] = useState(store.info_create_todos[1]); //Contiene las frecuencias de las tareas
+	const [typeList, setTypeList] = useState(store.info_create_todos[2]); //Contiene los tipos de frecuencia de las tareas días/horas
 	const [allTodos, setallTodos] = useState(store.todos); //Contiene los tipos de frecuencia de las tareas días/horas
 	//La siguiente función actualiza el nombre de la planta cada vez que es llamada por el evento onChange
+	let plant_url = "url(" + plantImg + ")";
 	function handleTitlePlant(event) {
 		actions.changeName(event.target.value);
 		setPlantName(event.target.value);
@@ -30,7 +29,7 @@ export function CreateTodo() {
 		let read = list;
 		let read2 = typeList;
 		let read3 = freqList;
-		read.push("Tu tarea");
+		read.push("");
 		read2.push("Horas");
 		read3.push("");
 		setPlantName(() => {
@@ -131,8 +130,8 @@ export function CreateTodo() {
 
 		actions.changeChargeValue();
 		format[2] = { tasks: tasks_push };
-		console.log(format);
 		actions.modifyTodos(format);
+		actions.restoreDataToModify();
 	}
 
 	//Esta función crea divs de acuerdo a la cantidad de tareas por editar
@@ -153,6 +152,7 @@ export function CreateTodo() {
 								name="text"
 								id="exampleEmail"
 								placeholder="Ej: Agua"
+								value={list[index]}
 								onChange={() => editNameTask(event, index)}
 							/>
 						</Col>
@@ -165,6 +165,7 @@ export function CreateTodo() {
 								name="text"
 								id="exampleEmail"
 								placeholder="Ej: 10 horas/días"
+								value={freqList[index]}
 								onChange={() => editFreqTask(event, index)}
 							/>
 						</Col>
@@ -199,11 +200,10 @@ export function CreateTodo() {
 		} else {
 			let temporal = list.map((item, index) => (
 				<div key={index}>
-					<ListGroupItem className="justify-content-between">
-						{" "}
-						<div className="m-1">
-							<Label check>
-								<Input type="checkbox" className="ps-2" /> {item}
+					<ListGroupItem key={index} className="justify-content-between bg-transparent">
+						<div className="m-1 ">
+							<Label check id="text-border2">
+								<Input type="checkbox" /> {item}
 							</Label>
 						</div>
 					</ListGroupItem>
@@ -222,12 +222,12 @@ export function CreateTodo() {
 	//les da formato general y le asigna a cada variable un valor temporal y así no dejar la previsualización vacía
 	useLayoutEffect(() => {
 		if (plantImg == undefined || plantImg == "") {
-			setPlantImg("https://activated.org/media/images/new-beginnings_82U8Rbw.max-550x350.jpg");
+			setPlantImg(store.initial_img_url);
 		}
 		if (plantName == undefined || plantName == "") {
-			setPlantName("Aquí irá el nombre de tu planta");
+			setPlantName(store.initial_plant_name);
 		}
-
+		plant_url = "url(" + plantImg + ")";
 		setList(list);
 	});
 
@@ -235,13 +235,13 @@ export function CreateTodo() {
 		<div className="m-5 mt-1">
 			<div className="row d-flex justify-content-end">
 				<Link to="/garden">
-					<Button color="danger" className="m-1">
+					<Button color="danger" className="m-1 rounded-pill">
 						Salir sin salvar
 					</Button>
 				</Link>
 			</div>
 			<div className="row mt-2 d-flex justify-content-center">
-				<div className="col-6 bg-light border border-rounded rounded-2">
+				<div className="col-6 col-lg-6 col-md-12 col-sm-12 bg-light border shadow-1-strong rounded rounded-5">
 					<div className="row d-flex justify-content-center">
 						<h1>Inserta aquí los datos de tu planta</h1>
 					</div>
@@ -291,32 +291,42 @@ export function CreateTodo() {
 					</div>
 					<div className="row d-flex justify-content-center">{responsive_todos}</div>
 					<div className="row d-flex justify-content-center">
-						<Button color="secondary" className="m-1" onClick={() => createNewTask()}>
+						<Button color="secondary" className="m-1 rounded-pill" onClick={() => createNewTask()}>
 							Crear nueva tarea
 						</Button>{" "}
 						<Link to="/garden" onClick={sendData}>
-							<Button color="info" className="m-1">
+							<Button color="info" className="m-1 rounded-pill">
 								Finalizar
 							</Button>
 						</Link>
 					</div>
 				</div>
-				<div className="col-6">
+				<div className="col-xl-6 col-lg-12 col-md-12 col-sm-12">
 					<div className="row d-flex justify-content-center mb-2">
 						<h1>Previsualización</h1>
 					</div>
-					<div className="row">
-						<div className="col-6">
-							<CardImg top width="100%" src={plantImg} alt="Card image cap" />
-							<div className="box">
-								<h2>
-									{store.name}
-									<p id="plant_title">{plantName}</p>
-								</h2>
-								<h3>Lista de Tareas</h3>
+					<div className="row d-flex justify-content-center">
+						<div style={{ width: "100%" }}>
+							<div className="m-0 col-xl-12 col-lg-12 col-md-12 col-sm-12">
+								<div className="shadow-lg">
+									<div
+										className="bg-image p-4 text-center shadow-1-strong rounded rounded-5 mb-5 text-white "
+										id="height"
+										style={{
+											backgroundImage: plant_url
+										}}>
+										<div className="row">
+											<h1 id="text-border" className="col-12">
+												{plantName}
+											</h1>
+										</div>
+										<div className="row d-flex justify-content-start">
+											<div className=" col-xl-6 col-lg-8 col-md-10 col-sm-12">{prev_todos}</div>
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
-						<div className="col-6">{prev_todos}</div>
 					</div>
 				</div>
 			</div>
