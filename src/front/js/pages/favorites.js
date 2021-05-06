@@ -23,7 +23,6 @@ export function Favorites() {
 	//tres columnas, el map va a separar cada uno y el navegador leera cada array
 
 	data.map(function(element, index) {
-		console.log(index, element);
 		if (counter == 0) {
 			//append al array 1
 			cards_col1.push(data[index]);
@@ -42,6 +41,7 @@ export function Favorites() {
 		actions.changeInitialName(name);
 		actions.changeName(name);
 		actions.changeInitialURL(url);
+		actions.restoreDataToModify();
 	}
 
 	//La siguiente función se encarga de eliminar un favorito, recibe un nombre y lo compara, si lo encuentra, elimina el favorito

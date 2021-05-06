@@ -4,6 +4,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			message: null,
 			charge_todos: true,
 			initial_plant_name: "Aquí aparecerá el nombre de tu planta",
+			info_create_todos: [["Tu tarea"], [""], ["Horas"]],
 			initial_img_url:
 				"https://64.media.tumblr.com/9e0731c5fd8e97d29a6f1f6928355572/tumblr_p2zkqfzA4B1wxub9uo1_1280.gifv",
 			name: "Aquí aparecerá el nombre de tu planta",
@@ -174,6 +175,22 @@ const getState = ({ getStore, getActions, setStore }) => {
 				let final_array = store.todos;
 				final_array.unshift(control);
 				setStore({ todos: final_array, charge_todos: true });
+			},
+			moveDataToModify: control => {
+				let temporal = control;
+				let tasks = [];
+				let freq = [];
+				let type = [];
+
+				temporal.map((item, index) => {
+					tasks.push(item.task);
+					freq.push(item.freq);
+					type.push(item.type);
+				});
+				setStore({ info_create_todos: [tasks, freq, type] });
+			},
+			restoreDataToModify: () => {
+				setStore({ info_create_todos: [["Tu tarea"], [""], ["Horas"]] });
 			},
 			changeColor: (index, color) => {
 				//get the store
