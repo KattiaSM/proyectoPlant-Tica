@@ -1,0 +1,40 @@
+#container1 {
+  position: relative;
+}
+
+/* Bottom right text */
+#text-1{
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  background-color: black;
+  border-color: black;
+  padding-left: 20px;
+  padding-right: 20px;
+
+} 
+
+#tasks{
+    opacity: 1;
+    text-decoration-color: black;
+} 
+#height{
+    min-height: 450px;
+    max-height: 450px;
+}
+#back-image{
+    border-radius: 25px;
+}
+#text-border {
+  font-weight: bold;
+  -webkit-text-stroke: 2px black;
+  color: white;
+}
+
+#text-border2 {
+  font-size: 20px;
+  font-weight: bold;
+  -webkit-text-stroke: 0.5px black;
+  text-shadow: 0.5px 0.5px black;
+  color: white;
+}
