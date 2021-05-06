@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: cc7c345b5bb1
+Revision ID: 31ad5f261ea8
 Revises: 
-Create Date: 2021-04-29 01:33:21.758388
+Create Date: 2021-05-06 02:27:32.894802
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'cc7c345b5bb1'
+revision = '31ad5f261ea8'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -45,20 +45,24 @@ def upgrade():
     sa.Column('last_pesticide', sa.Date(), nullable=True),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('commun_name'),
+    sa.UniqueConstraint('commun_name'),
+    sa.UniqueConstraint('local_cientific_name'),
     sa.UniqueConstraint('local_cientific_name')
     )
     op.create_table('user',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('name', sa.String(length=100), nullable=False),
-    sa.Column('first_surname', sa.String(length=100), nullable=False),
+    sa.Column('name', sa.String(length=100), nullable=True),
+    sa.Column('first_surname', sa.String(length=100), nullable=True),
     sa.Column('second_surname', sa.String(length=100), nullable=True),
     sa.Column('user_name', sa.String(length=50), nullable=True),
     sa.Column('user_image', sa.String(length=2000), nullable=True),
     sa.Column('email', sa.String(length=250), nullable=True),
     sa.Column('password', sa.String(length=80), nullable=False),
-    sa.Column('is_active', sa.Boolean(), nullable=False),
+    sa.Column('is_active', sa.Boolean(), nullable=True),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('email'),
+    sa.UniqueConstraint('email'),
+    sa.UniqueConstraint('user_name'),
     sa.UniqueConstraint('user_name')
     )
     op.create_table('favorites',

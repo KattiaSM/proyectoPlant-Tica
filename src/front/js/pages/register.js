@@ -25,7 +25,7 @@ export const Registration = () => {
 			password: password
 		};
 
-		fetch("https://3000-lime-mollusk-0goukxq3.ws-us03.gitpod.io/register", {
+		fetch("https://3001-amber-gayal-y1axfaw6.ws-us03.gitpod.io/api/register", {
 			method: "POST",
 			body: JSON.stringify(body),
 			headers: {
