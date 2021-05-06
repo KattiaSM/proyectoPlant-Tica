@@ -11,7 +11,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			todos: [
 				[
 					{ plant_name: "Crea listas de tareas" },
-					{ plant_url: "https://whatsup.es/wp-content/uploads/2020/07/partes-de-la-planta-en-ingles.jpg" },
+					{ plant_url: "https://media1.giphy.com/media/3ohs4i3JaSelQpFYVW/giphy.gif" },
 
 					{
 						tasks: [
@@ -22,7 +22,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 				],
 				[
 					{ plant_name: "Lleva el conteo de tus plantas" },
-					{ plant_url: "https://whatsup.es/wp-content/uploads/2020/07/partes-de-la-planta-en-ingles.jpg" },
+					{
+						plant_url:
+							"https://ecoosfera.com/wp-content/imagenes/2020/11/plantas-time-lapse-movimiento-vida.gif"
+					},
 
 					{
 						tasks: [
@@ -167,8 +170,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 			deleteTodo: index => {
 				const store = getStore();
 				let temporal = store.todos;
-				temporal.splice(index, 1);
-				setStore({ todos: temporal });
+				if (temporal.length > 1) {
+					temporal.splice(index, 1);
+					setStore({ todos: temporal });
+				} else {
+					console.log(temporal.lenght);
+					alert("Lo sentimos, debe tener almenos una lista de tareas disponible.");
+				}
 			},
 			modifyTodos: control => {
 				const store = getStore();

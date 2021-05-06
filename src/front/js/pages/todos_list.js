@@ -52,7 +52,9 @@ export function TodosList() {
 			return <div>No hay tareas disponibles</div>;
 		} else {
 			let temporal = all_data[genIndex];
+
 			let plant_url = "url(" + temporal[1].plant_url + ")";
+
 			return (
 				<div className="m-0 col-xl-12 col-lg-12 col-md-12 col-sm-12">
 					<div className="m-0 row d-flex justify-content-end">
