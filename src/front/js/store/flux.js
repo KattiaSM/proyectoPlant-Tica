@@ -1,6 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
+			userLogged: false,
 			message: null,
 			charge_todos: true,
 			todos: [
@@ -101,6 +102,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 				final_array.unshift(control);
 				setStore({ todos: final_array, charge_todos: true });
 			},
+
+			logout: () => {
+				localStorage.setItem("x-access-token", null);
+
+				setStore({ userLogged: false });
+
+				// Se configura la opción del home
+				getActions().activeOption("/login");
+
+				ShowAlert("top-end", "success", "", "¡Sesión cerrada exitosamente!", false, true, 2000);
+			},
+
 			changeColor: (index, color) => {
 				//get the store
 				const store = getStore();
