@@ -25,14 +25,14 @@ const items = [
 	},
 	{
 		src: "https://images.discerningassets.com/image/upload/q_auto:best/v1581391572/Columbine01_ntytbn.jpg",
-		altText: "Slide 2",
-		caption: "Slide 2"
+		altText: "Descubrí con Plant-Tica",
+		caption: "tu pasión por las plantas"
 	},
 	{
 		src:
 			"https://cdn.shopify.com/s/files/1/0082/2345/7365/collections/Live_Plant_Collection_Image_3780x630.jpg?v=1580399808",
-		altText: "Slide 3",
-		caption: "Slide 3"
+		altText: "Organiza con Plant-Tica",
+		caption: "tu huerta o jardín"
 	}
 ];
 
@@ -85,13 +85,17 @@ export function Home() {
 								Un espacio para aprender y compartir sobre plantas de Costa Rica... y ¿por qué no?
 								empezar a tener tu propio jardín con esas planticas 🇨🇷 que siempre has querido.
 							</p>
-							<p className="lead">¿Ya tenés tu huerta o jardín?</p>
+							<p className="lead">
+								<strong>¿Ya tenés tu huerta o jardín?</strong>
+							</p>
 							<hr className="my-2" />
 							<p className="mt-3">
-								En plant-tica te ayudamos y motivamos a seguir cuidándolo y además mostrarlo para que
-								¡más gente lo pueda apreciar!.
+								<h5>
+									En plant-tica te ayudamos y motivamos a seguir cuidándolo y además mostrarlo para
+									que
+								</h5>
+								<h4>más gente lo pueda apreciar</h4>
 							</p>
-
 							<Button color="success" className="mt-3 text-light">
 								<Link to="/register" className="text-light">
 									¡Registrarme!
