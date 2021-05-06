@@ -15,7 +15,15 @@ export function TodosList() {
 	});
 
 	function delTodo(index) {
+		console.log(index);
 		actions.deleteTodo(index);
+	}
+	function handleModifyInfo(info) {
+		actions.changeInitialName(info[0].plant_name);
+		actions.changeName(info[0].plant_name);
+		actions.changeInitialURL(info[1].plant_url);
+		console.log(info[2]);
+		actions.moveDataToModify(info[2].tasks);
 	}
 
 	function createTodos() {
@@ -45,20 +53,24 @@ export function TodosList() {
 			return <div>No hay tareas disponibles</div>;
 		} else {
 			let temporal = all_data[genIndex];
-			console.log(temporal[0].plant_name);
+			let deleteIndex = genIndex;
 			let plant_url = "url(" + temporal[1].plant_url + ")";
+
 			return (
 				<div className="m-0 col-xl-12 col-lg-12 col-md-12 col-sm-12">
 					<div className="m-0 row d-flex justify-content-end">
 						<div className="row m-0 p-0 ps-4 ">
-							<Button className="bg-dark border-dark border-rounded-top m-0 p-0 d-flex align-items-end">
-								<Badge color="dark" pill>
-									Modificar
-								</Badge>
-							</Button>
+							<Link to="/create" onClick={() => handleModifyInfo(temporal)}>
+								<Button className="bg-dark border-dark border-rounded-top m-0 p-0 d-flex align-items-end">
+									<Badge color="dark" pill>
+										Modificar
+									</Badge>
+								</Button>
+							</Link>
+
 							<Button
 								className="bg-danger border-danger border-rounded-top m-0 me-2 p-0 d-flex align-items-end"
-								onClick={() => delTodo(genIndex)}>
+								onClick={() => delTodo(deleteIndex)}>
 								<Badge color="danger" pill>
 									X
 								</Badge>
@@ -104,7 +116,7 @@ export function TodosList() {
 	return (
 		<div className="container-fluid border border-muted rounded">
 			<div className="row d-flex justify-content-start">
-				<Link to="/create">
+				<Link to="/create" onClick={() => actions.restoreDataToModify()}>
 					<Button color="info" className="m-2 rounded-pill">
 						Crear nueva lista de tareas
 					</Button>

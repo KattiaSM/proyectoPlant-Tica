@@ -4,29 +4,45 @@ const getState = ({ getStore, getActions, setStore }) => {
 			message: null,
 			charge_todos: true,
 			initial_plant_name: "Aquí aparecerá el nombre de tu planta",
+			info_create_todos: [["Tu tarea"], [""], ["Horas"]],
 			initial_img_url:
 				"https://64.media.tumblr.com/9e0731c5fd8e97d29a6f1f6928355572/tumblr_p2zkqfzA4B1wxub9uo1_1280.gifv",
 			name: "Aquí aparecerá el nombre de tu planta",
 			todos: [
 				[
-					{ plant_name: "Crea listas de tareas" },
-					{ plant_url: "https://whatsup.es/wp-content/uploads/2020/07/partes-de-la-planta-en-ingles.jpg" },
+					{ plant_name: "Realiza listas de tareas" },
+					{ plant_url: "https://media1.giphy.com/media/3ohs4i3JaSelQpFYVW/giphy.gif" },
 
 					{
 						tasks: [
-							{ task: "Tarea 1", freq: 24, type: "Horas" },
-							{ task: "Tarea 2", freq: 24, type: "Horas" }
+							{ task: "Agua", freq: 24, type: "Horas" },
+							{ task: "Abono", freq: 24, type: "Horas" }
 						]
 					}
 				],
 				[
-					{ plant_name: "Lleva el conteo de tus plantas" },
-					{ plant_url: "https://whatsup.es/wp-content/uploads/2020/07/partes-de-la-planta-en-ingles.jpg" },
+					{ plant_name: "Cuidá tus plantas" },
+					{
+						plant_url:
+							"https://ecoosfera.com/wp-content/imagenes/2020/11/plantas-time-lapse-movimiento-vida.gif"
+					},
 
 					{
 						tasks: [
-							{ task: "Tarea 1", freq: 24, type: "Horas" },
-							{ task: "Tarea 2", freq: 24, type: "Horas" }
+							{ task: "Sustrato", freq: 24, type: "Horas" },
+							{ task: "Amor <3", freq: 24, type: "Horas" }
+						]
+					}
+				],
+				[
+					{ plant_name: "Llevá el conteo de tus plantas" },
+					{
+						plant_url: "https://media2.giphy.com/media/3o6ZtaClRw5uXz18JO/giphy.gif"
+					},
+					{
+						tasks: [
+							{ task: "Luz", freq: 24, type: "Horas" },
+							{ task: "Enraizante", freq: 24, type: "Horas" }
 						]
 					}
 				]
@@ -166,14 +182,36 @@ const getState = ({ getStore, getActions, setStore }) => {
 			deleteTodo: index => {
 				const store = getStore();
 				let temporal = store.todos;
-				temporal.splice(index, 1);
-				setStore({ todos: temporal });
+				if (temporal.length > 1) {
+					console.log(index);
+					temporal.splice(index, 1);
+					setStore({ todos: temporal });
+				} else {
+					console.log(temporal.lenght);
+					alert("Lo sentimos, debe tener almenos una lista de tareas disponible.");
+				}
 			},
 			modifyTodos: control => {
 				const store = getStore();
 				let final_array = store.todos;
 				final_array.unshift(control);
 				setStore({ todos: final_array, charge_todos: true });
+			},
+			moveDataToModify: control => {
+				let temporal = control;
+				let tasks = [];
+				let freq = [];
+				let type = [];
+
+				temporal.map((item, index) => {
+					tasks.push(item.task);
+					freq.push(item.freq);
+					type.push(item.type);
+				});
+				setStore({ info_create_todos: [tasks, freq, type] });
+			},
+			restoreDataToModify: () => {
+				setStore({ info_create_todos: [["Tu tarea"], [""], ["Horas"]] });
 			},
 			changeColor: (index, color) => {
 				//get the store

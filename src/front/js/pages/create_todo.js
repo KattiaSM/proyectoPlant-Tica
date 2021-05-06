@@ -9,10 +9,9 @@ export function CreateTodo() {
 	const { store, actions } = useContext(Context); //El plantName también se almacena en el store
 	const [plantName, setPlantName] = useState(store.initial_plant_name); //Almacena el nombre de la planta
 	const [plantImg, setPlantImg] = useState(store.initial_img_url); //Almacena el URL de la planta
-	console.log(plantName);
-	const [list, setList] = useState(["Tarea"]); //Contiene los nombres de las tareas
-	const [freqList, setFreqList] = useState([""]); //Contiene las frecuencias de las tareas
-	const [typeList, setTypeList] = useState(["Horas"]); //Contiene los tipos de frecuencia de las tareas días/horas
+	const [list, setList] = useState(store.info_create_todos[0]); //Contiene los nombres de las tareas
+	const [freqList, setFreqList] = useState(store.info_create_todos[1]); //Contiene las frecuencias de las tareas
+	const [typeList, setTypeList] = useState(store.info_create_todos[2]); //Contiene los tipos de frecuencia de las tareas días/horas
 	const [allTodos, setallTodos] = useState(store.todos); //Contiene los tipos de frecuencia de las tareas días/horas
 	//La siguiente función actualiza el nombre de la planta cada vez que es llamada por el evento onChange
 	let plant_url = "url(" + plantImg + ")";
@@ -30,7 +29,7 @@ export function CreateTodo() {
 		let read = list;
 		let read2 = typeList;
 		let read3 = freqList;
-		read.push("Tu tarea");
+		read.push("");
 		read2.push("Horas");
 		read3.push("");
 		setPlantName(() => {
@@ -131,8 +130,8 @@ export function CreateTodo() {
 
 		actions.changeChargeValue();
 		format[2] = { tasks: tasks_push };
-		console.log(format);
 		actions.modifyTodos(format);
+		actions.restoreDataToModify();
 	}
 
 	//Esta función crea divs de acuerdo a la cantidad de tareas por editar
@@ -153,6 +152,7 @@ export function CreateTodo() {
 								name="text"
 								id="exampleEmail"
 								placeholder="Ej: Agua"
+								value={list[index]}
 								onChange={() => editNameTask(event, index)}
 							/>
 						</Col>
@@ -165,6 +165,7 @@ export function CreateTodo() {
 								name="text"
 								id="exampleEmail"
 								placeholder="Ej: 10 horas/días"
+								value={freqList[index]}
 								onChange={() => editFreqTask(event, index)}
 							/>
 						</Col>
@@ -300,12 +301,12 @@ export function CreateTodo() {
 						</Link>
 					</div>
 				</div>
-				<div className="col-6 col-xl-6 col-lg-12 col-md-12 col-sm-12">
+				<div className="col-xl-6 col-lg-12 col-md-12 col-sm-12">
 					<div className="row d-flex justify-content-center mb-2">
 						<h1>Previsualización</h1>
 					</div>
 					<div className="row d-flex justify-content-center">
-						<div>
+						<div style={{ width: "100%" }}>
 							<div className="m-0 col-xl-12 col-lg-12 col-md-12 col-sm-12">
 								<div className="shadow-lg">
 									<div
