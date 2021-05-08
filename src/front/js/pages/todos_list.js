@@ -116,7 +116,13 @@ export function TodosList() {
 	return (
 		<div className="container-fluid border border-muted rounded">
 			<div className="row d-flex justify-content-start">
-				<Link to="/create" onClick={() => actions.restoreDataToModify()}>
+				<Link
+					to="/create"
+					onClick={() =>
+						actions.restoreDataToModify(
+							"https://64.media.tumblr.com/9e0731c5fd8e97d29a6f1f6928355572/tumblr_p2zkqfzA4B1wxub9uo1_1280.gifv"
+						)
+					}>
 					<Button color="info" className="m-2 rounded-pill">
 						Crear nueva lista de tareas
 					</Button>
