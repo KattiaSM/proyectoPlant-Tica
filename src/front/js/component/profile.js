@@ -16,7 +16,7 @@ const profile = props => {
 											<img src={props.image} className="img-radius" alt="User-Profile-Image" />
 										</div>
 										<h3 className="f-w-600">{props.name}</h3>
-										<p>{props.profesion}</p>{" "}
+										<h4>{props.profesion}</h4>{" "}
 										<i className=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16" />
 									</div>
 								</div>

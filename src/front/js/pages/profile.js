@@ -9,12 +9,12 @@ export function Profile() {
 		<div>
 			<UserProfile
 				image="https://img.icons8.com/bubbles/100/000000/user.png"
-				name="Alberto"
+				name="Alberto Rivera"
 				profesion="Jardinero"
-				hobbies="Lorem ipsum dolor sit amet consectetur"
-				description="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Amet aliquam saepe illo reiciendis."
-				location="Algun lugar"
-				phone="3123123123123"
+				hobbies="Hidroponía - Jardines Verticales"
+				description="Mantenimiento de zonas verdes y tecnicas de cuidado de plantas"
+				location="La Union, Cartago"
+				phone="8888-8888"
 			/>
 		</div>
 	);
