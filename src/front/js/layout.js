@@ -61,7 +61,6 @@ const Layout = () => {
 							<div className="m-5 mt-0">
 								<div className="row justify-content-center">
 									<TodosList />
-									<Garden />
 								</div>
 							</div>
 						</Route>
