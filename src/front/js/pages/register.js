@@ -75,9 +75,9 @@ export const Registration = () => {
 				showValidation(input, false);
 			}
 		});
-
+		console.log(body);
 		if (formValid) {
-			fetch("https://3000-lime-mollusk-0goukxq3.ws-us03.gitpod.io/register", {
+			fetch("https://3001-maroon-sturgeon-rzum7dui.ws-us03.gitpod.io/api/register", {
 				method: "POST",
 				body: JSON.stringify(body),
 				headers: {
@@ -87,6 +87,7 @@ export const Registration = () => {
 				.then(res => res.json())
 				.then(data => {
 					console.log(data);
+					alert("Registration Successful");
 					setAuth(true);
 				})
 				.catch(err => console.log(err));

@@ -8,6 +8,7 @@ export const Login = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [auth, setAuth] = useState(false);
+	const { store, actions } = useContext(Context);
 
 	const handleSubmit = e => {
 		e.preventDefault();
@@ -17,7 +18,7 @@ export const Login = () => {
 			password: password
 		};
 
-		fetch("https://3001-amber-gayal-y1axfaw6.ws-us03.gitpod.io/api/login", {
+		fetch("https://3001-maroon-sturgeon-rzum7dui.ws-us03.gitpod.io/api/login", {
 			method: "POST",
 			body: JSON.stringify(body),
 			headers: {
@@ -27,6 +28,8 @@ export const Login = () => {
 			.then(res => res.json())
 			.then(data => {
 				console.log(data);
+				actions.savingToken(data.token, data.user_id);
+				alert("Login Successful");
 				sessionStorage.setItem("my_token", data.token);
 				setAuth(true);
 			})

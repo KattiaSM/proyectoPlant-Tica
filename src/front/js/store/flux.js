@@ -2,6 +2,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			userLogged: false,
+			token: "",
+			id: "",
 			message: null,
 			charge_todos: true,
 			initial_plant_name: "Aquí aparecerá el nombre de tu planta",
@@ -226,7 +228,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 			restoreDataToModify: () => {
 				setStore({ info_create_todos: [["Tu tarea"], [""], ["Horas"]] });
 			},
-
+			savingToken: (int_token, int_id) => {
+				sessionStorage.setItem("token", int_token);
+				setStore({ token: int_token });
+				setStore({ id: int_id });
+			},
 			changeColor: (index, color) => {
 				//get the store
 				const store = getStore();
