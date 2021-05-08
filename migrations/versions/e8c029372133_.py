@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 31ad5f261ea8
+Revision ID: e8c029372133
 Revises: 
-Create Date: 2021-05-06 02:27:32.894802
+Create Date: 2021-05-08 00:47:31.613321
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '31ad5f261ea8'
+revision = 'e8c029372133'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -35,12 +35,16 @@ def upgrade():
     sa.Column('germination', sa.String(length=50), nullable=False),
     sa.Column('height', sa.String(length=50), nullable=True),
     sa.Column('harving', sa.String(length=50), nullable=False),
+    sa.Column('num_water_freq', sa.Integer(), nullable=True),
     sa.Column('water_freq', sa.String(length=50), nullable=True),
     sa.Column('last_water', sa.Date(), nullable=True),
+    sa.Column('num_fertilizer_freq', sa.Integer(), nullable=True),
     sa.Column('fertilizer_freq', sa.String(length=50), nullable=True),
     sa.Column('last_fertilizer', sa.Date(), nullable=True),
+    sa.Column('num_prunning_freq', sa.Integer(), nullable=True),
     sa.Column('prunning_freq', sa.String(length=50), nullable=True),
     sa.Column('last_prunning', sa.Date(), nullable=True),
+    sa.Column('num_pesticide_freq', sa.Integer(), nullable=True),
     sa.Column('pesticide_freq', sa.String(length=50), nullable=True),
     sa.Column('last_pesticide', sa.Date(), nullable=True),
     sa.PrimaryKeyConstraint('id'),

@@ -25,6 +25,9 @@ def handle_hello():
 
 @api.route('/register', methods=['POST'])
 def register_user():
+    name = request.json.get("name", None)
+    first_surname = request.json.get("first_surname", None)
+    second_surname = request.json.get("second_surname", None)
     email = request.json.get("email", None)
     password = request.json.get("password", None)
 
@@ -39,8 +42,12 @@ def register_user():
         return jsonify({"msg": "User already exists"}), 401
     else:
         new_user = User()
+        new_user.name = name
         new_user.email = email
         new_user.password = password
+        new_user.first_surname = first_surname
+        new_user.second_surname = second_surname
+
 
         db.session.add(new_user)
         db.session.commit()
@@ -66,6 +73,7 @@ def create_token():
         access_token = create_access_token(identity=user.id)
         return jsonify({ "token": access_token, "user_id": user.id }), 200
 
+
 @api.route("/protected", methods=["GET"])
 @jwt_required()
 def protected():
@@ -75,3 +83,60 @@ def protected():
     
     print(current_user_id, user)
     return jsonify({"id": user.id, "email": user.email }), 200
+
+# [PUT] - Ruta para modificar un [user]
+@api.route('/users/<int:id>', methods=['PUT'])
+@jwt_required()
+def update(id):
+    user = User.query.get(id)
+
+    if user is None:
+        raise APIException('El usuario con el id especificado, no fue encontrado.',status_code=403)
+
+    data_request = request.get_json()
+
+    user.name = data_request["name"]
+    user.first_surname = data_request["first_surname"]
+    user.second_surname = data_request["second_surname"]
+    user.user_image = data_request["user_image"]
+    user.password = data_request["password"]
+
+    try: 
+        db.session.commit()
+        
+        return jsonify(User.serialize(user)), 200
+    
+    except AssertionError as exception_message: 
+        return jsonify(msg='Error: {}. '.format(exception_message)), 400
+
+
+# [GET] - Ruta para obtener todos los [Plants]
+@api.route('/plants', methods=['GET'])
+# @jwt_required()
+def index():
+    results = Plant.query.all()
+
+    return jsonify(list(map(lambda x: x.serialize(), results))), 200
+
+
+
+# [PUT] - Ruta para modificar un [todolist]
+@api.route('/todolist/<int:id>', methods=['PUT'])
+@jwt_required()
+def updatetodo(id):
+    Todolist = Todolist.query.get(id)
+
+    if user is None:
+        raise APIException('El usuario con el id especificado, no fue encontrado.',status_code=403)
+
+    request_body = request.get_json()
+    todolist = request_body["todo_list"]
+
+    try: 
+        db.session.commit()
+        
+        return jsonify(Todolist.serialize(id)), 200
+    
+    except AssertionError as exception_message: 
+        return jsonify(msg='Error: {}. '.format(exception_message)), 400
+
