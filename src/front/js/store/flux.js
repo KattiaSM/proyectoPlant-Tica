@@ -223,7 +223,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 				});
 				setStore({ info_create_todos: [tasks, freq, type] });
 			},
-			restoreDataToModify: () => {
+			restoreDataToModify: url => {
+				let url_temporal = url;
+				setStore({
+					initial_img_url: url_temporal
+				});
 				setStore({ info_create_todos: [["Tu tarea"], [""], ["Horas"]] });
 			},
 

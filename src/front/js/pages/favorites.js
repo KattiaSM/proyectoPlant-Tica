@@ -41,7 +41,7 @@ export function Favorites() {
 		actions.changeInitialName(name);
 		actions.changeName(name);
 		actions.changeInitialURL(url);
-		actions.restoreDataToModify();
+		actions.restoreDataToModify(url);
 	}
 
 	//La siguiente función se encarga de eliminar un favorito, recibe un nombre y lo compara, si lo encuentra, elimina el favorito
