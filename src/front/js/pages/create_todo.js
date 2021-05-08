@@ -232,96 +232,100 @@ export function CreateTodo() {
 	});
 
 	return (
-		<div className="m-5 mt-1">
-			<div className="row d-flex justify-content-end">
-				<Link to="/garden">
-					<Button color="danger" className="m-1 rounded-pill">
-						Salir sin salvar
-					</Button>
-				</Link>
-			</div>
-			<div className="row mt-2 d-flex justify-content-center">
-				<div className="col-6 col-lg-6 col-md-12 col-sm-12 bg-light border shadow-1-strong rounded rounded-5">
-					<div className="row d-flex justify-content-center">
-						<h1>Inserta aquí los datos de tu planta</h1>
-					</div>
-					<div className="row d-flex justify-content-center m-1">
-						<FormGroup row>
-							<Label for="exampleEmail" className="me-2" lg={2}>
-								Nombre
-							</Label>
-							<Col lg={10}>
-								<Input
-									type="text"
-									name="text"
-									id="exampleEmail"
-									placeholder="Nombre de la planta"
-									onChange={handleTitlePlant}
-								/>
-							</Col>
-							<Label for="exampleEmail" className="me-2" lg={2}>
-								URL
-							</Label>
-							<Col lg={10}>
-								<Input
-									type="text"
-									name="text"
-									id="exampleEmail"
-									placeholder="Ingresar URL de imagen de la planta"
-									onChange={handlePlantImg}
-								/>
-							</Col>
-							<Col lg={12} className="d-flex justify-content-end">
-								<div>
-									<Input
-										type="file"
-										name="file"
-										id="exampleFile"
-										accept=".jpg,.png,.jpeg,.gif"
-										onChange={() => {
-											uploadImg(event.target.files[0]);
-										}}
-									/>
-								</div>
-							</Col>
-						</FormGroup>
-					</div>
-					<div className="row d-flex justify-content-center mb-2">
-						<h1>Tareas para tu planta</h1>
-					</div>
-					<div className="row d-flex justify-content-center">{responsive_todos}</div>
-					<div className="row d-flex justify-content-center">
-						<Button color="secondary" className="m-1 rounded-pill" onClick={() => createNewTask()}>
-							Crear nueva tarea
-						</Button>{" "}
-						<Link to="/garden" onClick={sendData}>
-							<Button color="info" className="m-1 rounded-pill">
-								Finalizar
-							</Button>
-						</Link>
-					</div>
+		<div className="m-5">
+			<div className="mt-5">
+				<div className="row d-flex justify-content-end">
+					<Link to="/garden">
+						<Button color="danger" className="m-1 rounded-pill">
+							Salir sin salvar
+						</Button>
+					</Link>
 				</div>
-				<div className="col-xl-6 col-lg-12 col-md-12 col-sm-12">
-					<div className="row d-flex justify-content-center mb-2">
-						<h1>Previsualización</h1>
+				<div className="row mt-2 d-flex justify-content-center">
+					<div className="col-6 col-lg-6 col-md-12 col-sm-12 bg-light border shadow-1-strong rounded rounded-5">
+						<div className="row d-flex justify-content-center">
+							<h1>Inserta aquí los datos de tu planta</h1>
+						</div>
+						<div className="row d-flex justify-content-center m-1">
+							<FormGroup row>
+								<Label for="exampleEmail" className="me-2" lg={2}>
+									Nombre
+								</Label>
+								<Col lg={10}>
+									<Input
+										type="text"
+										name="text"
+										id="exampleEmail"
+										placeholder="Nombre de la planta"
+										onChange={handleTitlePlant}
+									/>
+								</Col>
+								<Label for="exampleEmail" className="me-2" lg={2}>
+									URL
+								</Label>
+								<Col lg={10}>
+									<Input
+										type="text"
+										name="text"
+										id="exampleEmail"
+										placeholder="Ingresar URL de imagen de la planta"
+										onChange={handlePlantImg}
+									/>
+								</Col>
+								<Col lg={12} className="d-flex justify-content-end">
+									<div>
+										<Input
+											type="file"
+											name="file"
+											id="exampleFile"
+											accept=".jpg,.png,.jpeg,.gif"
+											onChange={() => {
+												uploadImg(event.target.files[0]);
+											}}
+										/>
+									</div>
+								</Col>
+							</FormGroup>
+						</div>
+						<div className="row d-flex justify-content-center mb-2">
+							<h1>Tareas para tu planta</h1>
+						</div>
+						<div className="row d-flex justify-content-center">{responsive_todos}</div>
+						<div className="row d-flex justify-content-center">
+							<Button color="secondary" className="m-1 rounded-pill" onClick={() => createNewTask()}>
+								Crear nueva tarea
+							</Button>{" "}
+							<Link to="/garden" onClick={sendData}>
+								<Button color="info" className="m-1 rounded-pill">
+									Finalizar
+								</Button>
+							</Link>
+						</div>
 					</div>
-					<div className="row d-flex justify-content-center">
-						<div style={{ width: "100%" }}>
-							<div className="m-0 col-xl-12 col-lg-12 col-md-12 col-sm-12">
-								<div className="shadow-lg">
-									<div
-										className="bg-image p-4 text-center shadow-1-strong rounded rounded-5 mb-5 text-white "
-										id="height"
-										style={{
-											backgroundImage: plant_url
-										}}>
-										<div className="row">
-											<h1 id="text-border" className="col-12">
-												{plantName}
-											</h1>
-										</div>
-										<div className="row d-flex justify-content-start">
-											<div className=" col-xl-6 col-lg-8 col-md-10 col-sm-12">{prev_todos}</div>
+					<div className="col-xl-6 col-lg-12 col-md-12 col-sm-12">
+						<div className="row d-flex justify-content-center mb-2">
+							<h1>Previsualización</h1>
+						</div>
+						<div className="row d-flex justify-content-center">
+							<div style={{ width: "100%" }}>
+								<div className="m-0 col-xl-12 col-lg-12 col-md-12 col-sm-12">
+									<div className="shadow-lg">
+										<div
+											className="bg-image p-4 text-center shadow-1-strong rounded rounded-5 mb-5 text-white "
+											id="height"
+											style={{
+												backgroundImage: plant_url
+											}}>
+											<div className="row">
+												<h1 id="text-border" className="col-12">
+													{plantName}
+												</h1>
+											</div>
+											<div className="row d-flex justify-content-start">
+												<div className=" col-xl-6 col-lg-8 col-md-10 col-sm-12">
+													{prev_todos}
+												</div>
+											</div>
 										</div>
 									</div>
 								</div>
