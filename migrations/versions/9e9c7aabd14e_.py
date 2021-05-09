@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 1d8ece221846
+Revision ID: 9e9c7aabd14e
 Revises: 
-Create Date: 2021-05-09 22:30:18.599833
+Create Date: 2021-05-09 22:50:19.395622
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '1d8ece221846'
+revision = '9e9c7aabd14e'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -72,8 +72,7 @@ def upgrade():
     op.create_table('favorites',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=True),
-    sa.Column('plant_id', sa.Integer(), nullable=True),
-    sa.ForeignKeyConstraint(['plant_id'], ['plant.id'], ),
+    sa.Column('favs', sa.String(length=20000), nullable=True),
     sa.ForeignKeyConstraint(['user_id'], ['user.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
@@ -101,7 +100,7 @@ def upgrade():
     op.create_table('todolist',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=True),
-    sa.Column('tasks', sa.String(length=2000), nullable=True),
+    sa.Column('tasks', sa.String(length=20000), nullable=True),
     sa.ForeignKeyConstraint(['user_id'], ['user.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
