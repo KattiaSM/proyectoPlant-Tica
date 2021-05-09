@@ -138,15 +138,15 @@ def index():
 
 
 # [POST] - Ruta para modificar un [todolist]
-@api.route('/todolist/<int:id>', methods=['POST', 'GET'])
+@api.route('/todolist/<int:id>', methods=['POST'])
 # @jwt_required()
 def updatetodo(id):
-    Todolist = Todolist.query.get(id)
+    todos= Todolist.query.filter_by(user_id=id).first()
     data_request = request.get_json()
-    Todolist.tasks=data_request["tasks"]
+    todos.tasks=data_request["tasks"]
     try: 
         db.session.commit()
-        return jsonify(Todolist.serialize(tasks)), 200
+        return jsonify({"user_id":id, "tasks": todos.tasks}), 200
     
     except AssertionError as exception_message: 
         return jsonify(msg='Error: {}. '.format(exception_message)), 400
