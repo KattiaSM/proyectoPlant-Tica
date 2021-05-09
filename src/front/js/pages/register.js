@@ -77,7 +77,7 @@ export const Registration = () => {
 		});
 		console.log(body);
 		if (formValid) {
-			fetch("https://3001-maroon-sturgeon-rzum7dui.ws-us03.gitpod.io/api/register", {
+			fetch("https://3001-harlequin-harrier-4pdasr21.ws-us03.gitpod.io/api/register", {
 				method: "POST",
 				body: JSON.stringify(body),
 				headers: {

@@ -13,7 +13,7 @@ db = SQLAlchemy()
 class Todolist(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, ForeignKey('user.id'))
-    tasks = db.Column(db.String(2000))
+    tasks = db.Column(db.String(20000))
 
 
     def __repr__(self):
@@ -89,7 +89,6 @@ class Plant(db.Model):
     num_pesticide_freq = db.Column(db.Integer)
     pesticide_freq = db.Column(db.String(50), unique=False)
     last_pesticide = db.Column(db.Date)
-    favorites = db.relationship('Favorites',lazy=True)
 
 
 
@@ -181,7 +180,8 @@ class Garden(db.Model):
 class Favorites(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, ForeignKey('user.id'))
-    plant_id = db.Column(db.Integer, ForeignKey('plant.id'))
+    favs = db.Column(db.String(20000))
+
 
 
     def __repr__(self):
@@ -191,5 +191,5 @@ class Favorites(db.Model):
         return {
             "id": self.id,
             "user_id": self.user_id,
-            "plant_id": self.plant_id
+            "favs": self.favs
         }
