@@ -49,11 +49,14 @@ def register_user():
         new_user.second_surname = second_surname
 
 
+
+
+
         db.session.add(new_user)
         db.session.commit()
         return jsonify({"msg": "User created successfully"}), 200
     
-@api.route('/login', methods=['POST'])
+@api.route('/login', methods=['POST', 'GET'])
 def create_token():
     email = request.json.get("email", None)
     password = request.json.get("password", None)
@@ -64,13 +67,27 @@ def create_token():
         return jsonify({"msg": "No password was provided"}), 400
 
     user = User.query.filter_by(email=email, password=password).first()
+
     if user is None:
         # the user was not found on the database
         return jsonify({"msg": "Invalid username or password"}), 401
     else:
+        todos= Todolist.query.filter_by(user_id=user.id).first()
+
+        if todos is None:
+            new_todolist = Todolist()
+            new_todolist.tasks = [""]
+            new_todolist.user_id = user.id
+            db.session.add(new_todolist)
+            db.session.commit()
+            print(new_todolist)
+        else:
+            pass
+
         print(user)
         # create a new token with the user id inside
         access_token = create_access_token(identity=user.id)
+
         return jsonify({ "token": access_token, "user_id": user.id }), 200
 
 
@@ -120,22 +137,16 @@ def index():
 
 
 
-# [PUT] - Ruta para modificar un [todolist]
-@api.route('/todolist/<int:id>', methods=['PUT'])
-@jwt_required()
+# [POST] - Ruta para modificar un [todolist]
+@api.route('/todolist/<int:id>', methods=['POST', 'GET'])
+# @jwt_required()
 def updatetodo(id):
     Todolist = Todolist.query.get(id)
-
-    if user is None:
-        raise APIException('El usuario con el id especificado, no fue encontrado.',status_code=403)
-
-    request_body = request.get_json()
-    todolist = request_body["todo_list"]
-
+    data_request = request.get_json()
+    Todolist.tasks=data_request["tasks"]
     try: 
         db.session.commit()
-        
-        return jsonify(Todolist.serialize(id)), 200
+        return jsonify(Todolist.serialize(tasks)), 200
     
     except AssertionError as exception_message: 
         return jsonify(msg='Error: {}. '.format(exception_message)), 400

@@ -12,7 +12,7 @@ db = SQLAlchemy()
 
 class Todolist(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, ForeignKey('user.id'))
+    user_id = db.Column(db.Integer)
     tasks = db.Column(db.String(2000))
 
 
@@ -38,7 +38,7 @@ class User(db.Model):
     is_active = db.Column(db.Boolean(), unique=False, nullable=True)
     profiles = db.relationship('Profile',lazy=True)
     gardens = db.relationship('Garden',lazy=True)
-    todolists = db.relationship('Todolist',lazy=True)
+    # todolists = db.relationship('Todolist',lazy=True)
     favorites = db.relationship('Favorites',lazy=True)
 
 
