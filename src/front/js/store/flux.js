@@ -2,6 +2,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			userLogged: false,
+			search_option: "",
+			search_result_api: "",
+			search_result_3rd_api: "",
 			token: "",
 			id: "",
 			sci_names_temporal: [
@@ -182,6 +185,55 @@ const getState = ({ getStore, getActions, setStore }) => {
 				} else {
 					setStore({ charge_todos: false });
 				}
+			},
+			changeSearchValue: search_item => {
+				let search_temporal = search_item;
+				setStore({ search_option: search_temporal });
+			},
+			doSearch: () => {
+				const store = getStore();
+				//Filtrado de búsqueda en la bases de datos interna
+				let internal_data_result = "";
+				function filterItems(query) {
+					return store.sci_names_temporal.filter(function(el) {
+						return el.toLowerCase().indexOf(query.toLowerCase()) > -1;
+					});
+				}
+				internal_data_result = filterItems(store.search_option);
+				console.log(internal_data_result);
+				//Búsqueda en API de terceros
+				/* 
+                El API considera los espacios como %20, las siguiente líneas
+                adaptan el string para que sea legible en el API de terceros
+                ejemplo: "hola adios" pasaría a ser "hola%20adios" y así se le envía al API
+                */
+				let adapted_string = "";
+
+				for (let i = 0; i < store.search_option; 1) {
+					if (store.search_option[i] === " ") {
+						adapted_string = adapted_string + "%20";
+					} else {
+						adapted_string = adapted_string + store.search_option[i];
+					}
+				}
+				console.log(adapted_string);
+
+				//Una vez arreglado el string hay que adaptar el url para la búsqueda
+				//La búsqueda la hace el API de terceros y retorna la info de los elementos coincidentes
+				const url = "https://api.inaturalist.org/v1/search?q=" + adapted_string + "&sources=taxa";
+
+				// await fetch(url, {
+				//     method: "POST",
+				//     body: formData
+				// })
+				//     .then(response => response.json())
+				//     .then(data => {
+				//         console.log(data);
+				//     })
+				//     .catch(err => console.error(err));
+
+				setStore({ search_result_api: internal_data_result });
+				//setStore({ search_result_api_3rd_api: data });
 			},
 			deleteFav: index => {
 				const store = getStore();
