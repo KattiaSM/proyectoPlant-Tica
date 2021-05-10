@@ -75,11 +75,11 @@ export function Favorites() {
 				</div>
 				<CardBody>
 					<CardTitle tag="h5">{item.scientific_name}</CardTitle>
-					<CardText>{item.synonymous}</CardText>
-					<CardText>{item.year}</CardText>
-					<CardText>{item.family}</CardText>
+					<CardText>{item.data1}</CardText>
+					<CardText>{item.data2}</CardText>
+					<CardText>{item.data3}</CardText>
 					<CardText>
-						<small className="text-muted">{item.scientific_expanded}</small>
+						<small className="text-muted">{item.data4}</small>
 					</CardText>
 				</CardBody>
 			</Card>
