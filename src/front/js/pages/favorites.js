@@ -94,7 +94,7 @@ export function Favorites() {
 
 	return (
 		<div className="m-5">
-			<div className="row">
+			<div className="row mt-5">
 				<div className="col-lg-4 col-md-6 col-sm-12">
 					<div className="m-1">{col_1}</div>
 				</div>

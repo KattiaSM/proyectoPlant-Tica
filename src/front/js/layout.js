@@ -14,6 +14,7 @@ import { CreateTodo } from "./pages/create_todo";
 import { Plants } from "./pages/plants";
 import { Restore } from "./pages/restore";
 import { TodosList } from "./pages/todos_list";
+import { SearchView } from "./pages/search_view";
 
 import injectContext from "./store/appContext";
 
@@ -56,12 +57,14 @@ const Layout = () => {
 						<Route exact path="/profile">
 							<Profile />
 						</Route>
+						<Route exact path="/search">
+							<SearchView />
+						</Route>
 						<Route exact path="/garden">
 							<Profile />
 							<div className="m-5 mt-0">
 								<div className="row justify-content-center">
 									<TodosList />
-									<Garden />
 								</div>
 							</div>
 						</Route>

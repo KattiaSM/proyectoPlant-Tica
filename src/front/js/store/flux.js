@@ -4,6 +4,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 			userLogged: false,
 			token: "",
 			id: "",
+			sci_names_temporal: [
+				"quercus rotundifolia",
+				"sabila",
+				"cas moreno",
+				"flor del ocaso",
+				"no se que poner aqui"
+			],
 			message: null,
 			charge_todos: true,
 			initial_plant_name: "Aquí aparecerá el nombre de tu planta",
