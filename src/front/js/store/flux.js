@@ -263,7 +263,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ favs: temporal });
 			},
 			addFav: item => {
-				const store = getStore();
 				let temporal = item;
 				temporal.push(item);
 				setStore({ favs: temporal });
