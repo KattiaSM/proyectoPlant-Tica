@@ -203,7 +203,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			logout: () => {
 				localStorage.setItem("x-access-token", null);
-
+				sessionStorage.removeItem("token");
 				setStore({ userLogged: false });
 
 				// Se configura la opción del home
