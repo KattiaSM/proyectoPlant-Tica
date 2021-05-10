@@ -102,50 +102,50 @@ const getState = ({ getStore, getActions, setStore }) => {
 			favs: [
 				{
 					scientific_name: "Quercus Rotundifolia",
-					synonymous: "Roble de Hoja Perenne",
-					year: "1785",
-					family: "Fagaceae",
-					scientific_expanded: "Quercus rotundifolia f. dolichocalyx",
+					data1: "Roble de Hoja Perenne",
+					data2: "1785",
+					data3: "Fagaceae",
+					data4: "Quercus rotundifolia f. dolichocalyx",
 					url: "https://bs.plantnet.org/image/o/1a03948baf0300da25558c2448f086d39b41ca30"
 				},
 				{
 					scientific_name: "Urtica-diotica",
-					synonymous: "Ortiga",
-					year: "1753",
-					family: "Urticaceae",
-					scientific_expanded: "Urtica haussknechtii",
+					data1: "Ortiga",
+					data2: "1753",
+					data3: "Urticaceae",
+					data4: "Urtica haussknechtii",
 					url: "https://bs.plantnet.org/image/o/85256a1c2c098e254fefe05040626a4df49ce248"
 				},
 				{
 					scientific_name: "Dactylis glomerata",
-					synonymous: "Pastos de la huerta",
-					year: "1753",
-					family: "Poaceae",
-					scientific_expanded: "Dactylis glomerata subsp. himalayensis",
+					data1: "Pastos de la huerta",
+					data2: "1753",
+					data3: "Poaceae",
+					data4: "Dactylis glomerata subsp. himalayensis",
 					url: "https://bs.plantnet.org/image/o/428f40dadfa0281dc890ead17fcd07882f9efb09"
 				},
 				{
 					scientific_name: "Festuca rubra",
-					synonymous: "Festuca roja",
-					year: "1753",
-					family: "Fagaceae",
-					scientific_expanded: "Quercus rotundifolia f. dolichocalyx",
+					data1: "Festuca roja",
+					data2: "1753",
+					data3: "Fagaceae",
+					data4: "Quercus rotundifolia f. dolichocalyx",
 					url: "https://bs.plantnet.org/image/o/0b932c8a275efc79f473a71bec20d6f15e9b6b90"
 				},
 				{
 					scientific_name: "Plantago lanceolata",
-					synonymous: "Plátano de hoja estrecha",
-					year: "1753",
-					family: "Poaceae",
-					scientific_expanded: "Festuca austrodolomitica",
+					data1: "Plátano de hoja estrecha",
+					data2: "1753",
+					data3: "Poaceae",
+					data4: "Festuca austrodolomitica",
 					url: "https://bs.plantnet.org/image/o/78a8374f009e6ed2dc71ca17d18e4271ea0a2a7b"
 				},
 				{
 					scientific_name: "Quercus robur",
-					synonymous: "Roble inglés",
-					year: "1753",
-					family: "Fagaceae",
-					scientific_expanded: "Quercus robur subsp. broteroan",
+					data1: "Roble inglés",
+					data1: "1753",
+					data3: "Fagaceae",
+					data4: "Quercus robur subsp. broteroan",
 					url: "https://bs.plantnet.org/image/o/2292b670683abdaac354389514105df0018d9ef8"
 				}
 			],
@@ -190,7 +190,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				let search_temporal = search_item;
 				setStore({ search_option: search_temporal });
 			},
-			doSearch: () => {
+			doSearch: async () => {
 				const store = getStore();
 				//Filtrado de búsqueda en la bases de datos interna
 				let internal_data_result = "";
@@ -207,31 +207,52 @@ const getState = ({ getStore, getActions, setStore }) => {
                 adaptan el string para que sea legible en el API de terceros
                 ejemplo: "hola adios" pasaría a ser "hola%20adios" y así se le envía al API
                 */
+
 				let adapted_string = "";
 
-				for (let i = 0; i < store.search_option; 1) {
+				for (let i = 0; i < store.search_option.length; i++) {
 					if (store.search_option[i] === " ") {
 						adapted_string = adapted_string + "%20";
 					} else {
 						adapted_string = adapted_string + store.search_option[i];
 					}
 				}
-				console.log(adapted_string);
+
+				console.log("pasa por adaptada", adapted_string);
 
 				//Una vez arreglado el string hay que adaptar el url para la búsqueda
 				//La búsqueda la hace el API de terceros y retorna la info de los elementos coincidentes
 				const url = "https://api.inaturalist.org/v1/search?q=" + adapted_string + "&sources=taxa";
 
-				// await fetch(url, {
-				//     method: "POST",
-				//     body: formData
-				// })
-				//     .then(response => response.json())
-				//     .then(data => {
-				//         console.log(data);
-				//     })
-				//     .catch(err => console.error(err));
+				const options = {
+					method: "GET",
+					headers: {
+						"Content-Type": "application/json"
+					}
+				};
 
+				// await fetch(url, {
+				// 	method: "GET",
+				// 	headers: {
+				// 		"Content-Type": "application/json"
+				// 	}
+				// })
+				// 	.then(response => {
+				// 		console.log(response);
+				// 	})
+				// 	.catch(error => {
+				// 		alert("no hay suficientes parámetros");
+				// 	});
+
+				// try {
+				//     const resp = await fetch(url, options);
+
+				//     const data = await resp.json();
+
+				// } catch (error) {
+				//     console.error("Ha ocurrido un error");
+				// }
+				console.log(url);
 				setStore({ search_result_api: internal_data_result });
 				//setStore({ search_result_api_3rd_api: data });
 			},
@@ -239,6 +260,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const store = getStore();
 				let temporal = store.favs;
 				temporal.splice(index, 1);
+				setStore({ favs: temporal });
+			},
+			addFav: item => {
+				const store = getStore();
+				let temporal = item;
+				temporal.push(item);
 				setStore({ favs: temporal });
 			},
 			deleteTodo: index => {
