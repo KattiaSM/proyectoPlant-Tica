@@ -4,27 +4,26 @@ import LinkNav from "./LinkNav";
 import Search from "./Search";
 import { Context } from "../../store/appContext";
 
-const Logout = () => {
-	return <LinkNav name="Cerrar Sesión" to="/" onClick={() => actions.logout()} />;
-};
-
-const LoginAndRegister = () => {
-	return (
-		<div className="d-flex justify-content-center align-items-center">
-			<LinkNav name="Ingresar" to="/login"></LinkNav>
-			<LinkNav name="Registrarse" to="/register"></LinkNav>
-		</div>
-	);
-};
-
-const LinksAccount = () => {
-	const { store } = useContext(Context);
-	return store.token ? <Logout /> : <LoginAndRegister />;
-};
-
 //Barra de navegacion de la
 const Navbar = () => {
-	const { store } = useContext(Context);
+	const { store, actions } = useContext(Context);
+
+	const Logout = () => {
+		return <LinkNav name="Cerrar Sesión" to="/" onClick={() => actions.logout()} />;
+	};
+
+	const LoginAndRegister = () => {
+		return (
+			<div className="d-flex justify-content-center align-items-center">
+				<LinkNav name="Ingresar" to="/login"></LinkNav>
+				<LinkNav name="Registrarse" to="/register"></LinkNav>
+			</div>
+		);
+	};
+
+	const LinksAccount = () => {
+		return store.token ? <Logout /> : <LoginAndRegister />;
+	};
 
 	const getFavorites = () => {
 		return "Favoritos(" + store.favs.length + ")";
