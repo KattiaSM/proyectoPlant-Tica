@@ -201,6 +201,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 				internal_data_result = filterItems(store.search_option);
 
+				setStore({ search_result_api: internal_data_result });
 				//Búsqueda en API de terceros
 				/* 
                 El API considera los espacios como %20, las siguiente líneas
@@ -208,40 +209,39 @@ const getState = ({ getStore, getActions, setStore }) => {
                 ejemplo: "hola adios" pasaría a ser "hola%20adios" y así se le envía al API
                 */
 
-				let adapted_string = "";
+				// let adapted_string = "";
 
-				for (let i = 0; i < store.search_option.length; i++) {
-					if (store.search_option[i] === " ") {
-						adapted_string = adapted_string + "%20";
-					} else {
-						adapted_string = adapted_string + store.search_option[i];
-					}
-				}
+				// for (let i = 0; i < store.search_option.length; i++) {
+				// 	if (store.search_option[i] === " ") {
+				// 		adapted_string = adapted_string + "%20";
+				// 	} else {
+				// 		adapted_string = adapted_string + store.search_option[i];
+				// 	}
+				// }
 
 				//Una vez arreglado el string hay que adaptar el url para la búsqueda
 				//La búsqueda la hace el API de terceros y retorna la info de los elementos coincidentes
-				const url = "https://api.inaturalist.org/v1/search?q=" + adapted_string + "&sources=taxa";
+				// const url = "https://api.inaturalist.org/v1/search?q=" + adapted_string + "&sources=taxa";
 
-				let api_3rd_res = "";
+				// let api_3rd_res = "";
 
-				fetch(url, {
-					method: "GET",
-					headers: {
-						"Content-Type": "application/json"
-					}
-				})
-					.then(response => {
-						api_3rd_res = response.json();
-						console.log("indicador", api_3rd_res);
-					})
-					.then(data => {})
-					.catch(error => {
-						alert("no hay suficientes parámetros");
-					});
+				// fetch(url, {
+				// 	method: "GET",
+				// 	headers: {
+				// 		"Content-Type": "application/json"
+				// 	}
+				// })
+				// 	.then(response => {
+				// 		api_3rd_res = response.json();
+				// 		console.log("indicador", api_3rd_res);
+				// 	})
+				// 	.then(data => {})
+				// 	.catch(error => {
+				// 		alert("no hay suficientes parámetros");
+				// 	});
 
-				setStore({ search_result_api: internal_data_result });
-				setStore({ search_result_3rd_api: api_3rd_res });
-				return api_3rd_res;
+				// setStore({ search_result_3rd_api: api_3rd_res });
+				// return api_3rd_res;
 			},
 			deleteFav: index => {
 				const store = getStore();

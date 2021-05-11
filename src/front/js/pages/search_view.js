@@ -15,7 +15,7 @@ export const SearchView = () => {
 			return <Spinner type="grow" color="success" />;
 		} else {
 			let result = apiResult.map((item, index) => (
-				<div className="card col-xl-4 col-lg-6 col-md-6 col-sm-12" key={index} style={{ width: "100%" }}>
+				<div className="card col-xl-3 col-lg-4 col-md-6 col-sm-12" key={index} style={{ width: "100%" }}>
 					<img
 						className="img-fluid"
 						src="https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg"
@@ -40,11 +40,16 @@ export const SearchView = () => {
 	}
 
 	function createApiCards() {
-		if (apiResult3rd === undefined || apiResult3rd === "") {
-			return <h1>No se muestran resultados</h1>;
+		if (apiResult === undefined || apiResult === "") {
+			return (
+				<h1>
+					<Spinner type="grow" color="success" /> No se muestran resultados{" "}
+					<Spinner type="grow" color="success" />
+				</h1>
+			);
 		} else {
 			let result = apiResult.map((item, index) => (
-				<div className="card col-xl-4 col-lg-6 col-md-6 col-sm-12" key={index} style={{ width: "100%" }}>
+				<div className="card col-xl-3 col-lg-4 col-md-6 col-sm-12 m-1" key={index}>
 					<img
 						className="img-fluid"
 						src="https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg"
@@ -93,13 +98,15 @@ export const SearchView = () => {
 					<form className="form-inline my-2 my-lg-0">
 						<input
 							className="form-control mr-sm-2"
-							type="search"
+							type="text"
 							placeholder="Buscar"
-							aria-label="Search"
+							aria-label="text"
 							onChange={handleSearchChange}
+							onKeyPress={handleSearchClic}
 						/>
 					</form>
 					<button
+						hidden="true"
 						className="btn btn-outline-light my-2 my-sm-0 bg-info border-info rounded rounded-pill"
 						onClick={handleSearchClic}>
 						<i className="fas fa-search" />
@@ -107,7 +114,7 @@ export const SearchView = () => {
 				</div>
 			</div>
 			<div>
-				<div className="row"> {api_cards} </div>
+				<div className="row d-flex justify-content-center"> {api_cards} </div>
 			</div>
 			<div>
 				<div hidden="true"> {api_cards_3rd} </div>
