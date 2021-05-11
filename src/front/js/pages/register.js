@@ -77,7 +77,7 @@ export const Registration = () => {
 		});
 		console.log(body);
 		if (formValid) {
-			fetch("https://3001-harlequin-harrier-4pdasr21.ws-us03.gitpod.io/api/register", {
+			fetch("https://3001-turquoise-salamander-yftf4lsq.ws-us04.gitpod.io/api/register", {
 				method: "POST",
 				body: JSON.stringify(body),
 				headers: {
@@ -97,111 +97,113 @@ export const Registration = () => {
 	return (
 		// <div className="mx-auto pt-5">
 		<div>
-			<div className="container my-5">
-				<div className="row">
-					<div className="col-sm-12 col-md-6 offset-md-3">
-						<h1 className="m-0">Registrarse</h1>
-						<hr className="mx-0 my-1" />
-						<small>Ingresa los datos para registrate</small>
-						<form id="formRegister" onSubmit={handleSubmit} className="mt-3 needs-validation">
-							<div className="form-group">
-								<label htmlFor="inputName">Nombre</label>
-								<input
-									onChange={e => setName(e.target.value)}
-									onBlur={validateTextInput}
-									type="text"
-									className="form-control"
-									id="inputName"
-								/>
-								<div className="invalid-feedback">Ingresa un nombre válido</div>
-							</div>
-
-							<div className="form-group">
-								<label htmlFor="inputFirstSurname">Primer Apellido</label>
-								<input
-									onChange={e => setFirst_surname(e.target.value)}
-									type="text"
-									className="form-control"
-									id="inputFirstSurname"
-									onBlur={validateTextInput}
-								/>
-								<div className="invalid-feedback">Ingresa un apellido válido</div>
-							</div>
-
-							<div className="form-group">
-								<label htmlFor="inputSecondSurname">Segundo Apellido</label>
-								<input
-									onChange={e => setSecond_surname(e.target.value)}
-									type="text"
-									className="form-control"
-									id="inputSecondSurname"
-									onBlur={validateTextInput}
-								/>
-								<div className="invalid-feedback">Ingresa un apellido válido</div>
-							</div>
-
-							<div className="form-group">
-								<label htmlFor="inputEmail">Dirección de correo electrónico</label>
-								<input
-									type="text"
-									onChange={e => setEmail(e.target.value)}
-									className="form-control"
-									id="inputEmail"
-									onBlur={validateEmailInput}
-								/>
-								<div className="invalid-feedback">Correo electrónico invalido</div>
-							</div>
-							<div className="row">
-								<div className="col">
-									<div className="form-group">
-										<label htmlFor="inputPassword1">Contraseña</label>
-										<input
-											type="password"
-											onChange={e => setPassword(e.target.value)}
-											onBlur={validatePassword}
-											className="form-control"
-											id="inputPassword1"
-										/>
-										<div className="invalid-feedback">Ingresa una contraseña valida</div>
-									</div>
-								</div>
-								<div className="col">
-									<div className="form-group">
-										<label htmlFor="inputPassword2">Confirmar Contraseña</label>
-										<input
-											type="password"
-											onChange={(e => setFirst_surname(e.target.value), samePassword)}
-											className="form-control"
-											id="inputPassword2"
-										/>
-										<div className="invalid-feedback">La contraseña deben ser iguales</div>
-									</div>
+			<div className="row mt-5">
+				<div className="container my-5">
+					<div className="row">
+						<div className="col-sm-12 col-md-6 offset-md-3">
+							<h1 className="m-0">Registrarse</h1>
+							<hr className="mx-0 my-1" />
+							<small>Ingresa los datos para registrate</small>
+							<form id="formRegister" onSubmit={handleSubmit} className="mt-3 needs-validation">
+								<div className="form-group">
+									<label htmlFor="inputName">Nombre</label>
+									<input
+										onChange={e => setName(e.target.value)}
+										onBlur={validateTextInput}
+										type="text"
+										className="form-control"
+										id="inputName"
+									/>
+									<div className="invalid-feedback">Ingresa un nombre válido</div>
 								</div>
 
-								<div className="container">
-									<div className="row">
-										<small id="passwordHelpBlock" className="form-text text-muted">
-											<ul>
-												<li>Minimo 8 caracteres</li>
-												<li>Maximo 15</li>
-												<li>Al menos una letra mayúscula</li>
-												<li>Al menos una letra minucula</li>
-												<li>Al menos un dígito</li>
-												<li>No espacios en blanco</li>
-												<li>Al menos 1 caracter especial</li>
-											</ul>
-										</small>
+								<div className="form-group">
+									<label htmlFor="inputFirstSurname">Primer Apellido</label>
+									<input
+										onChange={e => setFirst_surname(e.target.value)}
+										type="text"
+										className="form-control"
+										id="inputFirstSurname"
+										onBlur={validateTextInput}
+									/>
+									<div className="invalid-feedback">Ingresa un apellido válido</div>
+								</div>
+
+								<div className="form-group">
+									<label htmlFor="inputSecondSurname">Segundo Apellido</label>
+									<input
+										onChange={e => setSecond_surname(e.target.value)}
+										type="text"
+										className="form-control"
+										id="inputSecondSurname"
+										onBlur={validateTextInput}
+									/>
+									<div className="invalid-feedback">Ingresa un apellido válido</div>
+								</div>
+
+								<div className="form-group">
+									<label htmlFor="inputEmail">Dirección de correo electrónico</label>
+									<input
+										type="text"
+										onChange={e => setEmail(e.target.value)}
+										className="form-control"
+										id="inputEmail"
+										onBlur={validateEmailInput}
+									/>
+									<div className="invalid-feedback">Correo electrónico invalido</div>
+								</div>
+								<div className="row">
+									<div className="col">
+										<div className="form-group">
+											<label htmlFor="inputPassword1">Contraseña</label>
+											<input
+												type="password"
+												onChange={e => setPassword(e.target.value)}
+												onBlur={validatePassword}
+												className="form-control"
+												id="inputPassword1"
+											/>
+											<div className="invalid-feedback">Ingresa una contraseña valida</div>
+										</div>
+									</div>
+									<div className="col">
+										<div className="form-group">
+											<label htmlFor="inputPassword2">Confirmar Contraseña</label>
+											<input
+												type="password"
+												onChange={(e => setFirst_surname(e.target.value), samePassword)}
+												className="form-control"
+												id="inputPassword2"
+											/>
+											<div className="invalid-feedback">La contraseña deben ser iguales</div>
+										</div>
+									</div>
+
+									<div className="container">
+										<div className="row">
+											<small id="passwordHelpBlock" className="form-text text-muted">
+												<ul>
+													<li>Minimo 8 caracteres</li>
+													<li>Maximo 15</li>
+													<li>Al menos una letra mayúscula</li>
+													<li>Al menos una letra minucula</li>
+													<li>Al menos un dígito</li>
+													<li>No espacios en blanco</li>
+													<li>Al menos 1 caracter especial</li>
+												</ul>
+											</small>
+										</div>
 									</div>
 								</div>
-							</div>
-							<button type="submit" className="btn btn-block btn-info">
-								Registrarse
-							</button>
-						</form>
+								<button type="submit" className="btn btn-block btn-info">
+									Registrarse
+								</button>
+							</form>
+						</div>
 					</div>
 				</div>
+				{auth ? <Redirect to="/login" /> : null}
 			</div>
-			{auth ? <Redirect to="/login" /> : null}
 		</div>
 	);
 };

@@ -335,6 +335,23 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				//reset the global store
 				setStore({ demo: demo });
+			},
+			loadProfile: async () => {
+				// Se obtiene los datos del profile
+				let localStorageProfile = localStorage.getItem("profileAPI");
+
+				if (localStoragePlanets === null || localStoragePlanets === undefined) {
+					// Si localStorage NO existe, entonces se cargan los datos de la API.
+					const url = "https://3001-turquoise-salamander-yftf4lsq.ws-us04.gitpod.io/api/users";
+					const response = await fetch(url);
+					const data = await response.json();
+					setStore({ profile: data });
+
+					localStorage.setItem("profileAPI", JSON.stringify(data));
+				} else {
+					// Si localStorage SI existe, entonces se cargan los datos de la variable local, para no volver a realizar Request.
+					setStore({ profile: JSON.parse(localStoragePlanets) });
+				}
 			}
 		}
 	};

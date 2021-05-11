@@ -130,10 +130,8 @@ class Plant(db.Model):
 
 class Profile(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    user_name = db.Column(db.String(50), ForeignKey('user.user_name'))
+    user_id = db.Column(db.Integer, ForeignKey('user.id'))
     user_image = db.Column(db.String(2000))
-    first_name = db.Column(db.String(100), nullable=False)
-    last_name = db.Column(db.String(100), nullable=False)
     personal_description = db.Column(db.String(100), nullable=False)
     occupation = db.Column(db.String(100), nullable=False)
     location = db.Column(db.String(50), nullable=False)
@@ -158,7 +156,7 @@ class Profile(db.Model):
 
 class Garden(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    user_name =  db.Column(db.String(50), ForeignKey('user.user_name'))
+    user_id = db.Column(db.Integer, ForeignKey('user.id'))
     status = db.Column(db.String(100))
     photo1 = db.Column(db.String(100))
 
