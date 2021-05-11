@@ -1,6 +1,7 @@
 import React from "react";
 import propTypes from "prop-types";
 import styles from "../../styles/profile.scss";
+import { ListGroupItem, Button, CardImg, Label, Input, FormGroup, Col, ButtonToggle, Badge } from "reactstrap";
 
 const profile = props => {
 	return (
@@ -28,29 +29,75 @@ const profile = props => {
 									<div className="col-sm-8">
 										<div className="card-block">
 											<h3 className="m-b-20 p-b-5 b-b-default f-w-600">Información </h3>
-											<div className="row">
-												<div className="col-sm-12 mb-2">
-													<p className="f-w-600 mb-1">Descripción personal</p>
-													<h6 className="text-muted f-w-400">{props.description}</h6>
-												</div>
-												<div className="col-sm-12 mb-2">
-													<p className="f-w-600 mb-1">Localización</p>
-													<h6 className="text-muted f-w-400">{props.location}</h6>
-												</div>
-												<div className="col-sm-12 mb-2">
-													<p className="f-w-600 mb-1">Teléfono</p>
-													<h6 className="text-muted f-w-400">{props.phone}</h6>
-												</div>
-												<div className="col-sm-12 mb-2">
-													<p className="f-w-600 mb-1">Hobbies</p>
-													<h6 className="text-muted f-w-400">{props.hobbies}</h6>
-												</div>
-												<div className="col-sm-12 mb-2">
-													<button type="button" className="btn btn-block btn-outline-info">
-														Cerrar Sesión
-													</button>
-												</div>
-											</div>
+											<FormGroup row>
+												<Label for="exampleEmail" className="me-2" lg={2}>
+													Ocupación
+												</Label>
+												<Col lg={10}>
+													<Input
+														type="text"
+														name="text"
+														id="exampleEmail"
+														placeholder="Ocupacion"
+														// onChange={handleTitlePlant}
+													/>
+												</Col>
+												<Label for="exampleEmail" className="me-2" lg={2}>
+													Localización
+												</Label>
+												<Col lg={10}>
+													<Input
+														type="text"
+														name="text"
+														id="exampleEmail"
+														placeholder="Localización"
+														// onChange={handlePlantImg}
+													/>
+												</Col>
+												<Label for="exampleEmail" className="me-2" lg={2}>
+													Teléfono
+												</Label>
+												<Col lg={10}>
+													<Input
+														type="text"
+														name="text"
+														id="exampleEmail"
+														placeholder="Telefono"
+														// onChange={handlePlantImg}
+													/>
+												</Col>
+												<Label for="exampleEmail" className="me-2" lg={2}>
+													Pasatiempos - Hobbies
+												</Label>
+												<Col lg={10}>
+													<Input
+														type="text"
+														name="text"
+														id="exampleEmail"
+														placeholder="Pasatiempos - Hobbies"
+														// onChange={handlePlantImg}
+													/>
+												</Col>
+												<Label for="exampleEmail" className="me-2" lg={2}>
+													Actualizar imagen de perfil
+												</Label>
+												<Col lg={12} className="d-flex justify-content-center">
+													<Input
+														type="file"
+														name="file"
+														id="exampleFile"
+														accept=".jpg,.png,.jpeg,.gif"
+														// onChange={() => {
+														// 	uploadImg(event.target.files[0]);
+														// }}
+													/>
+												</Col>
+											</FormGroup>
+										</div>
+										<div className="col-sm-12 mb-2">
+											<button type="button" className="btn btn-block btn-outline-info">
+												Cerrar Sesión
+											</button>
 										</div>
 									</div>
 								</div>
