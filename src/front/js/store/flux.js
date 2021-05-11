@@ -232,11 +232,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 					.then(response => {
 						api_3rd_res = response.json();
-						console.log("indicador", api_3rd_res.value.results);
+						console.log("indicador", api_3rd_res);
 					})
-					.then(data => {
-						//console.log("indicador", data.page);
-					})
+					.then(data => {})
 					.catch(error => {
 						alert("no hay suficientes parámetros");
 					});
