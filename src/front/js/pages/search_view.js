@@ -110,7 +110,7 @@ export const SearchView = () => {
 				<div className="row"> {api_cards} </div>
 			</div>
 			<div>
-				<div> {api_cards_3rd} </div>
+				<div hidden="true"> {api_cards_3rd} </div>
 			</div>
 		</div>
 	);
