@@ -119,8 +119,13 @@ def update(id):
     user.name = data_request["name"]
     user.first_surname = data_request["first_surname"]
     user.second_surname = data_request["second_surname"]
-    user.user_image = data_request["user_image"]
+    # user.user_image = data_request["user_image"]
     user.password = data_request["password"]
+    profile.user_image = data_request["user_image"]
+    profile.personal_description = data_request["personal_description"]
+    profile.occupation = data_request["occupation"]
+    profile.location = data_request["location"]
+    profile.hobbies = data_request["hobbies"]
 
     try: 
         db.session.commit()
