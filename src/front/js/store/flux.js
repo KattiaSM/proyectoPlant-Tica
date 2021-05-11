@@ -200,7 +200,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 				}
 				internal_data_result = filterItems(store.search_option);
-				console.log(internal_data_result);
+
+				setStore({ search_result_api: internal_data_result });
 				//Búsqueda en API de terceros
 				/* 
                 El API considera los espacios como %20, las siguiente líneas
@@ -218,43 +219,44 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				}
 
-				console.log("pasa por adaptada", adapted_string);
-
 				//Una vez arreglado el string hay que adaptar el url para la búsqueda
 				//La búsqueda la hace el API de terceros y retorna la info de los elementos coincidentes
 				const url = "https://api.inaturalist.org/v1/search?q=" + adapted_string + "&sources=taxa";
 
-				const options = {
-					method: "GET",
-					headers: {
-						"Content-Type": "application/json"
-					}
+				let api_3rd_res = "";
+
+				const loadTodo = () => {
+					fetch(url, {
+						method: "GET",
+						headers: { "Content-Type": "application/json" }
+					})
+						.then(res => res.json())
+						.then(data => {
+							console.log("data--->", data.results);
+							//api_3rd_res = data.results;
+							setStore({ search_result_3rd_api: data.results });
+						})
+						.catch(error => console.error("Error:", error.message));
 				};
 
-				// await fetch(url, {
+				loadTodo();
+
+				// fetch(url, {
 				// 	method: "GET",
 				// 	headers: {
 				// 		"Content-Type": "application/json"
 				// 	}
 				// })
 				// 	.then(response => {
-				// 		console.log(response);
+				// 		api_3rd_res = response.json();
+				// 		console.log("indicador", api_3rd_res);
 				// 	})
+				// 	.then(data => {})
 				// 	.catch(error => {
 				// 		alert("no hay suficientes parámetros");
 				// 	});
-
-				// try {
-				//     const resp = await fetch(url, options);
-
-				//     const data = await resp.json();
-
-				// } catch (error) {
-				//     console.error("Ha ocurrido un error");
-				// }
-				console.log(url);
-				setStore({ search_result_api: internal_data_result });
-				//setStore({ search_result_api_3rd_api: data });
+				console.log("dato actualizado", api_3rd_res);
+				setStore({ search_result_3rd_api: api_3rd_res });
 			},
 			deleteFav: index => {
 				const store = getStore();
