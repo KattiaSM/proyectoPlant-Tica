@@ -200,7 +200,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 				}
 				internal_data_result = filterItems(store.search_option);
-				console.log(internal_data_result);
+
 				//Búsqueda en API de terceros
 				/* 
                 El API considera los espacios como %20, las siguiente líneas
@@ -218,43 +218,32 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				}
 
-				console.log("pasa por adaptada", adapted_string);
-
 				//Una vez arreglado el string hay que adaptar el url para la búsqueda
 				//La búsqueda la hace el API de terceros y retorna la info de los elementos coincidentes
 				const url = "https://api.inaturalist.org/v1/search?q=" + adapted_string + "&sources=taxa";
 
-				const options = {
+				let api_3rd_res = "";
+
+				fetch(url, {
 					method: "GET",
 					headers: {
 						"Content-Type": "application/json"
 					}
-				};
+				})
+					.then(response => {
+						api_3rd_res = response.json();
+						console.log("indicador", api_3rd_res);
+					})
+					.then(data => {
+						//console.log("indicador", data.page);
+					})
+					.catch(error => {
+						alert("no hay suficientes parámetros");
+					});
 
-				// await fetch(url, {
-				// 	method: "GET",
-				// 	headers: {
-				// 		"Content-Type": "application/json"
-				// 	}
-				// })
-				// 	.then(response => {
-				// 		console.log(response);
-				// 	})
-				// 	.catch(error => {
-				// 		alert("no hay suficientes parámetros");
-				// 	});
-
-				// try {
-				//     const resp = await fetch(url, options);
-
-				//     const data = await resp.json();
-
-				// } catch (error) {
-				//     console.error("Ha ocurrido un error");
-				// }
-				console.log(url);
 				setStore({ search_result_api: internal_data_result });
-				//setStore({ search_result_api_3rd_api: data });
+				setStore({ search_result_3rd_api: api_3rd_res });
+				return api_3rd_res;
 			},
 			deleteFav: index => {
 				const store = getStore();
