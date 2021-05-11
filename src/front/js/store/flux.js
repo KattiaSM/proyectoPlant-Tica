@@ -209,21 +209,37 @@ const getState = ({ getStore, getActions, setStore }) => {
                 ejemplo: "hola adios" pasaría a ser "hola%20adios" y así se le envía al API
                 */
 
-				// let adapted_string = "";
+				let adapted_string = "";
 
-				// for (let i = 0; i < store.search_option.length; i++) {
-				// 	if (store.search_option[i] === " ") {
-				// 		adapted_string = adapted_string + "%20";
-				// 	} else {
-				// 		adapted_string = adapted_string + store.search_option[i];
-				// 	}
-				// }
+				for (let i = 0; i < store.search_option.length; i++) {
+					if (store.search_option[i] === " ") {
+						adapted_string = adapted_string + "%20";
+					} else {
+						adapted_string = adapted_string + store.search_option[i];
+					}
+				}
 
 				//Una vez arreglado el string hay que adaptar el url para la búsqueda
 				//La búsqueda la hace el API de terceros y retorna la info de los elementos coincidentes
-				// const url = "https://api.inaturalist.org/v1/search?q=" + adapted_string + "&sources=taxa";
+				const url = "https://api.inaturalist.org/v1/search?q=" + adapted_string + "&sources=taxa";
 
-				// let api_3rd_res = "";
+				let api_3rd_res = "";
+
+				const loadTodo = () => {
+					fetch(url, {
+						method: "GET",
+						headers: { "Content-Type": "application/json" }
+					})
+						.then(res => res.json())
+						.then(data => {
+							console.log("data--->", data.results);
+							//api_3rd_res = data.results;
+							setStore({ search_result_3rd_api: data.results });
+						})
+						.catch(error => console.error("Error:", error.message));
+				};
+
+				loadTodo();
 
 				// fetch(url, {
 				// 	method: "GET",
@@ -239,9 +255,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 				// 	.catch(error => {
 				// 		alert("no hay suficientes parámetros");
 				// 	});
-
-				// setStore({ search_result_3rd_api: api_3rd_res });
-				// return api_3rd_res;
+				console.log("dato actualizado", api_3rd_res);
+				setStore({ search_result_3rd_api: api_3rd_res });
 			},
 			deleteFav: index => {
 				const store = getStore();
