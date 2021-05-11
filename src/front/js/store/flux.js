@@ -63,39 +63,66 @@ const getState = ({ getStore, getActions, setStore }) => {
 			plants: [
 				{
 					name: "Chile Jalapeño",
-					scientName: "Capsicum annuum var"
+					scientName: "Capsicum annuum var",
+					fullScientName: "Lorem Ipsum algo mas",
+					year: "2000",
+					category: "Planta"
 				},
 				{
 					name: "Chile Poblano / Chile Ancho",
-					scientName: "Capsicum annuum var"
+					scientName: "Capsicum annuum var",
+					fullScientName: "Lorem Ipsum algo mas",
+					year: "2000",
+					category: "Planta"
 				},
 				{
 					name: "Chile Habanero Manzano",
-					scientName: "Capsicum annuum var"
+					scientName: "Capsicum annuum var",
+					fullScientName: "Lorem Ipsum algo mas",
+					year: "2000",
+					category: "Planta"
 				},
 				{
 					name: "Chile Güero Húngaro Variedad Santa Fe",
-					scientName: "Capsicum annuum var"
+					scientName: "Capsicum annuum var",
+					fullScientName: "Lorem Ipsum algo mas",
+					year: "2000",
+					category: "Planta"
 				},
 				{
 					name: "Betabel Remolacha",
-					scientName: "Beta vulgaris"
+					scientName: "Beta vulgaris",
+					fullScientName: "Lorem Ipsum algo mas",
+					year: "2000",
+					category: "Planta"
 				},
 				{
 					name: "Cabeza Larga",
-					scientName: "Curcubita pepo"
+					scientName: "Curcubita pepo",
+					fullScientName: "Lorem Ipsum algo mas",
+					year: "2000",
+					category: "Planta"
 				},
 				{
 					name: "Cebolla Amarilla",
-					scientName: "Allium cepa"
+					scientName: "Allium cepa",
+					fullScientName: "Lorem Ipsum algo mas",
+					year: "2000",
+					category: "Planta"
 				},
 				{
 					name: "Crisantemo Gigante Blanco",
-					scientName: "Leucanthemum maximum"
+					scientName: "Leucanthemum maximum",
+					fullScientName: "Lorem Ipsum algo mas",
+					year: "2000",
+					category: "Planta"
 				},
 				{
 					name: "Girasol Belleza de Otoño Variado",
-					scientName: "Helianthus decapetalus"
+					scientName: "Helianthus decapetalus",
+					fullScientName: "Lorem Ipsum algo mas",
+					year: "2000",
+					category: "Planta"
 				}
 			],
 
@@ -204,10 +231,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ search_result_api: internal_data_result });
 				//Búsqueda en API de terceros
 				/* 
-                El API considera los espacios como %20, las siguiente líneas
-                adaptan el string para que sea legible en el API de terceros
-                ejemplo: "hola adios" pasaría a ser "hola%20adios" y así se le envía al API
-                */
+				El API considera los espacios como %20, las siguiente líneas
+				adaptan el string para que sea legible en el API de terceros
+				ejemplo: "hola adios" pasaría a ser "hola%20adios" y así se le envía al API
+				*/
 
 				let adapted_string = "";
 
@@ -265,8 +292,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ favs: temporal });
 			},
 			addFav: item => {
-				let temporal = item;
-				temporal.push(item);
+				let temporal = getStore().favs;
+				temporal.unshift(item);
 				setStore({ favs: temporal });
 			},
 			deleteTodo: index => {
