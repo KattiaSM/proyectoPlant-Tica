@@ -232,7 +232,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 					.then(response => {
 						api_3rd_res = response.json();
-						console.log("indicador", api_3rd_res);
+						console.log("indicador", api_3rd_res.value.results);
 					})
 					.then(data => {
 						//console.log("indicador", data.page);
