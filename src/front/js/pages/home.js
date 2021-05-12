@@ -68,40 +68,42 @@ export function Home() {
 
 	return (
 		<div className="text-center m-5">
-			<div className="w-100 mb-3">
-				<Carousel activeIndex={activeIndex} next={next} previous={previous}>
-					<CarouselIndicators items={items} activeIndex={activeIndex} onClickHandler={goToIndex} />
-					{slides}
-					<CarouselControl direction="prev" directionText="Previous" onClickHandler={previous} />
-					<CarouselControl direction="next" directionText="Next" onClickHandler={next} />
-				</Carousel>
-			</div>
-			<div className="container d-flex justify-content-center pt-3">
-				<div className="row d-flex justify-content-center">
-					<div className="col-12">
-						<Jumbotron>
-							<h1 className="display-3">Gracias por visitar Plant-Tica</h1>
-							<p className="lead">
-								Un espacio para aprender y compartir sobre plantas de Costa Rica... y ¿por qué no?
-								empezar a tener tu propio jardín con esas planticas 🇨🇷 que siempre has querido.
-							</p>
-							<p className="lead">
-								<strong>¿Ya tenés tu huerta o jardín?</strong>
-							</p>
-							<hr className="my-2" />
-							<p className="mt-3">
-								<h5>
-									En plant-tica te ayudamos y motivamos a seguir cuidándolo y además mostrarlo para
-									que
-								</h5>
-								<h4>más gente lo pueda apreciar</h4>
-							</p>
-							<Button color="success" className="mt-3 text-light">
-								<Link to="/register" className="text-light">
-									¡Registrarme!
-								</Link>
-							</Button>
-						</Jumbotron>
+			<div className="mt-5">
+				<div className="w-100 mb-3">
+					<Carousel activeIndex={activeIndex} next={next} previous={previous}>
+						<CarouselIndicators items={items} activeIndex={activeIndex} onClickHandler={goToIndex} />
+						{slides}
+						<CarouselControl direction="prev" directionText="Previous" onClickHandler={previous} />
+						<CarouselControl direction="next" directionText="Next" onClickHandler={next} />
+					</Carousel>
+				</div>
+				<div className="container d-flex justify-content-center pt-3">
+					<div className="row d-flex justify-content-center">
+						<div className="col-12">
+							<Jumbotron>
+								<h1 className="display-3">Gracias por visitar Plant-Tica</h1>
+								<p className="lead">
+									Un espacio para aprender y compartir sobre plantas de Costa Rica... y ¿por qué no?
+									empezar a tener tu propio jardín con esas planticas 🇨🇷 que siempre has querido.
+								</p>
+								<p className="lead">
+									<strong>¿Ya tenés tu huerta o jardín?</strong>
+								</p>
+								<hr className="my-2" />
+								<p className="mt-3">
+									<h5>
+										En plant-tica te ayudamos y motivamos a seguir cuidándolo y además mostrarlo
+										para que
+									</h5>
+									<h4>más gente lo pueda apreciar</h4>
+								</p>
+								<Button color="success" className="mt-3 text-light">
+									<Link to="/register" className="text-light">
+										¡Registrarme!
+									</Link>
+								</Button>
+							</Jumbotron>
+						</div>
 					</div>
 				</div>
 			</div>

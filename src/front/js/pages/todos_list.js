@@ -80,7 +80,7 @@ export function TodosList() {
 					<div className="shadow-lg">
 						<div
 							className="bg-image p-4 text-center shadow-1-strong rounded rounded-5 mb-5 text-white "
-							id="height"
+							id="height_todos"
 							style={{
 								backgroundImage: plant_url
 							}}>
@@ -129,66 +129,11 @@ export function TodosList() {
 				</Link>
 			</div>
 			<div>
-				<div className="row"> {todos_output} </div>
-			</div>
-			{/* <div className="row">
-				<div className="m-0 col-xl-4 col-lg-6 col-md-6 col-sm-12">
-					<div className="m-0 row d-flex justify-content-end">
-						<div className="row m-0 p-0 ps-4 ">
-							<Button
-								className="bg-dark border-dark border-rounded-top m-0 p-0 d-flex align-items-end"
-								
-								<Badge color="dark" pill>
-									Modificar
-								</Badge>
-							</Button>
-							<Button className="bg-danger border-danger border-rounded-top m-0 me-2 p-0 d-flex align-items-end">
-								<Badge color="danger" pill>
-									X
-								</Badge>
-							</Button>
-						</div>
-					</div>
-					<div className="shadow-lg">
-						<div
-							className="bg-image p-4 text-center shadow-1-strong rounded rounded-5 mb-5 text-white "
-							style={{
-								backgroundImage: `url("https://bs.plantnet.org/image/o/85256a1c2c098e254fefe05040626a4df49ce248")`
-							}}>
-							<div className="row">
-								<h1 id="text-border" className="col-12">
-									Quercus rotundifolia
-								</h1>
-							</div>
-							<div className="row d-flex justify-content-start">
-								<div className="col-xl-5 col-lg-8 col-md-8 col-sm-10 shadow m-0 p-0">
-									<ListGroupItem className="justify-content-between bg-transparent">
-										<div className="m-1 ">
-											<Label check id="text-border2">
-												<Input type="checkbox" /> Tarea de prueba
-											</Label>
-										</div>
-									</ListGroupItem>
-									<ListGroupItem className="justify-content-between bg-transparent">
-										<div className="m-1 ">
-											<Label check id="text-border2">
-												<Input type="checkbox" /> Tarea de prueba
-											</Label>
-										</div>
-									</ListGroupItem>
-									<ListGroupItem className="justify-content-between bg-transparent">
-										<div className="m-1 ">
-											<Label check id="text-border2">
-												<Input type="checkbox" /> Tarea de prueba
-											</Label>
-										</div>
-									</ListGroupItem>
-								</div>
-							</div>
-						</div>
-					</div>
+				<div className="row" style={{ height: "600px" }}>
+					{" "}
+					{todos_output}{" "}
 				</div>
-			</div> */}
+			</div>
 		</div>
 	);
 }
