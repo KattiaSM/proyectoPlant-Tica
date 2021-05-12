@@ -71,6 +71,7 @@ def create_token():
     else:
         todos = Todolist.query.filter_by(user_id=user.id).first()
         favs = Favorites.query.filter_by(user_id=user.id).first()
+        profile = Profile.query.filter_by(user_id=user.id).first()
         if todos is None:
             new_todolist = Todolist()
             new_todolist.tasks = [""]
@@ -86,6 +87,20 @@ def create_token():
             new_favs.favs = [""]
             new_favs.user_id = user.id
             db.session.add(new_favs)
+            db.session.commit()
+        else:
+            pass
+
+        if profile is None:
+            new_profile = Profile()
+            new_profile.user_id = user.id
+            new_profile.user_image = [""]
+            new_profile.personal_description = [""]
+            new_profile.occupation= [""]
+            new_profile.location= [""]
+            new_profile.hobbies= [""]
+
+            db.session.add(new_profile)
             db.session.commit()
         else:
             pass
@@ -115,6 +130,7 @@ def protected():
 def update(id):
     user = User.query.get(id)
 
+
     if user is None:
         raise APIException(
             'El usuario con el id especificado, no fue encontrado.', status_code=403)
@@ -124,9 +140,10 @@ def update(id):
     user.name = data_request["name"]
     user.first_surname = data_request["first_surname"]
     user.second_surname = data_request["second_surname"]
+    user.user_image = data_request["user_image"]
     # user.user_image = data_request["user_image"]
-    user.password = data_request["password"]
-    profile.user_image = data_request["user_image"]
+    #user.password = data_request["password"]
+    profile = Profile.query.get(id)
     profile.personal_description = data_request["personal_description"]
     profile.occupation = data_request["occupation"]
     profile.location = data_request["location"]
@@ -145,7 +162,7 @@ def update(id):
 # @jwt_required()
 def userData(id):
     user = User.query.get(id)
-
+    profile= Profile.query.get(id)
     if user is None:
         raise APIException(
             'El usuario con el id especificado, no fue encontrado.', status_code=403)
@@ -155,7 +172,7 @@ def userData(id):
     try:
 
 
-        return jsonify(User.serialize(user)), 200
+        return jsonify(User.serialize(user),Profile.serialize(profile)), 200
 
     except AssertionError as exception_message:
         return jsonify(msg='Error: {}. '.format(exception_message)), 400
