@@ -8,25 +8,27 @@ import { Context } from "../../store/appContext";
 const Navbar = () => {
 	const { store, actions } = useContext(Context);
 
-	const Logout = () => {
-		return <LinkNav name="Cerrar Sesión" to="/" onClick={() => actions.logout()} />;
+	const getFavorites = () => {
+		return "Favoritos(" + store.favs.length + ")";
 	};
 
 	const LoginAndRegister = () => {
-		return (
-			<div className="d-flex justify-content-center align-items-center">
-				<LinkNav name="Ingresar" to="/login"></LinkNav>
-				<LinkNav name="Registrarse" to="/register"></LinkNav>
-			</div>
-		);
-	};
-
-	const LinksAccount = () => {
-		return store.token ? <Logout /> : <LoginAndRegister />;
-	};
-
-	const getFavorites = () => {
-		return "Favoritos(" + store.favs.length + ")";
+		if (store.token) {
+			return (
+				<div>
+					<LinkNav name={getFavorites()} to="/favorites" />
+					<LinkNav name="Garden" to="/garden" />
+					<LinkNav name="Cerrar Sesión" to="/" onClick={() => actions.logout()} />;
+				</div>
+			);
+		} else {
+			return (
+				<div className="d-flex justify-content-center align-items-center">
+					<LinkNav name="Ingresar" to="/login"></LinkNav>
+					<LinkNav name="Registrarse" to="/register"></LinkNav>
+				</div>
+			);
+		}
 	};
 
 	return (
@@ -42,11 +44,8 @@ const Navbar = () => {
 			<div className="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul className="navbar-nav mr-auto">
 					<LinkNav name="Plantas" to="/plants" />
-					<LinkNav name={getFavorites()} to="/favorites" />
-					<LinkNav name="Garden" to="/garden" />
-
 					{/* Botones condicionados */}
-					<LinksAccount />
+					<LoginAndRegister />
 				</ul>
 			</div>
 

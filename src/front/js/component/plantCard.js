@@ -25,8 +25,19 @@ const plantsCard = props => {
 			data4: props.fullScientName,
 			url: props.image
 		});
+	};
 
-		history.push("/favorites");
+	const renderButtons = props => {
+		if (store.token) {
+			<div className="d-flex justify-content-end align-items-center">
+				<button className="btn btn-sm btn-success mr-2" onClick={() => moveData(props.scientName, props.image)}>
+					Sembrar <i className="fas fa-seedling ml-1"></i>
+				</button>
+				<button className="btn btn-sm btn-danger text-white" onClick={() => addFav(props)}>
+					<i className="far fa-heart"></i>
+				</button>
+			</div>;
+		}
 	};
 
 	return (
@@ -35,16 +46,7 @@ const plantsCard = props => {
 			<div className="card-body">
 				<h5 className="card-title text-truncate">{props.name}</h5>
 				<p className="card-text">{props.scientName}</p>
-				<div className="d-flex justify-content-end align-items-center">
-					<button
-						className="btn btn-sm btn-success mr-2"
-						onClick={() => moveData(props.scientName, props.image)}>
-						Sembrar <i className="fas fa-seedling ml-1"></i>
-					</button>
-					<button className="btn btn-sm btn-danger text-white" onClick={() => addFav(props)}>
-						<i className="far fa-heart"></i>
-					</button>
-				</div>
+				<renderButtons />
 			</div>
 		</div>
 	);
