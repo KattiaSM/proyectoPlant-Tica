@@ -312,7 +312,7 @@ export function CreateTodo() {
 									<div className="shadow-lg">
 										<div
 											className="bg-image p-4 text-center shadow-1-strong rounded rounded-5 mb-5 text-white "
-											id="height"
+											id="height_todos"
 											style={{
 												backgroundImage: plant_url
 											}}>
