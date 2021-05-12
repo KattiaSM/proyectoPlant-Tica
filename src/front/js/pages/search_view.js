@@ -2,7 +2,7 @@ import React, { Component, useState, useContext, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
 import { Context } from "../store/appContext";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { MDBCol, MDBInput } from "mdbreact";
 import { Spinner } from "reactstrap";
 import "../../styles/search_imgs.scss";
@@ -10,7 +10,27 @@ export const SearchView = () => {
 	const { store, actions } = useContext(Context);
 	const [apiResult, setApiResult] = useState(store.search_result_api);
 	const [apiResult3rd, setApiResult3rd] = useState(store.search_result_3rd_api);
-
+	const History = useHistory();
+	function moveData(name, url) {
+		actions.changeInitialName(name);
+		actions.changeName(name);
+		actions.changeInitialURL(url);
+		actions.restoreDataToModify(url);
+		History.push("/create");
+	}
+	function sendtoFav(object, url) {
+		let temporal = object;
+		let temporal_url = url;
+		let send_object = {
+			scientific_name: temporal.record.name,
+			data1: temporal.record.type,
+			data2: temporal.record.iconic_taxon_name,
+			data3: temporal.record.preferred_common_name,
+			data4: temporal.record.matched_term,
+			url: temporal_url
+		};
+		actions.addFav(send_object);
+	}
 	function createApiCards() {
 		if (apiResult === undefined || apiResult === "") {
 			return <h1 className="m-3">No se muestran resultados {"   "}</h1>;
@@ -80,17 +100,20 @@ export const SearchView = () => {
 						<h5 className="card-title text-truncate">{item.record.name}</h5>
 						<p className="card-text">{item.record.matched_term}</p>
 						<div className="d-flex justify-content-end align-items-center">
-							<button className="btn btn-sm btn-success mr-2">
+							<button
+								className="btn btn-sm btn-success mr-2"
+								onClick={() => moveData(item.record.name, temporal[index])}>
 								Sembrar <i className="fas fa-seedling ml-1"></i>
 							</button>
-							<button className="btn btn-sm btn-danger text-white">
+							<button
+								className="btn btn-sm btn-danger text-white"
+								onClick={() => sendtoFav(item, temporal[index])}>
 								<i className="far fa-heart"></i>
 							</button>
 						</div>
 					</div>
 				</div>
 			));
-			console.log(apiResult3rd);
 			return result;
 		}
 	}
@@ -99,15 +122,11 @@ export const SearchView = () => {
 		actions.changeSearchValue(event.target.value);
 	}
 	async function handleSearchClic() {
-		// await actions.doSearch().then(data => {
-		// 	console.log(data);
-		// });
 		actions.doSearch();
 	}
 	useEffect(() => {
 		setApiResult3rd(store.search_result_3rd_api);
 		setApiResult(store.search_result_api);
-		console.log(apiResult3rd);
 	});
 
 	let api_cards = createApiCards();
@@ -133,10 +152,7 @@ export const SearchView = () => {
 				</div>
 			</div>
 			<div>
-				<div className="row d-flex justify-content-center align-items-center">
-					{" "}
-					{api_cards} {api_cards_3rd}{" "}
-				</div>
+				<div className="row d-flex justify-content-center align-items-center"> {api_cards_3rd} </div>
 			</div>
 			<div>
 				<div className="row d-flex justify-content-center"> </div>

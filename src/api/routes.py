@@ -23,6 +23,7 @@ def handle_hello():
 
     return jsonify(response_body), 200
 
+
 @api.route('/register', methods=['POST'])
 def register_user():
     name = request.json.get("name", None)
@@ -35,7 +36,7 @@ def register_user():
         return jsonify({"msg": "No email was provided"}), 400
     if password is None:
         return jsonify({"msg": "No password was provided"}), 400
-    
+
     user = User.query.filter_by(email=email, password=password).first()
     if user:
         # the user was not found on the database
@@ -50,12 +51,13 @@ def register_user():
         db.session.add(new_user)
         db.session.commit()
         return jsonify({"msg": "User created successfully"}), 200
-    
+
+
 @api.route('/login', methods=['POST', 'GET'])
 def create_token():
     email = request.json.get("email", None)
     password = request.json.get("password", None)
-    
+
     if email is None:
         return jsonify({"msg": "No email was provided"}), 400
     if password is None:
@@ -67,8 +69,8 @@ def create_token():
         # the user was not found on the database
         return jsonify({"msg": "Invalid username or password"}), 401
     else:
-        todos= Todolist.query.filter_by(user_id=user.id).first()
-        favs= Favorites.query.filter_by(user_id=user.id).first()
+        todos = Todolist.query.filter_by(user_id=user.id).first()
+        favs = Favorites.query.filter_by(user_id=user.id).first()
         if todos is None:
             new_todolist = Todolist()
             new_todolist.tasks = [""]
@@ -92,7 +94,7 @@ def create_token():
         # create a new token with the user id inside
         access_token = create_access_token(identity=user.id)
 
-        return jsonify({ "token": access_token, "user_id": user.id }), 200
+        return jsonify({"token": access_token, "user_id": user.id}), 200
 
 
 @api.route("/protected", methods=["GET"])
@@ -101,18 +103,21 @@ def protected():
     # Access the identity of the current user with get_jwt_identity
     current_user_id = get_jwt_identity()
     user = User.query.get(current_user_id)
-    
+
     print(current_user_id, user)
-    return jsonify({"id": user.id, "email": user.email }), 200
+    return jsonify({"id": user.id, "email": user.email}), 200
 
 # [PUT] - Ruta para modificar un [user]
+
+
 @api.route('/users/<int:id>', methods=['PUT'])
-@jwt_required()
+# @jwt_required()
 def update(id):
     user = User.query.get(id)
 
     if user is None:
-        raise APIException('El usuario con el id especificado, no fue encontrado.',status_code=403)
+        raise APIException(
+            'El usuario con el id especificado, no fue encontrado.', status_code=403)
 
     data_request = request.get_json()
 
@@ -127,12 +132,32 @@ def update(id):
     profile.location = data_request["location"]
     profile.hobbies = data_request["hobbies"]
 
-    try: 
+    try:
         db.session.commit()
-        
+
         return jsonify(User.serialize(user)), 200
-    
-    except AssertionError as exception_message: 
+
+    except AssertionError as exception_message:
+        return jsonify(msg='Error: {}. '.format(exception_message)), 400
+
+
+@api.route('/users/<int:id>', methods=['GET'])
+# @jwt_required()
+def userData(id):
+    user = User.query.get(id)
+
+    if user is None:
+        raise APIException(
+            'El usuario con el id especificado, no fue encontrado.', status_code=403)
+
+    data_request = request.get_json()
+
+    try:
+
+
+        return jsonify(User.serialize(user)), 200
+
+    except AssertionError as exception_message:
         return jsonify(msg='Error: {}. '.format(exception_message)), 400
 
 
@@ -145,65 +170,57 @@ def index():
     return jsonify(list(map(lambda x: x.serialize(), results))), 200
 
 
-
 # [POST] - Ruta para modificar un [todolist]
 @api.route('/todolist/<int:id>', methods=['POST'])
 # @jwt_required()
 def updatetodo(id):
-    todos= Todolist.query.filter_by(user_id=id).first()
+    todos = Todolist.query.filter_by(user_id=id).first()
     data_request = request.get_json()
-    todos.tasks=data_request["tasks"]
-    try: 
+    todos.tasks = data_request["tasks"]
+    try:
         db.session.commit()
-        return jsonify({"user_id":id, "tasks": todos.tasks}), 200
-    
-    except AssertionError as exception_message: 
-        return jsonify(msg='Error: {}. '.format(exception_message)), 400
+        return jsonify({"user_id": id, "tasks": todos.tasks}), 200
 
+    except AssertionError as exception_message:
+        return jsonify(msg='Error: {}. '.format(exception_message)), 400
 
 
 # [POST] - Ruta para modificar un [favorites]
 @api.route('/favorites/<int:id>', methods=['POST'])
 # @jwt_required()
 def updatefavs(id):
-    
-    favorites= Favorites.query.filter_by(user_id=id).first()
+
+    favorites = Favorites.query.filter_by(user_id=id).first()
     data_request = request.get_json()
-    favorites.favs=data_request["favs"]
-    try: 
+    favorites.favs = data_request["favs"]
+    try:
         db.session.commit()
-        return jsonify({"user_id":id, "favs": favorites.favs}), 200
-    
-    except AssertionError as exception_message: 
+        return jsonify({"user_id": id, "favs": favorites.favs}), 200
+
+    except AssertionError as exception_message:
         return jsonify(msg='Error: {}. '.format(exception_message)), 400
-
-
-
 
 
 # [GET] - Ruta para leer [favorites]
 @api.route('/favorites/<int:id>', methods=['GET'])
 # @jwt_required()
 def readfavs(id):
-    
-    favorites= Favorites.query.filter_by(user_id=id).first()
-    try: 
-        return jsonify({"user_id":id, "favs": favorites.favs}), 200
-    
-    except AssertionError as exception_message: 
+
+    favorites = Favorites.query.filter_by(user_id=id).first()
+    try:
+        return jsonify({"user_id": id, "favs": favorites.favs}), 200
+
+    except AssertionError as exception_message:
         return jsonify(msg='Error: {}. '.format(exception_message)), 400
-
-
-
 
 
 # [GET] - Ruta para leer [todolist]
 @api.route('/todolist/<int:id>', methods=['GET'])
 # @jwt_required()
 def readtodo(id):
-    todos= Todolist.query.filter_by(user_id=id).first()
-    try: 
-        return jsonify({"user_id":id, "tasks": todos.tasks}), 200
-    
-    except AssertionError as exception_message: 
+    todos = Todolist.query.filter_by(user_id=id).first()
+    try:
+        return jsonify({"user_id": id, "tasks": todos.tasks}), 200
+
+    except AssertionError as exception_message:
         return jsonify(msg='Error: {}. '.format(exception_message)), 400

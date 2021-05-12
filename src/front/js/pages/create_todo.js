@@ -1,7 +1,7 @@
 import React, { Component, useState, useContext, useEffect, useLayoutEffect } from "react";
 import PropTypes from "prop-types";
 import { Context } from "../store/appContext";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { ListGroupItem, Button, CardImg, Label, Input, FormGroup, Col, ButtonToggle, Badge } from "reactstrap";
 import "../../styles/todos_list.scss";
 
@@ -334,6 +334,7 @@ export function CreateTodo() {
 					</div>
 				</div>
 			</div>
+			{store.userLogged ? console.log("auth") : <Redirect to="/login" />}
 		</div>
 	);
 }

@@ -17,8 +17,8 @@ export const Login = () => {
 			email: email,
 			password: password
 		};
-
-		fetch("https://3001-jade-galliform-3jxw3pmu.ws-us04.gitpod.io/api/login", {
+		let url = store.api_url + "/api/login";
+		fetch(url, {
 			method: "POST",
 			body: JSON.stringify(body),
 			headers: {
@@ -29,9 +29,8 @@ export const Login = () => {
 			.then(data => {
 				console.log(data);
 				actions.savingToken(data.token, data.user_id);
-				alert("Login Successful");
-				sessionStorage.setItem("my_token", data.token);
-				setAuth(true);
+				//sessionStorage.setItem("my_token", data.token);
+				//setAuth(true);
 			})
 			.catch(err => console.log(err));
 	};
@@ -74,7 +73,7 @@ export const Login = () => {
 				<button type="submit" className="btn btn-primary">
 					Ingresar
 				</button>
-				{auth ? <Redirect to="/garden" /> : null}
+				{store.userLogged ? <Redirect to="/garden" /> : <Redirect to="/login" />}
 			</form>
 		</div>
 	);

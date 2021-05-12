@@ -1,7 +1,7 @@
 import React, { Component, useState, useContext, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Context } from "../store/appContext";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { Card, CardBody, Button, CardTitle, CardText, CardImg } from "reactstrap";
 
 export function Favorites() {
@@ -53,6 +53,7 @@ export function Favorites() {
 				actions.deleteFav(index);
 			}
 		});
+		actions.favsFetch();
 	}
 
 	//La siguiente función lo que hace es darle formato html a cada elemento de los tres array
@@ -105,6 +106,7 @@ export function Favorites() {
 					<div className="m-1">{col_3}</div>
 				</div>
 			</div>
+			{store.userLogged ? console.log("auth") : <Redirect to="/login" />}
 		</div>
 	);
 }

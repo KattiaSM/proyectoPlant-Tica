@@ -13,7 +13,7 @@ export const Registration = () => {
 	const [password, setPassword] = useState("");
 	const [confPassword, setConfPassword] = useState("");
 	const [auth, setAuth] = useState(false);
-
+	const { store, actions } = useContext(Context);
 	const showValidation = (tag, show) => {
 		if (!show) {
 			tag.classList.remove("is-valid");
@@ -77,7 +77,8 @@ export const Registration = () => {
 		});
 		console.log(body);
 		if (formValid) {
-			fetch("https://3001-jade-galliform-3jxw3pmu.ws-us04.gitpod.io/api/register", {
+			let url = store.api_url + "/api/register";
+			fetch(url, {
 				method: "POST",
 				body: JSON.stringify(body),
 				headers: {
