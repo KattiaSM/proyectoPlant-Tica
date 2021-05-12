@@ -1,8 +1,9 @@
-import React, { useContext } from "react";
+import React, { Component, useState, useContext, useEffect, useLayoutEffect } from "react";
 import { Link } from "react-router-dom";
 import LinkNav from "./LinkNav";
 import Search from "./Search";
-import { Context } from "../../store/appContext";
+import { Context } from ".././../store/appContext";
+import PropTypes from "prop-types";
 
 //Barra de navegacion de la
 const Navbar = () => {
@@ -13,12 +14,15 @@ const Navbar = () => {
 	};
 
 	const LoginAndRegister = () => {
+		console.log(store.token);
 		if (store.token) {
 			return (
 				<div className="d-flex justify-content-center align-items-center">
 					<LinkNav name={getFavorites()} to="/favorites" />
 					<LinkNav name="Garden" to="/garden" />
-					<LinkNav name="Cerrar Sesión" to="/" onClick={() => actions.logout()} />
+					<div onClick={() => actions.logout()}>
+						<LinkNav name="Cerrar Sesión" to="/" />
+					</div>
 				</div>
 			);
 		} else {

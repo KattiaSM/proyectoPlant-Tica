@@ -8,7 +8,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 			search_result_3rd_api: "",
 			token: "",
 			id: "",
-			userLogged: false,
 			sci_names_temporal: [
 				"quercus rotundifolia",
 				"sabila",
@@ -316,16 +315,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 				final_array.unshift(control);
 				setStore({ todos: final_array, charge_todos: true });
 			},
-
 			logout: () => {
-				localStorage.setItem("x-access-token", null);
-				sessionStorage.removeItem("token");
+				//localStorage.setItem("x-access-token", null);
+				console.log("debería eliminar la vara");
+				localStorage.removeItem("token");
 				setStore({ userLogged: false });
-
+				setStore({ token: "" });
 				// Se configura la opción del home
-				getActions().activeOption("/login");
-
-				ShowAlert("top-end", "success", "", "¡Sesión cerrada exitosamente!", false, true, 2000);
+				//getActions().activeOption("/login");
 			},
 
 			moveDataToModify: control => {
@@ -349,8 +346,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ info_create_todos: [["Tu tarea"], [""], ["Horas"]] });
 			},
 			savingToken: (int_token, int_id) => {
-				sessionStorage.setItem("token", int_token);
+				localStorage.setItem("token", int_token);
+				setStore({ userLogged: true });
 				setStore({ token: int_token });
+				console.log("pasa por saving", int_token);
 				setStore({ id: int_id });
 			},
 			changeColor: (index, color) => {

@@ -29,9 +29,8 @@ export const Login = () => {
 			.then(data => {
 				console.log(data);
 				actions.savingToken(data.token, data.user_id);
-				alert("Login Successful");
-				sessionStorage.setItem("my_token", data.token);
-				setAuth(true);
+				//sessionStorage.setItem("my_token", data.token);
+				//setAuth(true);
 			})
 			.catch(err => console.log(err));
 	};
@@ -74,7 +73,7 @@ export const Login = () => {
 				<button type="submit" className="btn btn-primary">
 					Ingresar
 				</button>
-				{auth ? <Redirect to="/garden" /> : <Redirect to="/login" />}
+				{store.userLogged ? <Redirect to="/garden" /> : <Redirect to="/login" />}
 			</form>
 		</div>
 	);
