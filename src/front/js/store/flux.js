@@ -1,7 +1,9 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			api_url: "https://3001-orange-kite-5z235ran.ws-us04.gitpod.io",
+			api_url: "https://3001-coral-pelican-19w6sdfl.ws-us04.gitpod.io",
+			modify: false,
+			index_to_modify: "",
 			userLogged: false,
 			user_data: "",
 			search_option: "",
@@ -219,6 +221,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 				let search_temporal = search_item;
 				setStore({ search_option: search_temporal });
 			},
+			modifyAndIndex: internal_index => {
+				let index = internal_index;
+				setStore({ index_to_modify: index });
+				setStore({ modify: true });
+			},
 			synkTokenFromSessionStore: () => {
 				const token = localStorage.getItem("token");
 				const user_id = localStorage.getItem("user_id");
@@ -271,7 +278,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 						.then(res => res.json())
 						.then(data => {
-							console.log("data--->", data.results);
+							//console.log("data--->", data.results);
 							//api_3rd_res = data.results;
 							setStore({ search_result_3rd_api: data.results });
 						})
@@ -294,7 +301,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				// 	.catch(error => {
 				// 		alert("no hay suficientes parámetros");
 				// 	});
-				console.log("dato actualizado", api_3rd_res);
+				//console.log("dato actualizado", api_3rd_res);
 				setStore({ search_result_3rd_api: api_3rd_res });
 			},
 			deleteFav: index => {
@@ -312,23 +319,32 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const store = getStore();
 				let temporal = store.todos;
 				if (temporal.length > 1) {
-					console.log(index);
+					//console.log(index);
 					temporal.splice(index, 1);
 					setStore({ todos: temporal });
 				} else {
-					console.log(temporal.lenght);
+					//console.log(temporal.lenght);
 					alert("Lo sentimos, debe tener almenos una lista de tareas disponible.");
 				}
 			},
 			modifyTodos: control => {
 				const store = getStore();
 				let final_array = store.todos;
-				final_array.unshift(control);
-				setStore({ todos: final_array, charge_todos: true });
+				console.log("resultado de modify", store.modify);
+				if (store.modify === false) {
+					final_array.unshift(control);
+					setStore({ todos: final_array, charge_todos: true });
+				} else {
+					console.log("modificando", store.index_to_modify);
+					let final_array = store.todos;
+					final_array[store.index_to_modify] = control;
+					setStore({ todos: final_array, charge_todos: true });
+					setStore({ modify: false });
+				}
 			},
 			logout: () => {
 				//localStorage.setItem("x-access-token", null);
-				console.log("debería eliminar la vara");
+				//console.log("debería eliminar la vara");
 				localStorage.removeItem("token");
 				localStorage.removeItem("user_id");
 				setStore({ userLogged: false });
@@ -348,6 +364,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					freq.push(item.freq);
 					type.push(item.type);
 				});
+				setStore({ modify: true });
 				setStore({ info_create_todos: [tasks, freq, type] });
 			},
 			restoreDataToModify: url => {
@@ -362,7 +379,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				localStorage.setItem("user_id", int_id);
 				setStore({ userLogged: true });
 				setStore({ token: int_token });
-				console.log("pasa por saving", int_token);
+				//console.log("pasa por saving", int_token);
 				setStore({ id: int_id });
 			},
 			favsFetch: () => {
@@ -371,15 +388,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 				let internal_favs = store.favs;
 				let internal_user_id = store.id;
 				const body = {
-					favs: internal_favs
+					favs: internal_favs,
+					user_id: internal_user_id
 				};
 				let url = store.api_url + "/api/favorites/" + internal_user_id.toString();
 				fetch(url, {
 					method: "POST",
-					body: JSON.stringify({ favs: internal_favs }),
+
 					headers: {
-						"Content-Type": "application/json"
-					}
+						"Content-Type": "application/text"
+					},
+					body: JSON.parse(JSON.stringify(body))
 				})
 					.then(res => res.json())
 					.then(data => {
@@ -388,23 +407,54 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 					.catch(err => console.log(err));
 			},
-			userDataFetch: () => {
+			userDataFetch: async () => {
 				const store = getStore();
 
 				let internal_user_id = store.id.toString();
 				let url = store.api_url + "/api/users/" + internal_user_id;
-				fetch(url, {
+
+				await fetch(url, {
 					method: "GET",
-					headers: {
-						"Content-Type": "application/json"
-					}
+					headers: { "Content-Type": "application/text" }
 				})
 					.then(res => res.json())
 					.then(data => {
 						console.log(data);
 						setStore({ user_data: data });
 					})
-					.catch(err => console.log(err));
+					.catch(error => console.log(error));
+			},
+			userDataUpdate: async all_info => {
+				const store = getStore();
+				let internal_info = all_info;
+				//send_info={"ocup":ocup, "local":local,"tel":tel,"hobbies":hobbies, "img":img};
+				let internal_user_id = store.id.toString();
+				let url = store.api_url + "/api/users/" + internal_user_id;
+
+				if (store.user_data[0] != undefined) {
+					let send_body = {
+						name: store.user_data[0].name,
+						first_surname: store.user_data[0].first_surname,
+						second_surname: store.user_data[0].second_surname,
+						user_image: internal_info.img,
+						personal_description: "lo que sea",
+						occupation: internal_info.ocup,
+						location: internal_info.local,
+						hobbies: internal_info.hobbies
+					};
+
+					await fetch(url, {
+						method: "PUT",
+						headers: { "Content-Type": "application/json" },
+						body: JSON.stringify(send_body)
+					})
+						.then(res => res.json())
+						.then(data => {
+							console.log(data);
+							setStore({ user_data: data });
+						})
+						.catch(error => console.log(error));
+				}
 			},
 			changeColor: (index, color) => {
 				//get the store

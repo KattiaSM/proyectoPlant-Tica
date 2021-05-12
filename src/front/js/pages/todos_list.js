@@ -18,11 +18,11 @@ export function TodosList() {
 		console.log(index);
 		actions.deleteTodo(index);
 	}
-	function handleModifyInfo(info) {
+	function handleModifyInfo(info, index) {
+		actions.modifyAndIndex(index);
 		actions.changeInitialName(info[0].plant_name);
 		actions.changeName(info[0].plant_name);
 		actions.changeInitialURL(info[1].plant_url);
-		console.log(info[2]);
 		actions.moveDataToModify(info[2].tasks);
 	}
 
@@ -60,7 +60,7 @@ export function TodosList() {
 				<div className="m-0 col-xl-12 col-lg-12 col-md-12 col-sm-12">
 					<div className="m-0 row d-flex justify-content-end">
 						<div className="row m-0 p-0 ps-4 ">
-							<Link to="/create" onClick={() => handleModifyInfo(temporal)}>
+							<Link to="/create" onClick={() => handleModifyInfo(temporal, deleteIndex)}>
 								<Button className="bg-dark border-dark border-rounded-top m-0 p-0 d-flex align-items-end">
 									<Badge color="dark" pill>
 										Modificar
@@ -129,10 +129,7 @@ export function TodosList() {
 				</Link>
 			</div>
 			<div>
-				<div className="row" style={{ height: "600px" }}>
-					{" "}
-					{todos_output}{" "}
-				</div>
+				<div className="row"> {todos_output} </div>
 			</div>
 		</div>
 	);
