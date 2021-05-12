@@ -17,8 +17,8 @@ export const Login = () => {
 			email: email,
 			password: password
 		};
-
-		fetch("https://3001-jade-galliform-3jxw3pmu.ws-us04.gitpod.io/api/login", {
+		let url = store.api_url + "/api/login";
+		fetch(url, {
 			method: "POST",
 			body: JSON.stringify(body),
 			headers: {
@@ -74,7 +74,7 @@ export const Login = () => {
 				<button type="submit" className="btn btn-primary">
 					Ingresar
 				</button>
-				{auth ? <Redirect to="/garden" /> : null}
+				{auth ? <Redirect to="/garden" /> : <Redirect to="/login" />}
 			</form>
 		</div>
 	);

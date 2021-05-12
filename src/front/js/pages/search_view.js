@@ -99,15 +99,11 @@ export const SearchView = () => {
 		actions.changeSearchValue(event.target.value);
 	}
 	async function handleSearchClic() {
-		// await actions.doSearch().then(data => {
-		// 	console.log(data);
-		// });
 		actions.doSearch();
 	}
 	useEffect(() => {
 		setApiResult3rd(store.search_result_3rd_api);
 		setApiResult(store.search_result_api);
-		console.log(apiResult3rd);
 	});
 
 	let api_cards = createApiCards();

@@ -15,10 +15,10 @@ const Navbar = () => {
 	const LoginAndRegister = () => {
 		if (store.token) {
 			return (
-				<div>
+				<div className="d-flex justify-content-center align-items-center">
 					<LinkNav name={getFavorites()} to="/favorites" />
 					<LinkNav name="Garden" to="/garden" />
-					<LinkNav name="Cerrar Sesión" to="/" onClick={() => actions.logout()} />;
+					<LinkNav name="Cerrar Sesión" to="/" onClick={() => actions.logout()} />
 				</div>
 			);
 		} else {
