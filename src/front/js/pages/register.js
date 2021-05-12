@@ -77,7 +77,8 @@ export const Registration = () => {
 		});
 		console.log(body);
 		if (formValid) {
-			fetch("https://3001-jade-galliform-3jxw3pmu.ws-us04.gitpod.io/api/register", {
+			let url = store.internal_link + "/api/register";
+			fetch(url, {
 				method: "POST",
 				body: JSON.stringify(body),
 				headers: {

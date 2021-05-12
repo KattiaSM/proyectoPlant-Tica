@@ -1,6 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
+            internal_link="https://3001-jade-galliform-3jxw3pmu.ws-us04.gitpod.io/",
 			userLogged: false,
 			search_option: "",
 			search_result_api: "",
@@ -369,10 +370,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 			loadProfile: async () => {
 				// Se obtiene los datos del profile
 				let localStorageProfile = localStorage.getItem("profileAPI");
-
+                const store = getStore();
 				if (localStorageProfile === null || localStorageProfile === undefined) {
 					// Si localStorage NO existe, entonces se cargan los datos de la API.
-					const url = "https://3001-jade-galliform-3jxw3pmu.ws-us04.gitpod.io/api/users";
+					const url = store.internal_link+"/api/users";
 					const response = await fetch(url);
 					const data = await response.json();
 					setStore({ profile: data });

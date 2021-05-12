@@ -17,8 +17,8 @@ export const Login = () => {
 			email: email,
 			password: password
 		};
-
-		fetch("https://3001-jade-galliform-3jxw3pmu.ws-us04.gitpod.io/api/login", {
+		let url = store.internal_link + "/api/login";
+		fetch(url, {
 			method: "POST",
 			body: JSON.stringify(body),
 			headers: {
