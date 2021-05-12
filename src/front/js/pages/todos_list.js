@@ -129,10 +129,7 @@ export function TodosList() {
 				</Link>
 			</div>
 			<div>
-				<div className="row" style={{ height: "600px" }}>
-					{" "}
-					{todos_output}{" "}
-				</div>
+				<div className="row"> {todos_output} </div>
 			</div>
 		</div>
 	);
