@@ -392,7 +392,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const store = getStore();
 
 				let internal_user_id = store.id.toString();
-				let url = store.api_url + "/api/users/" + internal_user_id + "/";
+				let url = store.api_url + "/api/users/" + internal_user_id;
 				fetch(url, {
 					method: "GET",
 					headers: {
