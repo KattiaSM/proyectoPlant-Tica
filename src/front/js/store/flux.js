@@ -2,6 +2,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			api_url: "https://3001-coral-pelican-19w6sdfl.ws-us04.gitpod.io",
+			modify: false,
+			index_to_modify: "",
 			userLogged: false,
 			user_data: "",
 			search_option: "",
@@ -219,6 +221,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 				let search_temporal = search_item;
 				setStore({ search_option: search_temporal });
 			},
+			modifyAndIndex: internal_index => {
+				let index = internal_index;
+				setStore({ index_to_modify: index });
+				setStore({ modify: true });
+			},
 			synkTokenFromSessionStore: () => {
 				const token = localStorage.getItem("token");
 				const user_id = localStorage.getItem("user_id");
@@ -323,8 +330,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 			modifyTodos: control => {
 				const store = getStore();
 				let final_array = store.todos;
-				final_array.unshift(control);
-				setStore({ todos: final_array, charge_todos: true });
+				console.log("resultado de modify", store.modify);
+				if (store.modify === false) {
+					final_array.unshift(control);
+					setStore({ todos: final_array, charge_todos: true });
+				} else {
+					console.log("modificando", store.index_to_modify);
+					let final_array = store.todos;
+					final_array[store.index_to_modify] = control;
+					setStore({ todos: final_array, charge_todos: true });
+					setStore({ modify: false });
+				}
 			},
 			logout: () => {
 				//localStorage.setItem("x-access-token", null);
@@ -348,6 +364,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					freq.push(item.freq);
 					type.push(item.type);
 				});
+				setStore({ modify: true });
 				setStore({ info_create_todos: [tasks, freq, type] });
 			},
 			restoreDataToModify: url => {
