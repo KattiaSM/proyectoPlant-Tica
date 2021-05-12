@@ -53,6 +53,7 @@ export function Favorites() {
 				actions.deleteFav(index);
 			}
 		});
+		actions.favsFetch();
 	}
 
 	//La siguiente función lo que hace es darle formato html a cada elemento de los tres array

@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
-import { Context } from "../store/appContext";
+import { Context } from ".././store/appContext";
 import PropTypes from "prop-types";
 
 const plantsCard = props => {

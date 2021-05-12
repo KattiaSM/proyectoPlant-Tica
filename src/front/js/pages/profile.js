@@ -6,6 +6,7 @@ import UserProfile from "../component/profile";
 
 export function Profile() {
 	const { store, actions } = useContext(Context);
+	actions.userDataFetch();
 	return (
 		<div>
 			<UserProfile

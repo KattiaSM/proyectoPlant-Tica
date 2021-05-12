@@ -3,6 +3,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 		store: {
 			api_url: "https://3001-orange-kite-5z235ran.ws-us04.gitpod.io",
 			userLogged: false,
+			user_data: "",
 			search_option: "",
 			search_result_api: "",
 			search_result_3rd_api: "",
@@ -218,6 +219,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 				let search_temporal = search_item;
 				setStore({ search_option: search_temporal });
 			},
+			synkTokenFromSessionStore: () => {
+				const token = localStorage.getItem("token");
+				const user_id = localStorage.getItem("user_id");
+
+				if (token && token != "" && token != undefined) {
+					setStore({ token: token });
+					setStore({ userLogged: true });
+					setStore({ id: user_id });
+				}
+			},
 			doSearch: async () => {
 				const store = getStore();
 				//Filtrado de búsqueda en la bases de datos interna
@@ -319,6 +330,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				//localStorage.setItem("x-access-token", null);
 				console.log("debería eliminar la vara");
 				localStorage.removeItem("token");
+				localStorage.removeItem("user_id");
 				setStore({ userLogged: false });
 				setStore({ token: "" });
 				// Se configura la opción del home
@@ -347,10 +359,52 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			savingToken: (int_token, int_id) => {
 				localStorage.setItem("token", int_token);
+				localStorage.setItem("user_id", int_id);
 				setStore({ userLogged: true });
 				setStore({ token: int_token });
 				console.log("pasa por saving", int_token);
 				setStore({ id: int_id });
+			},
+			favsFetch: () => {
+				const store = getStore();
+
+				let internal_favs = store.favs;
+				let internal_user_id = store.id;
+				const body = {
+					favs: internal_favs
+				};
+				let url = store.api_url + "/api/favorites/" + internal_user_id.toString();
+				fetch(url, {
+					method: "POST",
+					body: JSON.stringify({ favs: internal_favs }),
+					headers: {
+						"Content-Type": "application/json"
+					}
+				})
+					.then(res => res.json())
+					.then(data => {
+						console.log(data);
+						setStore({ favs: data.favs });
+					})
+					.catch(err => console.log(err));
+			},
+			userDataFetch: () => {
+				const store = getStore();
+
+				let internal_user_id = store.id.toString();
+				let url = store.api_url + "/api/users/" + internal_user_id + "/";
+				fetch(url, {
+					method: "GET",
+					headers: {
+						"Content-Type": "application/json"
+					}
+				})
+					.then(res => res.json())
+					.then(data => {
+						console.log(data);
+						setStore({ user_data: data });
+					})
+					.catch(err => console.log(err));
 			},
 			changeColor: (index, color) => {
 				//get the store
