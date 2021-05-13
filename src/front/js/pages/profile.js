@@ -14,7 +14,7 @@ export function Profile() {
 		setInternalInfo(store.user_data);
 	});
 
-	let internal_name = "Cargando tus datos";
+	let internal_name = "Fabián Chacón";
 	let internal_image = "https://img.icons8.com/bubbles/100/000000/user.png";
 	let internal_profesion = "Jardinero";
 	let internal_hobbies = "Hidroponía - Jardines Verticales";
@@ -34,7 +34,7 @@ export function Profile() {
 			internal_info[0].user_image === null ||
 			internal_info[0].user_image === undefined
 		) {
-			internal_image = "https://img.pikbest.com/58pic/35/39/61/62K58PICb88i68HEwVnm5_PIC2018.gif!w340";
+			internal_image = "https://img.icons8.com/bubbles/100/000000/user.png";
 		}
 	}
 
